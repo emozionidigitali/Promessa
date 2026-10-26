@@ -21,7 +21,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #0d0a09, #1f1915, #120e0c);
+            /* Sfondo blu notte profondo ed elegante, tipico dei promessi sposi */
+            background: linear-gradient(135deg, #070d1a, #101c30, #0a101f);
             background-size: 200% 200%;
             animation: bgMove 12s ease infinite;
         }
@@ -32,6 +33,40 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Contenitore dei fuochi d'artificio */
+        #fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            display: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 #f7e2b3;
+            animation: explode 1.2s infinite ease-out;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: 0 0 0 0 #f7e2b3, 0 0 0 0 #e6c584, 0 0 0 0 #ffdf79;
+            }
+            100% {
+                transform: scale(30);
+                opacity: 0;
+                box-shadow: -30px -30px 0 2px #f7e2b3, 30px -30px 0 2px #e6c584, -30px 30px 0 2px #ffdf79, 30px 30px 0 2px #fff;
+            }
+        }
+
         /* Schermata iniziale per sbloccare l'audio */
         #start-overlay {
             position: fixed;
@@ -39,7 +74,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 8, 7, 0.97);
+            background: rgba(7, 13, 26, 0.97);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -70,7 +105,7 @@
 
         .btn-start {
             background-color: #e6c584;
-            color: #120e0c;
+            color: #070d1a;
             border: none;
             padding: 14px 38px;
             font-size: 16px;
@@ -118,152 +153,6 @@
         }
 
         #step-3 {
-            background: rgba(20, 17, 15, 0.9);
+            background: rgba(14, 23, 41, 0.92);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(230, 197, 132, 0.5);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-            pointer-events: auto;
-        }
-
-        .tag {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #e6c584;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 48px;
-            margin: 0 0 5px 0;
-            font-weight: normal;
-            color: #f7e2b3;
-            letter-spacing: 1px;
-        }
-
-        .names {
-            font-size: 24px;
-            color: #d1c7bd;
-            margin-bottom: 20px;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        .divider {
-            width: 60px;
-            height: 1px;
-            background-color: #e6c584;
-            margin: 18px auto;
-        }
-
-        .details {
-            font-size: 17px;
-            line-height: 1.7;
-            color: #e2ded8;
-            margin: 15px 0;
-            text-align: left;
-            letter-spacing: 0.5px;
-        }
-
-        .details strong {
-            color: #e6c584;
-            font-weight: 600;
-        }
-
-        .footer-note {
-            font-size: 15px;
-            color: #d1c7bd;
-            margin-top: 25px;
-            font-style: italic;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Audio di sottofondo -->
-    <audio id="bg-music" loop>
-        <source src="canzone.mp3.mp3" type="audio/mp3">
-    </audio>
-
-    <!-- Schermata iniziale per sbloccare l'audio -->
-    <div id="start-overlay" onclick="startExperience()">
-        <div class="start-box">
-            <h2>Giovanni & Eliana</h2>
-            <p>Tocca per vivere l'emozione della nostra promessa</p>
-            <button class="btn-start">INIZIA</button>
-        </div>
-    </div>
-
-    <!-- Messaggio 1 -->
-    <div class="story-step" id="step-1">
-        Ci sono momenti che cambiano la vita per sempre...
-    </div>
-
-    <!-- Messaggio 2 -->
-    <div class="story-step" id="step-2">
-        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
-    </div>
-
-    <!-- Messaggio 3: Invito Ufficiale -->
-    <div class="story-step" id="step-3">
-        <div class="tag">La Nostra Promessa</div>
-        <h1>Giovanni & Eliana</h1>
-        <div class="names">&mdash; 23 Gennaio &mdash;</div>
-        
-        <div class="divider"></div>
-
-        <div class="details">
-            <p>📍 <strong>Cerimonia:</strong><br>Comune di Napoli</p>
-            <p>🕒 <strong>Programma:</strong><br>Arrivo degli ospiti e celebrazione, a seguire brindisi insieme.</p>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="footer-note">
-            La vostra presenza è il regalo più bello.
-        </div>
-    </div>
-
-    <script>
-        function startExperience() {
-            var music = document.getElementById('bg-music');
-            music.play().catch(function(error) { console.log("Audio bloccato"); });
-
-            var overlay = document.getElementById('start-overlay');
-            overlay.style.opacity = '0';
-            setTimeout(function() {
-                overlay.style.display = 'none';
-                runStorySequence();
-            }, 800);
-        }
-
-        function runStorySequence() {
-            setTimeout(function() {
-                document.getElementById('step-1').style.opacity = '1';
-            }, 1000);
-
-            setTimeout(function() {
-                document.getElementById('step-1').style.opacity = '0';
-            }, 5000);
-
-            setTimeout(function() {
-                document.getElementById('step-2').style.opacity = '1';
-            }, 6500);
-
-            setTimeout(function() {
-                document.getElementById('step-2').style.opacity = '0';
-            }, 11000);
-
-            setTimeout(function() {
-                document.getElementById('step-3').style.opacity = '1';
-            }, 12500);
-        }
-    </script>
-
-</body>
-</html>
+            -webkit-backdrop-filter: blur(
