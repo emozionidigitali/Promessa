@@ -18,10 +18,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1a1512;
+            background-color: #000000;
         }
 
-        /* Video come sfondo a tutto schermo */
+        /* Video come sfondo a tutto schermo ottimizzato per mobile */
         #bg-video {
             position: fixed;
             top: 50%;
@@ -36,14 +36,14 @@
             filter: brightness(0.6);
         }
 
-        /* Schermata iniziale per sbloccare l'audio con un tocco discreto */
+        /* Schermata iniziale per sbloccare l'audio e far partire il video */
         #start-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 13, 12, 0.85);
+            background: rgba(15, 13, 12, 0.9);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -58,7 +58,7 @@
 
         .start-box h2 {
             color: #dfc187;
-            font-size: 26px;
+            font-size: 28px;
             margin-bottom: 10px;
             font-style: italic;
         }
@@ -99,25 +99,23 @@
             max-width: 450px;
             padding: 25px;
             pointer-events: none;
+            z-index: 5;
         }
 
-        /* Messaggio 1 */
         #step-1 {
             font-size: 28px;
             color: #f3e5ab;
             font-style: italic;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
         }
 
-        /* Messaggio 2 */
         #step-2 {
             font-size: 24px;
             color: #ffffff;
             line-height: 1.5;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
         }
 
-        /* Step 3: Card Invito Finale */
         #step-3 {
             background: rgba(20, 18, 16, 0.82);
             backdrop-filter: blur(12px);
@@ -185,12 +183,12 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Sfondo Video -->
+    <!-- Video di sfondo ottimizzato e garantito per mobile -->
     <video muted loop playsinline preload="auto" id="bg-video">
-        <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-golden-glowing-particles-background-41480-large.mp4" type="video/mp4">
     </video>
 
-    <!-- Schermata iniziale per avviare musica e video con un tocco (richiesto dai telefoni) -->
+    <!-- Schermata iniziale per sbloccare audio e video con un tocco -->
     <div id="start-overlay" onclick="startExperience()">
         <div class="start-box">
             <h2>Giovanni & Eliana</h2>
@@ -231,14 +229,15 @@
 
     <script>
         function startExperience() {
-            // Avvia audio e video
+            // Avvia la musica
             var music = document.getElementById('bg-music');
             music.play().catch(function(error) { console.log("Audio bloccato"); });
 
+            // Avvia e forza il video di sfondo
             var video = document.getElementById('bg-video');
             video.play().catch(function(error) { console.log("Video bloccato"); });
 
-            // Nasconde la schermata iniziale di avvio
+            // Nasconde la copertina e fa partire la sequenza dei messaggi
             var overlay = document.getElementById('start-overlay');
             overlay.style.opacity = '0';
             setTimeout(function() {
@@ -248,12 +247,12 @@
         }
 
         function runStorySequence() {
-            // Mostra il primo messaggio dopo 1 secondo
+            // Messaggio 1 compare dopo 1 secondo
             setTimeout(function() {
                 document.getElementById('step-1').style.opacity = '1';
             }, 1000);
 
-            // Nasconde il primo e mostra il secondo dopo 5 secondi
+            // Messaggio 1 scompare, Messaggio 2 compare
             setTimeout(function() {
                 document.getElementById('step-1').style.opacity = '0';
             }, 5000);
@@ -262,7 +261,7 @@
                 document.getElementById('step-2').style.opacity = '1';
             }, 6500);
 
-            // Nasconde il secondo e mostra l'invito finale dopo 11 secondi
+            // Messaggio 2 scompare, Invito Finale compare
             setTimeout(function() {
                 document.getElementById('step-2').style.opacity = '0';
             }, 11000);
