@@ -17,21 +17,30 @@
             width: 100%;
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
+            /* Sfondo blu notte profondo con animazione fluida garantita su mobile */
             background: linear-gradient(135deg, #070d1a, #101c30, #0a101f);
+            background-size: 200% 200%;
+            animation: bgMove 12s ease infinite;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Schermata iniziale per sbloccare l'audio */
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Schermata iniziale per sbloccare l'audio e l'interazione */
         #start-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #070d1a;
+            background: rgba(7, 13, 26, 0.98);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -124,4 +133,41 @@
         .tag {
             font-size: 12px;
             text-transform: uppercase;
-            letter
+            letter-spacing: 4px;
+            color: #e6c584;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 50px;
+            margin: 0 0 5px 0;
+            font-weight: normal;
+            color: #f7e2b3;
+        }
+
+        .names {
+            font-size: 24px;
+            color: #d1c7bd;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background-color: #e6c584;
+            margin: 18px auto;
+        }
+
+        .details {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #e2ded8;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .details strong {
+            color: #e6
