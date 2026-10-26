@@ -21,7 +21,7 @@
             background-color: #1a1512;
         }
 
-        /* Video di sfondo sicuro e garantito al 100% su mobile */
+        /* Video caricato da te come sfondo a tutto schermo */
         #bg-video {
             position: fixed;
             top: 50%;
@@ -36,7 +36,7 @@
             filter: brightness(0.65);
         }
 
-        /* Schermata 1: La Busta */
+        /* Schermata 1: La Busta con il messaggio iniziale */
         #envelope-screen {
             position: fixed;
             top: 0;
@@ -56,7 +56,7 @@
         }
 
         .envelope-box {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.08);
             border: 2px solid #dfc187;
             padding: 40px 30px;
             border-radius: 15px;
@@ -102,7 +102,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 13, 12, 0.85);
+            background: rgba(15, 13, 12, 0.75);
             display: none;
             flex-direction: column;
             justify-content: center;
@@ -120,15 +120,15 @@
 
         .bio-card h3 {
             color: #dfc187;
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 15px;
             font-style: italic;
         }
 
         .bio-card p {
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.6;
-            color: #ddd;
+            color: #eee;
             margin-bottom: 30px;
         }
 
@@ -210,9 +210,9 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Sfondo Video con link diretto ottimizzato per smartphone -->
-    <video autoplay muted loop playsinline preload="auto" id="bg-video">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-golden-glowing-particles-background-41480-large.mp4" type="video/mp4">
+    <!-- Sfondo Video con il nome esatto del file che hai caricato -->
+    <video muted loop playsinline preload="auto" id="bg-video">
+        <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
     </video>
 
     <!-- 1. SCHERMATA BUSTA -->
@@ -255,6 +255,7 @@
 
     <script>
         function openEnvelope() {
+            // Fa partire la musica e il video in contemporanea al tocco
             var music = document.getElementById('bg-music');
             music.play().catch(function(error) { console.log("Audio bloccato"); });
 
