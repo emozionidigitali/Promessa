@@ -18,21 +18,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #111;
+            background-color: #1a1614;
         }
 
-        /* Video come sfondo a tutto schermo (nascosto all'inizio) */
+        /* Video come sfondo a tutto schermo forzato */
         #bg-video {
             position: fixed;
-            right: 0;
-            bottom: 0;
+            top: 50%;
+            left: 50%;
             min-width: 100%;
             min-height: 100%;
             width: auto;
             height: auto;
             z-index: -1;
+            transform: translate(-50%, -50%);
             object-fit: cover;
-            filter: brightness(0.6);
+            filter: brightness(0.65);
             display: none;
         }
 
@@ -52,7 +53,6 @@
             color: #fff;
             text-align: center;
             padding: 20px;
-            cursor: pointer;
             transition: opacity 0.8s ease;
         }
 
@@ -135,7 +135,7 @@
 
         /* Schermata 3: Invito Principale con Video Sottofondo */
         .invitation-card {
-            background: rgba(20, 20, 20, 0.7);
+            background: rgba(20, 20, 20, 0.72);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -211,17 +211,17 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Sfondo Video -->
-    <video autoplay muted loop playsinline id="bg-video">
+    <!-- Sfondo Video corretto con attributi per mobile -->
+    <video autoplay muted loop playsinline preload="auto" id="bg-video">
         <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
     </video>
 
     <!-- 1. SCHERMATA BUSTA -->
-    <div id="envelope-screen" onclick="openEnvelope()">
+    <div id="envelope-screen">
         <div class="envelope-box">
             <h2>✉️ Hai un messaggio</h2>
             <p>Giovanni & Eliana ti invitano a scoprire un momento speciale</p>
-            <button class="btn-open">Apri la Busta</button>
+            <button class="btn-open" onclick="openEnvelope()">Apri la Busta</button>
         </div>
     </div>
 
@@ -256,22 +256,26 @@
 
     <script>
         function openEnvelope() {
-            // Fa partire la musica
             var music = document.getElementById('bg-music');
             music.play().catch(function(error) { console.log("Audio bloccato"); });
 
-            // Nasconde la busta e mostra la schermata della biografia
             document.getElementById('envelope-screen').style.opacity = '0';
             setTimeout(function() {
                 document.getElementById('envelope-screen').style.display = 'none';
                 document.getElementById('bio-screen').style.display = 'flex';
-            }, 800);
+            }, 600);
         }
 
         function showInvite() {
-            // Nasconde la biografia e mostra l'invito con il video di sfondo
             document.getElementById('bio-screen').style.display = 'none';
-            document.getElementById('bg-video').style.display = 'block';
+            
+            // Mostra e forza la riproduzione del video di sfondo
+            var video = document.getElementById('bg-video');
+            video.style.display = 'block';
+            video.play().catch(function(error) {
+                console.log("Video autoplay bloccato dal browser");
+            });
+
             document.getElementById('main-invite').style.display = 'block';
         }
     </script>
