@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promessa di Matrimonio</title>
+    <title>Promessa di Matrimonio - Giovanni & Eliana</title>
     <style>
         body {
             margin: 0;
@@ -20,28 +20,42 @@
             overflow: auto;
         }
 
+        /* Effetto "vita" / animazione di comparsa */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .overlay {
-            background: rgba(255, 255, 255, 0.88);
-            padding: 25px;
+            background: rgba(255, 255, 255, 0.89);
+            padding: 30px;
             border-radius: 15px;
             max-width: 90%;
             width: 420px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.4);
             margin: 20px 0;
+            animation: fadeIn 1.5s ease-out; /* Appare con un movimento elegante */
         }
 
         h1.title {
             color: #8c7355;
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 5px;
+            letter-spacing: 1px;
         }
 
         h2.subtitle {
-            font-size: 15px;
-            color: #555;
-            font-weight: normal;
+            font-size: 18px;
+            color: #444;
+            font-weight: bold;
             margin-top: 0;
             margin-bottom: 15px;
         }
@@ -50,14 +64,15 @@
             font-size: 16px;
             font-weight: bold;
             color: #333;
-            margin: 12px 0;
-            padding: 8px;
+            margin: 15px 0;
+            padding: 10px;
             background: #f7f4f0;
             border-radius: 8px;
+            border: 1px solid #e6dfd5;
         }
 
         .section {
-            margin: 15px 0;
+            margin: 20px 0;
             text-align: left;
         }
 
@@ -66,14 +81,14 @@
             font-size: 15px;
             border-bottom: 2px solid #e6dfd5;
             padding-bottom: 4px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .section p {
-            font-size: 13px;
-            line-height: 1.4;
+            font-size: 14px;
+            line-height: 1.5;
             color: #444;
-            margin: 4px 0;
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -84,31 +99,30 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Contenuto Principale dell'Invito -->
+    <!-- Contenuto Principale dell'Invito con effetto animato -->
     <div class="overlay">
         <h1 class="title">La Nostra Promessa</h1>
-        <h2 class="subtitle">[I vostri nomi]</h2>
+        <h2 class="subtitle">Giovanni Piccolo & Eliana Lanzi</h2>
         
         <div class="date">
-            📅 [Data] | Ore [Orario]
+            📅 23 Gennaio | Promessa di Matrimonio
         </div>
 
         <div class="section">
             <h3>📍 Dove</h3>
-            <p><strong>Cerimonia:</strong> [Nome Location o Comune]<br>
-            Indirizzo: [Indirizzo, Città]</p>
+            <p><strong>Cerimonia:</strong> Comune di Napoli</p>
         </div>
 
         <div class="section">
             <h3>🕒 Programma</h3>
             <p>• Arrivo degli ospiti<br>
-            • Celebrazione<br>
-            • Festeggiamenti insieme</p>
+            • Celebrazione della promessa<br>
+            • Brindisi e festeggiamenti insieme</p>
         </div>
 
         <div class="section">
             <h3>🎁 Informazioni Utili</h3>
-            <p>La vostra presenza è il regalo più bello per noi!</p>
+            <p>La vostra presenza è il regalo più bello per celebrare questo momento speciale insieme a noi!</p>
         </div>
     </div>
 
