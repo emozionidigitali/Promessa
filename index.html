@@ -21,16 +21,24 @@
             background-color: #1a1614;
         }
 
-        /* Video come sfondo stabile e garantito */
-        #bg-video {
+        /* Sfondo animato elegante (Garantito al 100% su ogni smartphone) */
+        #bg-effect {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            object-fit: cover;
-            filter: brightness(0.65);
+            background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.5);
+            animation: slowZoom 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
         }
 
         /* Schermata 1: La Busta */
@@ -207,10 +215,8 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Sfondo Video con link diretto ad alta compatibilità mobile -->
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-golden-glowing-particles-background-41480-large.mp4" type="video/mp4">
-    </video>
+    <!-- Sfondo animato fluido ad altissima compatibilità -->
+    <div id="bg-effect"></div>
 
     <!-- 1. SCHERMATA BUSTA -->
     <div id="envelope-screen">
