@@ -6,83 +6,95 @@
     <title>Promessa di Matrimonio</title>
     <style>
         body {
-            font-family: 'Georgia', serif;
-            background-color: #fcfbfa;
-            color: #333;
             margin: 0;
-            padding: 20px;
-            text-align: center;
+            padding: 0;
+            font-family: 'Georgia', serif;
+            /* Imposta la foto come sfondo a tutto schermo */
+            background-image: url('foto1.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: #ffffff;
+        .overlay {
+            background: rgba(255, 255, 255, 0.85); /* Sfondo semi-trasparente per leggere il testo */
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #eae5e0;
+            border-radius: 15px;
+            max-width: 90%;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
         }
         h1 {
             color: #8c7355;
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 5px;
         }
         h2 {
-            font-size: 18px;
-            color: #666;
+            font-size: 16px;
+            color: #555;
             font-weight: normal;
             margin-top: 0;
+            margin-bottom: 20px;
         }
         .date {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            color: #444;
-            margin: 20px 0;
+            color: #333;
+            margin: 15px 0;
             padding: 10px;
             background: #f7f4f0;
             border-radius: 8px;
         }
         .section {
-            margin: 25px 0;
+            margin: 20px 0;
             text-align: left;
         }
         .section h3 {
             color: #8c7355;
-            border-bottom: 2px solid #f7f4f0;
-            padding-bottom: 5px;
+            font-size: 16px;
+            border-bottom: 2px solid #e6dfd5;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
         }
         p {
-            line-height: 1.6;
-            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #444;
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="overlay">
         <h1>La Nostra Promessa</h1>
-        <h2>I nostri nomi</h2>
+        <h2>[I vostri nomi]</h2>
         
         <div class="date">
-            📅 [Inserisci la Data] | Ore [Inserisci Orario]
+            📅 [Data] | Ore [Orario]
         </div>
 
         <div class="section">
             <h3>📍 Dove</h3>
-            <p><strong>Cerimonia:</strong> [Nome Location / Comune / Chiesa]<br>
+            <p><strong>Cerimonia:</strong> [Nome Location o Comune]<br>
             Indirizzo: [Indirizzo, Città]</p>
         </div>
 
         <div class="section">
             <h3>🕒 Programma</h3>
             <p>• Arrivo degli ospiti<br>
-            • Celebrazione della promessa<br>
-            • Brindisi e festeggiamenti</p>
+            • Celebrazione<br>
+            • Festeggiamenti insieme</p>
         </div>
 
         <div class="section">
             <h3>🎁 Informazioni Utili</h3>
-            <p>La vostra presenza è il traguardo più bello per noi. Qui troverete tutti gli aggiornamenti per la nostra giornata speciale!</p>
+            <p>La vostra presenza è il regalo più bello per noi!</p>
         </div>
     </div>
 
