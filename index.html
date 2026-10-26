@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promessa di Matrimonio - Giovanni & Eliana</title>
-    <!-- Importazione dei font eleganti -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
@@ -17,46 +16,36 @@
             width: 100%;
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
-            /* Sfondo blu notte profondo con animazione fluida garantita su mobile */
-            background: linear-gradient(135deg, #070d1a, #101c30, #0a101f);
-            background-size: 200% 200%;
-            animation: bgMove 12s ease infinite;
+            background: #070d1a;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        @keyframes bgMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Schermata iniziale per sbloccare l'audio e l'interazione */
+        /* Schermata iniziale (Forzata in primo piano) */
         #start-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(7, 13, 26, 0.98);
+            width: 100vw;
+            height: 100vh;
+            background: #070d1a;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 100;
+            z-index: 99999;
             color: #fff;
             text-align: center;
             padding: 20px;
-            cursor: pointer;
         }
 
         .start-box h2 {
             font-family: 'Great Vibes', cursive;
             color: #e6c584;
-            font-size: 48px;
-            margin-bottom: 10px;
+            font-size: 50px;
+            margin: 0 0 10px 0;
             font-weight: normal;
         }
 
@@ -71,28 +60,22 @@
             background-color: #e6c584;
             color: #070d1a;
             border: none;
-            padding: 15px 40px;
-            font-size: 16px;
+            padding: 15px 45px;
+            font-size: 18px;
             font-weight: 600;
             font-family: 'Cormorant Garamond', serif;
             letter-spacing: 2px;
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(230, 197, 132, 0.4);
-            transition: 0.3s;
         }
 
-        .btn-start:hover {
-            background-color: #f7e2b3;
-            transform: scale(1.05);
-        }
-
-        /* Contenitori dei messaggi a tempo */
+        /* Testi della sequenza */
         .story-step {
             position: absolute;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+            transition: opacity 1.5s ease, visibility 1.5s ease;
             text-align: center;
             color: #ffffff;
             width: 85%;
@@ -108,7 +91,7 @@
 
         #step-1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 40px;
+            font-size: 42px;
             color: #f7e2b3;
             text-shadow: 0 2px 15px rgba(0,0,0,0.9);
         }
@@ -170,4 +153,133 @@
         }
 
         .details strong {
-            color: #e6
+            color: #e6c584;
+        }
+
+        .footer-note {
+            font-size: 15px;
+            color: #d1c7bd;
+            margin-top: 25px;
+            font-style: italic;
+        }
+
+        /* Fuochi d'artificio */
+        #fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            display: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 #f7e2b3;
+            animation: explode 1.2s infinite ease-out;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 #f7e2b3, 0 0 0 0 #e6c584; }
+            100% { transform: scale(35); opacity: 0; box-shadow: -30px -30px 0 2px #f7e2b3, 30px -30px 0 2px #e6c584, -30px 30px 0 2px #ffdf79, 30px 30px 0 2px #fff; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio di sottofondo -->
+    <audio id="bg-music" loop>
+        <source src="canzone.mp3.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Fuochi d'artificio -->
+    <div id="fireworks-container">
+        <div class="firework" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
+        <div class="firework" style="top: 30%; left: 80%; animation-delay: 0.4s;"></div>
+        <div class="firework" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
+        <div class="firework" style="top: 60%; left: 75%; animation-delay: 1.2s;"></div>
+    </div>
+
+    <!-- Schermata iniziale -->
+    <div id="start-overlay">
+        <div class="start-box">
+            <h2>Giovanni & Eliana</h2>
+            <p>Tocca per vivere l'emozione della nostra promessa</p>
+            <button class="btn-start" onclick="startExperience()">INIZIA</button>
+        </div>
+    </div>
+
+    <!-- Messaggio 1 -->
+    <div class="story-step" id="step-1">
+        Ci sono momenti che cambiano la vita per sempre...
+    </div>
+
+    <!-- Messaggio 2 -->
+    <div class="story-step" id="step-2">
+        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
+    </div>
+
+    <!-- Messaggio 3: Invito Ufficiale -->
+    <div class="story-step" id="step-3">
+        <div class="tag">La Nostra Promessa</div>
+        <h1>Giovanni & Eliana</h1>
+        <div class="names">&mdash; 23 Gennaio &mdash;</div>
+        
+        <div class="divider"></div>
+
+        <div class="details">
+            <p>📍 <strong>Cerimonia:</strong><br>Comune di Napoli</p>
+            <p>🕒 <strong>Programma:</strong><br>Arrivo degli ospiti e celebrazione, a seguire brindisi insieme.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="footer-note">
+            La vostra presenza è il regalo più bello.
+        </div>
+    </div>
+
+    <script>
+        function startExperience() {
+            var music = document.getElementById('bg-music');
+            music.play().catch(function(error) { console.log("Audio bloccato"); });
+
+            var overlay = document.getElementById('start-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(function() {
+                overlay.style.display = 'none';
+                runStorySequence();
+            }, 800);
+        }
+
+        function runStorySequence() {
+            setTimeout(function() {
+                document.getElementById('step-1').classList.add('visible');
+            }, 1000);
+
+            setTimeout(function() {
+                document.getElementById('step-1').classList.remove('visible');
+            }, 5000);
+
+            setTimeout(function() {
+                document.getElementById('step-2').classList.add('visible');
+            }, 6500);
+
+            setTimeout(function() {
+                document.getElementById('step-2').classList.remove('visible');
+            }, 11000);
+
+            setTimeout(function() {
+                document.getElementById('step-3').classList.add('visible');
+                document.getElementById('fireworks-container').style.display = 'block';
+            }, 12500);
+        }
+    </script>
+
+</body>
+</html>
