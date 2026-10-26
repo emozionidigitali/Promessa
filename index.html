@@ -18,27 +18,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1a1614;
+            /* Sfondo elegante con gradiente luminoso in movimento */
+            background: linear-gradient(135deg, #1a1614, #2c2521, #110e0c);
+            background-size: 200% 200%;
+            animation: gradientShift 10s ease infinite;
         }
 
-        /* Sfondo animato elegante (Garantito al 100% su ogni smartphone) */
-        #bg-effect {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.5);
-            animation: slowZoom 20s infinite alternate ease-in-out;
-        }
-
-        @keyframes slowZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Schermata 1: La Busta */
@@ -48,7 +37,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(26, 22, 20, 0.94);
+            background: rgba(15, 13, 12, 0.95);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -61,11 +50,11 @@
         }
 
         .envelope-box {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid #dfc187;
             padding: 40px 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             max-width: 350px;
             width: 100%;
         }
@@ -107,7 +96,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(20, 18, 16, 0.85);
+            background: rgba(15, 13, 12, 0.9);
             display: none;
             flex-direction: column;
             justify-content: center;
@@ -139,17 +128,17 @@
 
         /* Schermata 3: Invito Principale */
         .invitation-card {
-            background: rgba(20, 20, 20, 0.75);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(20, 18, 16, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(223, 193, 135, 0.3);
             padding: 35px 25px;
             border-radius: 20px;
             width: 88%;
             max-width: 400px;
             text-align: center;
             color: #ffffff;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
             display: none;
             animation: fadeIn 1.5s ease-out;
             z-index: 2;
@@ -214,9 +203,6 @@
     <audio id="bg-music" loop>
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
-
-    <!-- Sfondo animato fluido ad altissima compatibilità -->
-    <div id="bg-effect"></div>
 
     <!-- 1. SCHERMATA BUSTA -->
     <div id="envelope-screen">
