@@ -21,20 +21,16 @@
             background-color: #1a1614;
         }
 
-        /* Video come sfondo a tutto schermo forzato */
+        /* Video come sfondo sempre attivo */
         #bg-video {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            transform: translate(-50%, -50%);
             object-fit: cover;
             filter: brightness(0.65);
-            display: none;
         }
 
         /* Schermata 1: La Busta */
@@ -44,7 +40,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #2c2521, #1a1614);
+            background: rgba(26, 22, 20, 0.92);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -57,7 +53,7 @@
         }
 
         .envelope-box {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             border: 2px solid #dfc187;
             padding: 40px 30px;
             border-radius: 15px;
@@ -103,7 +99,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(20, 18, 16, 0.95);
+            background: rgba(20, 18, 16, 0.85);
             display: none;
             flex-direction: column;
             justify-content: center;
@@ -133,11 +129,11 @@
             margin-bottom: 30px;
         }
 
-        /* Schermata 3: Invito Principale con Video Sottofondo */
+        /* Schermata 3: Invito Principale */
         .invitation-card {
-            background: rgba(20, 20, 20, 0.72);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(20, 20, 20, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 35px 25px;
             border-radius: 20px;
@@ -211,8 +207,8 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Sfondo Video corretto con attributi per mobile -->
-    <video autoplay muted loop playsinline preload="auto" id="bg-video">
+    <!-- Sfondo Video sempre attivo fin dall'inizio -->
+    <video autoplay muted loop playsinline id="bg-video">
         <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
     </video>
 
@@ -268,14 +264,6 @@
 
         function showInvite() {
             document.getElementById('bio-screen').style.display = 'none';
-            
-            // Mostra e forza la riproduzione del video di sfondo
-            var video = document.getElementById('bg-video');
-            video.style.display = 'block';
-            video.play().catch(function(error) {
-                console.log("Video autoplay bloccato dal browser");
-            });
-
             document.getElementById('main-invite').style.display = 'block';
         }
     </script>
