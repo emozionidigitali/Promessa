@@ -18,9 +18,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #111;
         }
 
-        /* Video come sfondo a tutto schermo */
+        /* Video come sfondo a tutto schermo (nascosto all'inizio) */
         #bg-video {
             position: fixed;
             right: 0;
@@ -31,12 +32,110 @@
             height: auto;
             z-index: -1;
             object-fit: cover;
-            filter: brightness(0.65); /* Scurisce leggermente per far risaltare il testo */
+            filter: brightness(0.6);
+            display: none;
         }
 
-        /* Riquadro centrale dell'invito con effetto vetro sfocato */
+        /* Schermata 1: La Busta */
+        #envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c2521, #1a1614);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: opacity 0.8s ease;
+        }
+
+        .envelope-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #dfc187;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .envelope-box h2 {
+            color: #dfc187;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .envelope-box p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .btn-open {
+            background-color: #dfc187;
+            color: #1a1614;
+            border: none;
+            padding: 12px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-open:hover {
+            background-color: #f3e5ab;
+            transform: scale(1.05);
+        }
+
+        /* Schermata 2: Biografia / Messaggio */
+        #bio-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 18, 16, 0.95);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .bio-card {
+            max-width: 450px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .bio-card h3 {
+            color: #dfc187;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .bio-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        /* Schermata 3: Invito Principale con Video Sottofondo */
         .invitation-card {
-            background: rgba(20, 20, 20, 0.68);
+            background: rgba(20, 20, 20, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -47,7 +146,9 @@
             text-align: center;
             color: #ffffff;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1.8s ease-out;
+            display: none;
+            animation: fadeIn 1.5s ease-out;
+            z-index: 2;
         }
 
         @keyframes fadeIn {
@@ -105,19 +206,36 @@
 </head>
 <body>
 
-    <!-- Sfondo video in loop con il nome corretto -->
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
-        Il tuo browser non supporta i video HTML5.
-    </video>
-
-    <!-- Audio di sottofondo in loop -->
-    <audio id="bg-music" autoplay loop>
+    <!-- Audio di sottofondo -->
+    <audio id="bg-music" loop>
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Card principale dell'invito -->
-    <div class="invitation-card">
+    <!-- Sfondo Video -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
+    </video>
+
+    <!-- 1. SCHERMATA BUSTA -->
+    <div id="envelope-screen" onclick="openEnvelope()">
+        <div class="envelope-box">
+            <h2>✉️ Hai un messaggio</h2>
+            <p>Giovanni & Eliana ti invitano a scoprire un momento speciale</p>
+            <button class="btn-open">Apri la Busta</button>
+        </div>
+    </div>
+
+    <!-- 2. SCHERMATA BIOGRAFIA / MESSAGGIO -->
+    <div id="bio-screen">
+        <div class="bio-card">
+            <h3>Il nostro grande passo</h3>
+            <p>Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa di matrimonio.<br><strong>Non mancate!</strong></p>
+            <button class="btn-open" onclick="showInvite()">Continua all'Invito ➔</button>
+        </div>
+    </div>
+
+    <!-- 3. SCHERMATA INVITO FINALE -->
+    <div class="invitation-card" id="main-invite">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
         <div class="names">&mdash; 23 Gennaio &mdash;</div>
@@ -137,13 +255,25 @@
     </div>
 
     <script>
-        // Sblocca eventuale audio bloccato al primo tocco
-        document.addEventListener('click', function() {
+        function openEnvelope() {
+            // Fa partire la musica
             var music = document.getElementById('bg-music');
-            if (music.paused) {
-                music.play();
-            }
-        }, { once: true });
+            music.play().catch(function(error) { console.log("Audio bloccato"); });
+
+            // Nasconde la busta e mostra la schermata della biografia
+            document.getElementById('envelope-screen').style.opacity = '0';
+            setTimeout(function() {
+                document.getElementById('envelope-screen').style.display = 'none';
+                document.getElementById('bio-screen').style.display = 'flex';
+            }, 800);
+        }
+
+        function showInvite() {
+            // Nasconde la biografia e mostra l'invito con il video di sfondo
+            document.getElementById('bio-screen').style.display = 'none';
+            document.getElementById('bg-video').style.display = 'block';
+            document.getElementById('main-invite').style.display = 'block';
+        }
     </script>
 
 </body>
