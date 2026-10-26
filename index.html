@@ -21,7 +21,7 @@
             background-color: #1a1512;
         }
 
-        /* Video caricato da te come sfondo a tutto schermo */
+        /* Video come sfondo a tutto schermo */
         #bg-video {
             position: fixed;
             top: 50%;
@@ -33,126 +33,100 @@
             z-index: -1;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            filter: brightness(0.65);
+            filter: brightness(0.6);
         }
 
-        /* Schermata 1: La Busta con il messaggio iniziale */
-        #envelope-screen {
+        /* Schermata iniziale per sbloccare l'audio con un tocco discreto */
+        #start-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 13, 12, 0.96);
+            background: rgba(15, 13, 12, 0.85);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10;
+            z-index: 20;
             color: #fff;
             text-align: center;
             padding: 20px;
-            transition: opacity 0.8s ease;
+            cursor: pointer;
+            transition: opacity 1s ease;
         }
 
-        .envelope-box {
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid #dfc187;
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            max-width: 350px;
-            width: 100%;
-        }
-
-        .envelope-box h2 {
+        .start-box h2 {
             color: #dfc187;
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 10px;
+            font-style: italic;
         }
 
-        .envelope-box p {
-            color: #ccc;
-            font-size: 14px;
+        .start-box p {
+            color: #ddd;
+            font-size: 15px;
             margin-bottom: 25px;
         }
 
-        .btn-open {
+        .btn-start {
             background-color: #dfc187;
             color: #1a1614;
             border: none;
-            padding: 12px 25px;
-            font-size: 15px;
+            padding: 14px 35px;
+            font-size: 16px;
             font-weight: bold;
             font-family: 'Georgia', serif;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
+            box-shadow: 0 4px 20px rgba(223, 193, 135, 0.4);
             transition: 0.3s;
         }
 
-        .btn-open:hover {
+        .btn-start:hover {
             background-color: #f3e5ab;
             transform: scale(1.05);
         }
 
-        /* Schermata 2: Biografia / Messaggio */
-        #bio-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 13, 12, 0.75);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-            color: #fff;
+        /* Contenitori dei messaggi a tempo */
+        .story-step {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
             text-align: center;
-            padding: 30px;
-        }
-
-        .bio-card {
+            color: #ffffff;
+            width: 85%;
             max-width: 450px;
-            animation: fadeIn 1.5s ease-out;
+            padding: 25px;
+            pointer-events: none;
         }
 
-        .bio-card h3 {
-            color: #dfc187;
-            font-size: 24px;
-            margin-bottom: 15px;
+        /* Messaggio 1 */
+        #step-1 {
+            font-size: 28px;
+            color: #f3e5ab;
             font-style: italic;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
-        .bio-card p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #eee;
-            margin-bottom: 30px;
+        /* Messaggio 2 */
+        #step-2 {
+            font-size: 24px;
+            color: #ffffff;
+            line-height: 1.5;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
-        /* Schermata 3: Invito Principale */
-        .invitation-card {
+        /* Step 3: Card Invito Finale */
+        #step-3 {
             background: rgba(20, 18, 16, 0.82);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(223, 193, 135, 0.4);
             padding: 35px 25px;
             border-radius: 20px;
-            width: 88%;
-            max-width: 400px;
-            text-align: center;
-            color: #ffffff;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-            display: none;
-            animation: fadeIn 1.5s ease-out;
-            z-index: 2;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            pointer-events: auto;
         }
 
         .tag {
@@ -189,6 +163,7 @@
             line-height: 1.6;
             color: #e0e0e0;
             margin: 15px 0;
+            text-align: left;
         }
 
         .details strong {
@@ -210,31 +185,32 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Sfondo Video con il nome esatto del file che hai caricato -->
+    <!-- Sfondo Video -->
     <video muted loop playsinline preload="auto" id="bg-video">
         <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
     </video>
 
-    <!-- 1. SCHERMATA BUSTA -->
-    <div id="envelope-screen">
-        <div class="envelope-box">
-            <h2>✉️ Hai un messaggio</h2>
-            <p>Giovanni & Eliana ti invitano a scoprire un momento speciale</p>
-            <button class="btn-open" onclick="openEnvelope()">Apri la Busta</button>
+    <!-- Schermata iniziale per avviare musica e video con un tocco (richiesto dai telefoni) -->
+    <div id="start-overlay" onclick="startExperience()">
+        <div class="start-box">
+            <h2>Giovanni & Eliana</h2>
+            <p>Tocca per vivere l'emozione della nostra promessa</p>
+            <button class="btn-start">Inizia ▶</button>
         </div>
     </div>
 
-    <!-- 2. SCHERMATA BIOGRAFIA / MESSAGGIO -->
-    <div id="bio-screen">
-        <div class="bio-card">
-            <h3>Il nostro grande passo</h3>
-            <p>Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa di matrimonio.<br><strong>Non mancate!</strong></p>
-            <button class="btn-open" onclick="showInvite()">Continua all'Invito ➔</button>
-        </div>
+    <!-- Messaggio 1 -->
+    <div class="story-step" id="step-1">
+        Ci sono momenti che cambiano la vita per sempre...
     </div>
 
-    <!-- 3. SCHERMATA INVITO FINALE -->
-    <div class="invitation-card" id="main-invite">
+    <!-- Messaggio 2 -->
+    <div class="story-step" id="step-2">
+        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
+    </div>
+
+    <!-- Messaggio 3: Invito Ufficiale -->
+    <div class="story-step" id="step-3">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
         <div class="names">&mdash; 23 Gennaio &mdash;</div>
@@ -254,24 +230,46 @@
     </div>
 
     <script>
-        function openEnvelope() {
-            // Fa partire la musica e il video in contemporanea al tocco
+        function startExperience() {
+            // Avvia audio e video
             var music = document.getElementById('bg-music');
             music.play().catch(function(error) { console.log("Audio bloccato"); });
 
             var video = document.getElementById('bg-video');
             video.play().catch(function(error) { console.log("Video bloccato"); });
 
-            document.getElementById('envelope-screen').style.opacity = '0';
+            // Nasconde la schermata iniziale di avvio
+            var overlay = document.getElementById('start-overlay');
+            overlay.style.opacity = '0';
             setTimeout(function() {
-                document.getElementById('envelope-screen').style.display = 'none';
-                document.getElementById('bio-screen').style.display = 'flex';
-            }, 600);
+                overlay.style.display = 'none';
+                runStorySequence();
+            }, 800);
         }
 
-        function showInvite() {
-            document.getElementById('bio-screen').style.display = 'none';
-            document.getElementById('main-invite').style.display = 'block';
+        function runStorySequence() {
+            // Mostra il primo messaggio dopo 1 secondo
+            setTimeout(function() {
+                document.getElementById('step-1').style.opacity = '1';
+            }, 1000);
+
+            // Nasconde il primo e mostra il secondo dopo 5 secondi
+            setTimeout(function() {
+                document.getElementById('step-1').style.opacity = '0';
+            }, 5000);
+
+            setTimeout(function() {
+                document.getElementById('step-2').style.opacity = '1';
+            }, 6500);
+
+            // Nasconde il secondo e mostra l'invito finale dopo 11 secondi
+            setTimeout(function() {
+                document.getElementById('step-2').style.opacity = '0';
+            }, 11000);
+
+            setTimeout(function() {
+                document.getElementById('step-3').style.opacity = '1';
+            }, 12500);
         }
     </script>
 
