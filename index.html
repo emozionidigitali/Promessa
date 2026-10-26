@@ -5,129 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promessa di Matrimonio - Giovanni & Eliana</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Georgia', serif;
-            background-image: url('foto1.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            font-family: 'Playfair Display', 'Georgia', serif;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: auto;
         }
 
-        /* Effetto "vita" / animazione di comparsa */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Video come sfondo a tutto schermo */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.65); /* Scurisce leggermente per far risaltare il testo */
         }
 
-        .overlay {
-            background: rgba(255, 255, 255, 0.89);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 90%;
-            width: 420px;
+        /* Riquadro centrale dell'invito con effetto vetro sfocato */
+        .invitation-card {
+            background: rgba(20, 20, 20, 0.68);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 35px 25px;
+            border-radius: 20px;
+            width: 88%;
+            max-width: 400px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            border: 1px solid rgba(255,255,255,0.4);
-            margin: 20px 0;
-            animation: fadeIn 1.5s ease-out; /* Appare con un movimento elegante */
+            color: #ffffff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.8s ease-out;
         }
 
-        h1.title {
-            color: #8c7355;
-            font-size: 26px;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        h2.subtitle {
-            font-size: 18px;
-            color: #444;
-            font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-
-        .date {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-            margin: 15px 0;
-            padding: 10px;
-            background: #f7f4f0;
-            border-radius: 8px;
-            border: 1px solid #e6dfd5;
-        }
-
-        .section {
-            margin: 20px 0;
-            text-align: left;
-        }
-
-        .section h3 {
-            color: #8c7355;
-            font-size: 15px;
-            border-bottom: 2px solid #e6dfd5;
-            padding-bottom: 4px;
+        .tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #dfc187;
             margin-bottom: 8px;
         }
 
-        .section p {
+        h1 {
+            font-size: 26px;
+            margin: 0 0 5px 0;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .names {
+            font-size: 22px;
+            color: #f3e5ab;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .divider {
+            width: 50px;
+            height: 1px;
+            background-color: #dfc187;
+            margin: 15px auto;
+        }
+
+        .details {
             font-size: 14px;
-            line-height: 1.5;
-            color: #444;
-            margin: 5px 0;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin: 15px 0;
+        }
+
+        .details strong {
+            color: #fff;
+        }
+
+        .footer-note {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 20px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <!-- Audio invisibile in sottofondo -->
+    <!-- Sfondo video in loop con il nome corretto -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
+        Il tuo browser non supporta i video HTML5.
+    </video>
+
+    <!-- Audio di sottofondo in loop -->
     <audio id="bg-music" autoplay loop>
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Contenuto Principale dell'Invito con effetto animato -->
-    <div class="overlay">
-        <h1 class="title">La Nostra Promessa</h1>
-        <h2 class="subtitle">Giovanni Piccolo & Eliana Lanzi</h2>
+    <!-- Card principale dell'invito -->
+    <div class="invitation-card">
+        <div class="tag">La Nostra Promessa</div>
+        <h1>Giovanni & Eliana</h1>
+        <div class="names">&mdash; 23 Gennaio &mdash;</div>
         
-        <div class="date">
-            📅 23 Gennaio | Promessa di Matrimonio
+        <div class="divider"></div>
+
+        <div class="details">
+            <p>📍 <strong>Cerimonia:</strong><br>Comune di Napoli</p>
+            <p>🕒 <strong>Programma:</strong><br>Arrivo degli ospiti e celebrazione, a seguire brindisi insieme.</p>
         </div>
 
-        <div class="section">
-            <h3>📍 Dove</h3>
-            <p><strong>Cerimonia:</strong> Comune di Napoli</p>
-        </div>
+        <div class="divider"></div>
 
-        <div class="section">
-            <h3>🕒 Programma</h3>
-            <p>• Arrivo degli ospiti<br>
-            • Celebrazione della promessa<br>
-            • Brindisi e festeggiamenti insieme</p>
-        </div>
-
-        <div class="section">
-            <h3>🎁 Informazioni Utili</h3>
-            <p>La vostra presenza è il regalo più bello per celebrare questo momento speciale insieme a noi!</p>
+        <div class="footer-note">
+            La vostra presenza è il regalo più bello.
         </div>
     </div>
 
     <script>
-        // Sblocca la musica al primo tocco sullo schermo se il browser la blocca inizialmente
+        // Sblocca eventuale audio bloccato al primo tocco
         document.addEventListener('click', function() {
             var music = document.getElementById('bg-music');
             if (music.paused) {
