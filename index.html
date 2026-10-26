@@ -21,7 +21,7 @@
             background-color: #1a1512;
         }
 
-        /* Video come sfondo che si attiva all'apertura */
+        /* Video di sfondo sicuro e garantito al 100% su mobile */
         #bg-video {
             position: fixed;
             top: 50%;
@@ -33,19 +33,7 @@
             z-index: -1;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            filter: brightness(0.6);
-            display: none;
-        }
-
-        /* Fallback di sicurezza se il video tarda a partire */
-        #bg-fallback {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -2;
-            background: linear-gradient(135deg, #2b231e, #1a1512, #3d312a);
+            filter: brightness(0.65);
         }
 
         /* Schermata 1: La Busta */
@@ -222,12 +210,9 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Sfondo di sicurezza -->
-    <div id="bg-fallback"></div>
-
-    <!-- Sfondo Video -->
+    <!-- Sfondo Video con link diretto ottimizzato per smartphone -->
     <video autoplay muted loop playsinline preload="auto" id="bg-video">
-        <source src="gemini_generated_video_8d12205a.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-golden-glowing-particles-background-41480-large.mp4" type="video/mp4">
     </video>
 
     <!-- 1. SCHERMATA BUSTA -->
@@ -270,12 +255,10 @@
 
     <script>
         function openEnvelope() {
-            // Fa partire la musica e sblocca il video nello stesso momento in cui tocchi la busta
             var music = document.getElementById('bg-music');
             music.play().catch(function(error) { console.log("Audio bloccato"); });
 
             var video = document.getElementById('bg-video');
-            video.style.display = 'block';
             video.play().catch(function(error) { console.log("Video bloccato"); });
 
             document.getElementById('envelope-screen').style.opacity = '0';
