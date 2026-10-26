@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promessa di Matrimonio - Giovanni & Eliana</title>
-    <!-- Importazione di font Google Fonts eleganti e calligrafici -->
+    <!-- Importazione dei font eleganti -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
@@ -17,54 +17,11 @@
             width: 100%;
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #070d1a, #101c30, #0a101f);
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Sfondo blu notte profondo ed elegante, tipico dei promessi sposi */
-            background: linear-gradient(135deg, #070d1a, #101c30, #0a101f);
-            background-size: 200% 200%;
-            animation: bgMove 12s ease infinite;
-        }
-
-        @keyframes bgMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Contenitore dei fuochi d'artificio */
-        #fireworks-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            display: none;
-        }
-
-        .firework {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 #f7e2b3;
-            animation: explode 1.2s infinite ease-out;
-        }
-
-        @keyframes explode {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-                box-shadow: 0 0 0 0 #f7e2b3, 0 0 0 0 #e6c584, 0 0 0 0 #ffdf79;
-            }
-            100% {
-                transform: scale(30);
-                opacity: 0;
-                box-shadow: -30px -30px 0 2px #f7e2b3, 30px -30px 0 2px #e6c584, -30px 30px 0 2px #ffdf79, 30px 30px 0 2px #fff;
-            }
         }
 
         /* Schermata iniziale per sbloccare l'audio */
@@ -74,32 +31,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(7, 13, 26, 0.97);
+            background: #070d1a;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 20;
+            z-index: 100;
             color: #fff;
             text-align: center;
             padding: 20px;
             cursor: pointer;
-            transition: opacity 1s ease;
         }
 
         .start-box h2 {
             font-family: 'Great Vibes', cursive;
             color: #e6c584;
-            font-size: 45px;
+            font-size: 48px;
             margin-bottom: 10px;
             font-weight: normal;
         }
 
         .start-box p {
             color: #d1c7bd;
-            font-size: 17px;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
+            font-size: 18px;
+            margin-bottom: 30px;
             font-style: italic;
         }
 
@@ -107,7 +62,7 @@
             background-color: #e6c584;
             color: #070d1a;
             border: none;
-            padding: 14px 38px;
+            padding: 15px 40px;
             font-size: 16px;
             font-weight: 600;
             font-family: 'Cormorant Garamond', serif;
@@ -127,25 +82,30 @@
         .story-step {
             position: absolute;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            visibility: hidden;
+            transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
             text-align: center;
             color: #ffffff;
             width: 85%;
             max-width: 450px;
             padding: 25px;
-            pointer-events: none;
-            z-index: 5;
+            z-index: 10;
+        }
+
+        .visible {
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         #step-1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 38px;
+            font-size: 40px;
             color: #f7e2b3;
             text-shadow: 0 2px 15px rgba(0,0,0,0.9);
         }
 
         #step-2 {
-            font-size: 26px;
+            font-size: 28px;
             color: #fdfbf7;
             line-height: 1.6;
             font-style: italic;
@@ -153,6 +113,15 @@
         }
 
         #step-3 {
-            background: rgba(14, 23, 41, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(
+            background: rgba(14, 23, 41, 0.95);
+            border: 1px solid rgba(230, 197, 132, 0.5);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            z-index: 20;
+        }
+
+        .tag {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter
