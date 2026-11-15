@@ -114,7 +114,7 @@
         #step-3 {
             background: rgba(14, 23, 41, 0.97);
             border: 1px solid rgba(230, 197, 132, 0.4);
-            padding: 22px 20px;
+            padding: 20px 18px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             z-index: 20;
@@ -127,22 +127,22 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             color: #e6c584;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             font-weight: 600;
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 44px;
+            font-size: 42px;
             margin: 0 0 2px 0;
             font-weight: normal;
             color: #f7e2b3;
         }
 
         .names {
-            font-size: 16px;
+            font-size: 15px;
             color: #d1c7bd;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-style: italic;
             letter-spacing: 1px;
         }
@@ -156,31 +156,31 @@
 
         /* Sezione Dettagli */
         .details {
-            font-size: 15px;
-            line-height: 1.5;
+            font-size: 14px;
+            line-height: 1.4;
             color: #e2ded8;
-            margin: 8px 0;
+            margin: 6px 0;
             text-align: left;
         }
 
         .detail-row {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .detail-row strong {
             color: #e6c584;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         /* Pulsante Mappa */
         .btn-map {
             display: inline-block;
-            margin-top: 4px;
+            margin-top: 3px;
             background-color: transparent;
             color: #e6c584;
             border: 1px solid #e6c584;
-            padding: 5px 14px;
-            font-size: 12px;
+            padding: 4px 12px;
+            font-size: 11px;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             border-radius: 20px;
@@ -193,14 +193,45 @@
             color: #070d1a;
         }
 
+        /* Conto alla rovescia */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .countdown-box {
+            background: rgba(230, 197, 132, 0.1);
+            border: 1px solid rgba(230, 197, 132, 0.3);
+            border-radius: 6px;
+            padding: 5px 8px;
+            text-align: center;
+            min-width: 48px;
+        }
+
+        .countdown-number {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f7e2b3;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            color: #d1c7bd;
+            letter-spacing: 1px;
+        }
+
         /* Foto principale del ristorante grande */
         .featured-photo {
             width: 100%;
-            height: 150px;
+            height: 130px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.4);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             background: #000;
         }
 
@@ -211,7 +242,7 @@
 
         .video-container video {
             width: 100%;
-            height: 130px;
+            height: 110px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.3);
@@ -220,14 +251,14 @@
 
         /* Sezione RSVP Pulsanti WhatsApp */
         .rsvp-section {
-            margin-top: 12px;
+            margin-top: 8px;
             text-align: center;
         }
 
         .rsvp-title {
-            font-size: 14px;
+            font-size: 13px;
             color: #e6c584;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-style: italic;
         }
 
@@ -239,8 +270,8 @@
 
         .btn-rsvp {
             display: inline-block;
-            padding: 8px 18px;
-            font-size: 13px;
+            padding: 5px 14px;
+            font-size: 12px;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             border-radius: 20px;
@@ -265,10 +296,20 @@
             transform: scale(1.05);
         }
 
-        .footer-note {
-            font-size: 13px;
-            color: #d1c7bd;
+        /* Frase Emozionante Finale */
+        .final-quote {
+            font-family: 'Great Vibes', cursive;
+            font-size: 20px;
+            color: #f7e2b3;
             margin-top: 8px;
+            margin-bottom: 2px;
+            text-align: center;
+        }
+
+        .footer-note {
+            font-size: 12px;
+            color: #d1c7bd;
+            margin-top: 2px;
             font-style: italic;
         }
 
@@ -344,16 +385,40 @@
 
         <div class="details">
             <div class="detail-row">
-                🕒 <strong>Orario:</strong> ore 08:30
+                🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
                 📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 13px; color: #d1c7bd; padding-left: 20px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+                <span style="font-size: 12px; color: #d1c7bd; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
             </div>
             
             <!-- Pulsante per aprire Google Maps -->
             <div style="text-align: center;">
                 <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-map">Apri in Google Maps 🗺️</a>
+            </div>
+        </div>
+
+        <!-- Conto alla rovescia -->
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <span class="countdown-number" id="months">0</span>
+                <span class="countdown-label">Mesi</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="days">0</span>
+                <span class="countdown-label">Giorni</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="hours">0</span>
+                <span class="countdown-label">Ore</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="minutes">0</span>
+                <span class="countdown-label">Min</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="seconds">0</span>
+                <span class="countdown-label">Sec</span>
             </div>
         </div>
 
@@ -375,6 +440,9 @@
                 <a href="https://wa.me/393511481691?text=Ciao,%20purtroppo%20non%20potrò%20essere%20presente%20alla%20vostra%20promessa,%20vi%20auguro%20il%20meglio!%20🤍" target="_blank" class="btn-rsvp btn-no">Purtroppo no</a>
             </div>
         </div>
+
+        <!-- Frase Emozionante Finale -->
+        <div class="final-quote">"Il nostro per sempre comincia con voi..."</div>
 
         <div class="footer-note">
             La vostra presenza è il regalo più bello.
@@ -439,6 +507,39 @@
                 container.appendChild(fw);
             }
         }
+
+        // Funzione Conto alla Rovescia (Countdown)
+        const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("months").innerText = "0";
+                document.getElementById("days").innerText = "0";
+                document.getElementById("hours").innerText = "0";
+                document.getElementById("minutes").innerText = "0";
+                document.getElementById("seconds").innerText = "0";
+                return;
+            }
+
+            const daysTotal = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const months = Math.floor(daysTotal / 30);
+            const days = daysTotal % 30;
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("months").innerText = months;
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 
 </body>
