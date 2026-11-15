@@ -114,7 +114,7 @@
         #step-3 {
             background: rgba(14, 23, 41, 0.97);
             border: 1px solid rgba(230, 197, 132, 0.4);
-            padding: 25px 20px;
+            padding: 22px 20px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             z-index: 20;
@@ -142,7 +142,7 @@
         .names {
             font-size: 16px;
             color: #d1c7bd;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-style: italic;
             letter-spacing: 1px;
         }
@@ -151,36 +151,36 @@
             width: 50px;
             height: 1px;
             background-color: #e6c584;
-            margin: 10px auto;
+            margin: 8px auto;
         }
 
-        /* Sezione Dettagli spaziosa e ordinata */
+        /* Sezione Dettagli */
         .details {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.5;
             color: #e2ded8;
-            margin: 10px 0;
+            margin: 8px 0;
             text-align: left;
         }
 
         .detail-row {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .detail-row strong {
             color: #e6c584;
-            font-size: 17px;
+            font-size: 16px;
         }
 
         /* Pulsante Mappa */
         .btn-map {
             display: inline-block;
-            margin-top: 6px;
+            margin-top: 4px;
             background-color: transparent;
             color: #e6c584;
             border: 1px solid #e6c584;
-            padding: 6px 16px;
-            font-size: 13px;
+            padding: 5px 14px;
+            font-size: 12px;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             border-radius: 20px;
@@ -196,32 +196,79 @@
         /* Foto principale del ristorante grande */
         .featured-photo {
             width: 100%;
-            height: 170px;
+            height: 150px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.4);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             background: #000;
         }
 
         /* Video in autoplay */
         .video-container {
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
         .video-container video {
             width: 100%;
-            height: 150px;
+            height: 130px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.3);
             background: #000;
         }
 
-        .footer-note {
+        /* Sezione RSVP Pulsanti WhatsApp */
+        .rsvp-section {
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .rsvp-title {
             font-size: 14px;
+            color: #e6c584;
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+
+        .rsvp-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-rsvp {
+            display: inline-block;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .btn-yes {
+            background-color: #25d366;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-no {
+            background-color: transparent;
             color: #d1c7bd;
-            margin-top: 10px;
+            border: 1px solid #d1c7bd;
+        }
+
+        .btn-rsvp:hover {
+            transform: scale(1.05);
+        }
+
+        .footer-note {
+            font-size: 13px;
+            color: #d1c7bd;
+            margin-top: 8px;
             font-style: italic;
         }
 
@@ -301,7 +348,7 @@
             </div>
             <div class="detail-row">
                 📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 14px; color: #d1c7bd; padding-left: 22px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+                <span style="font-size: 13px; color: #d1c7bd; padding-left: 20px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
             </div>
             
             <!-- Pulsante per aprire Google Maps -->
@@ -315,9 +362,18 @@
         <!-- Foto Ristorante 1 Grande in primo piano -->
         <img src="ristorante 1.jpeg" alt="Ristorante Al Convento" class="featured-photo">
 
-        <!-- Nuovo Video 2 in Autoplay -->
+        <!-- Nuovo Video in Autoplay -->
         <div class="video-container">
             <video src="video 2.mp4" autoplay muted loop playsinline></video>
+        </div>
+
+        <!-- Sezione RSVP con invio WhatsApp diretto agli sposi -->
+        <div class="rsvp-section">
+            <div class="rsvp-title">Conferma la tua presenza</div>
+            <div class="rsvp-buttons">
+                <a href="https://wa.me/393511481691?text=Ciao!%20Confermo%20con%20gioia%20la%20mia%20presenza%20alla%20vostra%20promessa!%20❤️" target="_blank" class="btn-rsvp btn-yes">Sì, ci sarò! ✨</a>
+                <a href="https://wa.me/393511481691?text=Ciao,%20purtroppo%20non%20potrò%20essere%20presente%20alla%20vostra%20promessa,%20vi%20auguro%20il%20meglio!%20🤍" target="_blank" class="btn-rsvp btn-no">Purtroppo no</a>
+            </div>
         </div>
 
         <div class="footer-note">
