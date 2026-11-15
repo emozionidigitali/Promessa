@@ -193,17 +193,27 @@
             color: #070d1a;
         }
 
-        /* Multimedia Grid (Foto) */
+        /* Foto principale grande (ristorante 1) e le altre a supporto */
+        .featured-photo {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(230, 197, 132, 0.4);
+            margin-bottom: 8px;
+            background: #000;
+        }
+
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 8px;
-            margin: 12px 0;
+            margin: 8px 0;
         }
 
         .media-grid img {
             width: 100%;
-            height: 85px;
+            height: 90px;
             object-fit: cover;
             border-radius: 6px;
             border: 1px solid rgba(230, 197, 132, 0.3);
@@ -217,7 +227,7 @@
 
         .video-container video {
             width: 100%;
-            height: 130px;
+            height: 120px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.3);
@@ -254,14 +264,14 @@
 
         @keyframes explode {
             0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 #f7e2b3, 0 0 0 0 #e6c584; }
-            100% { transform: scale(35); opacity: 0; box-shadow: -30px -30px 0 2px #f7e2b3, 30px -30px 0 2px #e6c584, -30px 30px 0 2px #ffdf79, 30px 30px 0 2px #fff; }
+            100% { transform: scale(40); opacity: 0; box-shadow: -40px -40px 0 2px #f7e2b3, 40px -40px 0 2px #e6c584, -40px 40px 0 2px #ffdf79, 40px 40px 0 2px #fff; }
         }
     </style>
 </head>
 <body>
 
     <!-- Audio di sottofondo -->
-    <audio id="bg-music" loop>
+    <audio id="bg-music">
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
@@ -271,6 +281,7 @@
         <div class="firework" style="top: 30%; left: 80%; animation-delay: 0.4s;"></div>
         <div class="firework" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
         <div class="firework" style="top: 60%; left: 75%; animation-delay: 1.2s;"></div>
+        <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
     </div>
 
     <!-- Schermata iniziale -->
@@ -317,16 +328,16 @@
 
         <div class="divider"></div>
 
-        <!-- Sezione Foto -->
-        <div class="media-grid">
-            <img src="Gianni 1.jpg" alt="Giovanni ed Eliana">
-            <img src="ristorante 1.jpeg" alt="Ristorante Al Convento">
-            <img src="ristorante 2.jpeg" alt="Panorama Al Convento">
-        </div>
+        <!-- Foto Ristorante 1 in primo piano (più grande) -->
+        <img src="ristorante 1.jpeg" alt="Ristorante Al Convento" class="featured-photo">
 
-        <!-- Sezione Video in Autoplay -->
-        <div class="video-container">
-            <video src="video 1.mp4" autoplay muted loop playsinline></video>
+        <!-- Altre foto e video a supporto -->
+        <div class="media-grid">
+            <img src="ristorante 2.jpeg" alt="Panorama Al Convento">
+            <!-- Inserisci qui eventuale altra foto o lascialo bilanciato -->
+            <div class="video-container" style="grid-column: span 2; margin-top: 0;">
+                <video src="video 1.mp4" autoplay muted loop playsinline></video>
+            </div>
         </div>
 
         <div class="footer-note">
@@ -335,8 +346,9 @@
     </div>
 
     <script>
+        var music = document.getElementById('bg-music');
+
         function startExperience() {
-            var music = document.getElementById('bg-music');
             music.play().then(function() {
                 console.log("Audio avviato con successo");
             }).catch(function(error) { 
@@ -372,6 +384,25 @@
                 document.getElementById('step-3').classList.add('visible');
                 document.getElementById('fireworks-container').style.display = 'block';
             }, 12500);
+
+            // Rileva quando la canzone finisce per scatenare il gran finale con i fuochi d'artificio intensificati
+            music.onended = function() {
+                triggerGrandFinale();
+            };
+        }
+
+        function triggerGrandFinale() {
+            var container = document.getElementById('fireworks-container');
+            container.style.display = 'block';
+            // Aggiunge un effetto visivo extra alla fine della canzone
+            for(let i=0; i<6; i++) {
+                let fw = document.createElement('div');
+                fw.className = 'firework';
+                fw.style.top = Math.random() * 80 + '%';
+                fw.style.left = Math.random() * 80 + '%';
+                fw.style.animationDelay = (i * 0.2) + 's';
+                container.appendChild(fw);
+            }
         }
     </script>
 
