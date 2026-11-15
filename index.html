@@ -17,13 +17,13 @@
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
             background: #070d1a;
-            overflow: hidden;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Schermata iniziale (Forzata in primo piano) */
+        /* Schermata iniziale */
         #start-overlay {
             position: fixed;
             top: 0;
@@ -68,6 +68,11 @@
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(230, 197, 132, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-start:hover {
+            transform: scale(1.05);
         }
 
         /* Testi della sequenza */
@@ -78,8 +83,8 @@
             transition: opacity 1.5s ease, visibility 1.5s ease;
             text-align: center;
             color: #ffffff;
-            width: 85%;
-            max-width: 450px;
+            width: 90%;
+            max-width: 550px;
             padding: 25px;
             z-index: 10;
         }
@@ -107,10 +112,12 @@
         #step-3 {
             background: rgba(14, 23, 41, 0.95);
             border: 1px solid rgba(230, 197, 132, 0.5);
-            padding: 40px 30px;
+            padding: 30px 25px;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             z-index: 20;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .tag {
@@ -118,22 +125,22 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             color: #e6c584;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 50px;
+            font-size: 44px;
             margin: 0 0 5px 0;
             font-weight: normal;
             color: #f7e2b3;
         }
 
         .names {
-            font-size: 24px;
+            font-size: 22px;
             color: #d1c7bd;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-style: italic;
         }
 
@@ -141,14 +148,14 @@
             width: 60px;
             height: 1px;
             background-color: #e6c584;
-            margin: 18px auto;
+            margin: 12px auto;
         }
 
         .details {
-            font-size: 17px;
-            line-height: 1.7;
+            font-size: 16px;
+            line-height: 1.6;
             color: #e2ded8;
-            margin: 15px 0;
+            margin: 10px 0;
             text-align: left;
         }
 
@@ -156,10 +163,51 @@
             color: #e6c584;
         }
 
+        /* Multimedia Grid (Foto e Video) */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .media-grid img, .media-grid video {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(230, 197, 132, 0.3);
+        }
+
+        .video-full {
+            grid-column: span 2;
+            height: 140px !important;
+        }
+
+        /* Pulsante Mappa */
+        .btn-map {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: transparent;
+            color: #e6c584;
+            border: 1px solid #e6c584;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-map:hover {
+            background-color: #e6c584;
+            color: #070d1a;
+        }
+
         .footer-note {
-            font-size: 15px;
+            font-size: 14px;
             color: #d1c7bd;
-            margin-top: 25px;
+            margin-top: 15px;
             font-style: italic;
         }
 
@@ -228,16 +276,28 @@
     <div class="story-step" id="step-3">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
-        <div class="names">&mdash; 23 Gennaio &mdash;</div>
+        <div class="names">&mdash; 26 Gennaio 2027 &mdash;</div>
         
         <div class="divider"></div>
 
         <div class="details">
-            <p>📍 <strong>Cerimonia:</strong><br>Comune di Napoli</p>
-            <p>🕒 <strong>Programma:</strong><br>Arrivo degli ospiti e celebrazione, a seguire brindisi insieme.</p>
+            <p>🕒 <strong>Orario:</strong> ore 08:30[span_3](start_span)[span_3](end_span)</p>
+            <p>📍 <strong>Ristorante:</strong><br>Al Convento<br><span style="font-size: 14px; color: #d1c7bd;">Via Cupa Camaldoli 14, 80131 Napoli</span></p>
+            
+            <!-- Pulsante per aprire Google Maps con la posizione esatta -->
+            <div style="text-align: center;">
+                <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-map">Apri in Google Maps 🗺️</a>
+            </div>
         </div>
 
         <div class="divider"></div>
+
+        <!-- Sezione Foto e Video -->
+        <div class="media-grid">
+            <img src="135000.jpg" alt="Giovanni ed Eliana">
+            <img src="135001.jpg" alt="Ristorante Al Convento">
+            <video src="video_1.mp4" controls muted class="video-full"></video>
+        </div>
 
         <div class="footer-note">
             La vostra presenza è il regalo più bello.
