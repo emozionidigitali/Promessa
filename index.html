@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promessa di Matrimonio - Giovanni & Eliana</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Importiamo un font moderno e pulito (Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -15,7 +16,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Montserrat', sans-serif;
             background: #070d1a;
             overflow-x: hidden;
             display: flex;
@@ -42,28 +43,28 @@
         }
 
         .start-box h2 {
-            font-family: 'Great Vibes', cursive;
+            font-weight: 500;
             color: #e6c584;
-            font-size: 50px;
+            font-size: 38px;
             margin: 0 0 10px 0;
-            font-weight: normal;
+            letter-spacing: 1px;
         }
 
         .start-box p {
             color: #d1c7bd;
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 30px;
-            font-style: italic;
+            font-weight: 300;
         }
 
         .btn-start {
             background-color: #e6c584;
             color: #070d1a;
             border: none;
-            padding: 15px 45px;
-            font-size: 18px;
+            padding: 14px 40px;
+            font-size: 16px;
             font-weight: 600;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Montserrat', sans-serif;
             letter-spacing: 2px;
             border-radius: 30px;
             cursor: pointer;
@@ -84,8 +85,8 @@
             text-align: center;
             color: #ffffff;
             width: 90%;
-            max-width: 550px;
-            padding: 25px;
+            max-width: 500px;
+            padding: 20px;
             z-index: 10;
         }
 
@@ -95,64 +96,66 @@
         }
 
         #step-1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 42px;
+            font-size: 26px;
             color: #f7e2b3;
+            font-weight: 400;
+            line-height: 1.4;
             text-shadow: 0 2px 15px rgba(0,0,0,0.9);
         }
 
         #step-2 {
-            font-size: 28px;
+            font-size: 20px;
             color: #fdfbf7;
             line-height: 1.6;
-            font-style: italic;
+            font-weight: 300;
             text-shadow: 0 2px 12px rgba(0,0,0,0.9);
         }
 
         #step-3 {
-            background: rgba(14, 23, 41, 0.95);
-            border: 1px solid rgba(230, 197, 132, 0.5);
-            padding: 30px 25px;
-            border-radius: 20px;
+            background: rgba(14, 23, 41, 0.96);
+            border: 1px solid rgba(230, 197, 132, 0.4);
+            padding: 25px 20px;
+            border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             z-index: 20;
-            max-height: 90vh;
+            max-height: 92vh;
             overflow-y: auto;
         }
 
         .tag {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             color: #e6c584;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
         }
 
         h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 44px;
+            font-size: 32px;
             margin: 0 0 5px 0;
-            font-weight: normal;
+            font-weight: 500;
             color: #f7e2b3;
+            letter-spacing: 1px;
         }
 
         .names {
-            font-size: 22px;
+            font-size: 16px;
             color: #d1c7bd;
-            margin-bottom: 15px;
-            font-style: italic;
+            margin-bottom: 12px;
+            font-weight: 300;
+            letter-spacing: 2px;
         }
 
         .divider {
-            width: 60px;
+            width: 50px;
             height: 1px;
             background-color: #e6c584;
             margin: 12px auto;
         }
 
         .details {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.6;
             color: #e2ded8;
             margin: 10px 0;
@@ -161,6 +164,7 @@
 
         .details strong {
             color: #e6c584;
+            font-weight: 600;
         }
 
         /* Multimedia Grid (Foto e Video) */
@@ -173,27 +177,29 @@
 
         .media-grid img, .media-grid video {
             width: 100%;
-            height: 110px;
+            height: 100px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.3);
+            background: #000;
         }
 
         .video-full {
             grid-column: span 2;
-            height: 140px !important;
+            height: 130px !important;
         }
 
         /* Pulsante Mappa */
         .btn-map {
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 8px;
             background-color: transparent;
             color: #e6c584;
             border: 1px solid #e6c584;
-            padding: 8px 20px;
-            font-size: 14px;
-            font-family: 'Cormorant Garamond', serif;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
             border-radius: 20px;
             text-decoration: none;
             transition: background 0.3s, color 0.3s;
@@ -205,10 +211,10 @@
         }
 
         .footer-note {
-            font-size: 14px;
+            font-size: 13px;
             color: #d1c7bd;
-            margin-top: 15px;
-            font-style: italic;
+            margin-top: 12px;
+            font-weight: 300;
         }
 
         /* Fuochi d'artificio */
@@ -242,7 +248,7 @@
 
     <!-- Audio di sottofondo -->
     <audio id="bg-music" loop>
-        <source src="canzone.mp3.mp3" type="audio/mp3">
+        <source src="canzone.mp3" type="audio/mp3">
     </audio>
 
     <!-- Fuochi d'artificio -->
@@ -276,15 +282,15 @@
     <div class="story-step" id="step-3">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
-        <div class="names">&mdash; 26 Gennaio 2027 &mdash;</div>
+        <div class="names">26 GENNAIO 2027</div>
         
         <div class="divider"></div>
 
         <div class="details">
-            <p>🕒 <strong>Orario:</strong> ore 08:30[span_3](start_span)[span_3](end_span)</p>
-            <p>📍 <strong>Ristorante:</strong><br>Al Convento<br><span style="font-size: 14px; color: #d1c7bd;">Via Cupa Camaldoli 14, 80131 Napoli</span></p>
+            <p>🕒 <strong>Orario:</strong> ore 08:30[span_0](start_span)[span_0](end_span)</p>
+            <p>📍 <strong>Ristorante:</strong> Al Convento<br><span style="font-size: 13px; color: #d1c7bd;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)</p>
             
-            <!-- Pulsante per aprire Google Maps con la posizione esatta -->
+            <!-- Pulsante per aprire Google Maps -->
             <div style="text-align: center;">
                 <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-map">Apri in Google Maps 🗺️</a>
             </div>
@@ -292,11 +298,11 @@
 
         <div class="divider"></div>
 
-        <!-- Sezione Foto e Video -->
+        <!-- Sezione Foto e Video (Assicurati che i nomi corrispondano esattamente ai file caricati) -->
         <div class="media-grid">
             <img src="135000.jpg" alt="Giovanni ed Eliana">
             <img src="135001.jpg" alt="Ristorante Al Convento">
-            <video src="video_1.mp4" controls muted class="video-full"></video>
+            <video src="134998.mp4" controls muted playsinline class="video-full"></video>
         </div>
 
         <div class="footer-note">
