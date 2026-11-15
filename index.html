@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promessa di Matrimonio - Giovanni & Eliana</title>
-    <!-- Importiamo un font moderno e pulito (Montserrat) -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font eleganti in stile matrimonio (Great Vibes & Cormorant Garamond) -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -16,7 +16,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             background: #070d1a;
             overflow-x: hidden;
             display: flex;
@@ -43,28 +43,28 @@
         }
 
         .start-box h2 {
-            font-weight: 500;
+            font-family: 'Great Vibes', cursive;
             color: #e6c584;
-            font-size: 38px;
+            font-size: 52px;
             margin: 0 0 10px 0;
-            letter-spacing: 1px;
+            font-weight: normal;
         }
 
         .start-box p {
             color: #d1c7bd;
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 30px;
-            font-weight: 300;
+            font-style: italic;
         }
 
         .btn-start {
             background-color: #e6c584;
             color: #070d1a;
             border: none;
-            padding: 14px 40px;
-            font-size: 16px;
+            padding: 15px 45px;
+            font-size: 18px;
             font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             letter-spacing: 2px;
             border-radius: 30px;
             cursor: pointer;
@@ -96,18 +96,18 @@
         }
 
         #step-1 {
-            font-size: 26px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 42px;
             color: #f7e2b3;
-            font-weight: 400;
-            line-height: 1.4;
             text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+            line-height: 1.3;
         }
 
         #step-2 {
-            font-size: 20px;
+            font-size: 24px;
             color: #fdfbf7;
             line-height: 1.6;
-            font-weight: 300;
+            font-style: italic;
             text-shadow: 0 2px 12px rgba(0,0,0,0.9);
         }
 
@@ -125,26 +125,26 @@
         .tag {
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             color: #e6c584;
             margin-bottom: 6px;
             font-weight: 600;
         }
 
         h1 {
-            font-size: 32px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
             margin: 0 0 5px 0;
-            font-weight: 500;
+            font-weight: normal;
             color: #f7e2b3;
-            letter-spacing: 1px;
         }
 
         .names {
-            font-size: 16px;
+            font-size: 18px;
             color: #d1c7bd;
             margin-bottom: 12px;
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-style: italic;
+            letter-spacing: 1px;
         }
 
         .divider {
@@ -155,7 +155,7 @@
         }
 
         .details {
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.6;
             color: #e2ded8;
             margin: 10px 0;
@@ -164,29 +164,36 @@
 
         .details strong {
             color: #e6c584;
-            font-weight: 600;
         }
 
         /* Multimedia Grid (Foto e Video) */
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             margin: 15px 0;
         }
 
-        .media-grid img, .media-grid video {
+        .media-grid img {
             width: 100%;
-            height: 100px;
+            height: 90px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid rgba(230, 197, 132, 0.3);
             background: #000;
         }
 
-        .video-full {
-            grid-column: span 2;
-            height: 130px !important;
+        .video-container {
+            margin-top: 10px;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(230, 197, 132, 0.3);
+            background: #000;
         }
 
         /* Pulsante Mappa */
@@ -197,9 +204,9 @@
             color: #e6c584;
             border: 1px solid #e6c584;
             padding: 8px 18px;
-            font-size: 13px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
+            font-size: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
             border-radius: 20px;
             text-decoration: none;
             transition: background 0.3s, color 0.3s;
@@ -211,10 +218,10 @@
         }
 
         .footer-note {
-            font-size: 13px;
+            font-size: 15px;
             color: #d1c7bd;
             margin-top: 12px;
-            font-weight: 300;
+            font-style: italic;
         }
 
         /* Fuochi d'artificio */
@@ -246,9 +253,9 @@
 </head>
 <body>
 
-    <!-- Audio di sottofondo -->
+    <!-- Audio di sottofondo (collegato al tuo file esatto) -->
     <audio id="bg-music" loop>
-        <source src="canzone.mp3" type="audio/mp3">
+        <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
     <!-- Fuochi d'artificio -->
@@ -282,13 +289,13 @@
     <div class="story-step" id="step-3">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
-        <div class="names">26 GENNAIO 2027</div>
+        <div class="names">&mdash; 26 Gennaio 2027 &mdash;</div>
         
         <div class="divider"></div>
 
         <div class="details">
-            <p>🕒 <strong>Orario:</strong> ore 08:30[span_0](start_span)[span_0](end_span)</p>
-            <p>📍 <strong>Ristorante:</strong> Al Convento<br><span style="font-size: 13px; color: #d1c7bd;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)</p>
+            <p>🕒 <strong>Orario:</strong> ore 08:30[span_4](start_span)[span_4](end_span)</p>
+            <p>📍 <strong>Ristorante:</strong> Al Convento<br><span style="font-size: 14px; color: #d1c7bd;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_5](start_span)[span_5](end_span)</p>
             
             <!-- Pulsante per aprire Google Maps -->
             <div style="text-align: center;">
@@ -298,11 +305,16 @@
 
         <div class="divider"></div>
 
-        <!-- Sezione Foto e Video (Assicurati che i nomi corrispondano esattamente ai file caricati) -->
+        <!-- Sezione Foto (collegate ai tuoi file esatti) -->
         <div class="media-grid">
-            <img src="135000.jpg" alt="Giovanni ed Eliana">
-            <img src="135001.jpg" alt="Ristorante Al Convento">
-            <video src="134998.mp4" controls muted playsinline class="video-full"></video>
+            <img src="Gianni 1.jpg" alt="Giovanni ed Eliana">
+            <img src="ristorante 1.jpeg" alt="Ristorante Al Convento">
+            <img src="ristorante 2.jpeg" alt="Panorama Al Convento">
+        </div>
+
+        <!-- Sezione Video (collegato al tuo file esatto) -->
+        <div class="video-container">
+            <video src="video 1.mp4" controls muted playsinline></video>
         </div>
 
         <div class="footer-note">
@@ -313,7 +325,12 @@
     <script>
         function startExperience() {
             var music = document.getElementById('bg-music');
-            music.play().catch(function(error) { console.log("Audio bloccato"); });
+            // Forza la riproduzione dell'audio al click dell'utente
+            music.play().then(function() {
+                console.log("Audio avviato con successo");
+            }).catch(function(error) { 
+                console.log("Errore riproduzione audio:", error); 
+            });
 
             var overlay = document.getElementById('start-overlay');
             overlay.style.opacity = '0';
