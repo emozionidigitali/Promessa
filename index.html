@@ -84,9 +84,9 @@
             transition: opacity 1.5s ease, visibility 1.5s ease;
             text-align: center;
             color: #ffffff;
-            width: 90%;
-            max-width: 500px;
-            padding: 20px;
+            width: 92%;
+            max-width: 520px;
+            padding: 15px;
             z-index: 10;
         }
 
@@ -112,13 +112,13 @@
         }
 
         #step-3 {
-            background: rgba(14, 23, 41, 0.96);
+            background: rgba(14, 23, 41, 0.97);
             border: 1px solid rgba(230, 197, 132, 0.4);
             padding: 25px 20px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             z-index: 20;
-            max-height: 92vh;
+            max-height: 94vh;
             overflow-y: auto;
         }
 
@@ -127,22 +127,22 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             color: #e6c584;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-weight: 600;
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 48px;
-            margin: 0 0 5px 0;
+            font-size: 44px;
+            margin: 0 0 2px 0;
             font-weight: normal;
             color: #f7e2b3;
         }
 
         .names {
-            font-size: 18px;
+            font-size: 16px;
             color: #d1c7bd;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-style: italic;
             letter-spacing: 1px;
         }
@@ -151,60 +151,36 @@
             width: 50px;
             height: 1px;
             background-color: #e6c584;
-            margin: 12px auto;
+            margin: 10px auto;
         }
 
+        /* Sezione Dettagli spaziosa e ordinata */
         .details {
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.5;
             color: #e2ded8;
             margin: 10px 0;
             text-align: left;
         }
 
-        .details strong {
+        .detail-row {
+            margin-bottom: 12px;
+        }
+
+        .detail-row strong {
             color: #e6c584;
-        }
-
-        /* Multimedia Grid (Foto e Video) */
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin: 15px 0;
-        }
-
-        .media-grid img {
-            width: 100%;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid rgba(230, 197, 132, 0.3);
-            background: #000;
-        }
-
-        .video-container {
-            margin-top: 10px;
-        }
-
-        .video-container video {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid rgba(230, 197, 132, 0.3);
-            background: #000;
+            font-size: 17px;
         }
 
         /* Pulsante Mappa */
         .btn-map {
             display: inline-block;
-            margin-top: 8px;
+            margin-top: 6px;
             background-color: transparent;
             color: #e6c584;
             border: 1px solid #e6c584;
-            padding: 8px 18px;
-            font-size: 14px;
+            padding: 6px 16px;
+            font-size: 13px;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             border-radius: 20px;
@@ -217,10 +193,41 @@
             color: #070d1a;
         }
 
+        /* Multimedia Grid (Foto) */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .media-grid img {
+            width: 100%;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid rgba(230, 197, 132, 0.3);
+            background: #000;
+        }
+
+        /* Video in autoplay */
+        .video-container {
+            margin-top: 8px;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(230, 197, 132, 0.3);
+            background: #000;
+        }
+
         .footer-note {
-            font-size: 15px;
+            font-size: 14px;
             color: #d1c7bd;
-            margin-top: 12px;
+            margin-top: 10px;
             font-style: italic;
         }
 
@@ -253,7 +260,7 @@
 </head>
 <body>
 
-    <!-- Audio di sottofondo (collegato al tuo file esatto) -->
+    <!-- Audio di sottofondo -->
     <audio id="bg-music" loop>
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
@@ -294,8 +301,13 @@
         <div class="divider"></div>
 
         <div class="details">
-            <p>🕒 <strong>Orario:</strong> ore 08:30[span_4](start_span)[span_4](end_span)</p>
-            <p>📍 <strong>Ristorante:</strong> Al Convento<br><span style="font-size: 14px; color: #d1c7bd;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_5](start_span)[span_5](end_span)</p>
+            <div class="detail-row">
+                🕒 <strong>Orario:</strong> ore 08:30
+            </div>
+            <div class="detail-row">
+                📍 <strong>Ristorante:</strong> Al Convento<br>
+                <span style="font-size: 14px; color: #d1c7bd; padding-left: 22px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+            </div>
             
             <!-- Pulsante per aprire Google Maps -->
             <div style="text-align: center;">
@@ -305,16 +317,16 @@
 
         <div class="divider"></div>
 
-        <!-- Sezione Foto (collegate ai tuoi file esatti) -->
+        <!-- Sezione Foto -->
         <div class="media-grid">
             <img src="Gianni 1.jpg" alt="Giovanni ed Eliana">
             <img src="ristorante 1.jpeg" alt="Ristorante Al Convento">
             <img src="ristorante 2.jpeg" alt="Panorama Al Convento">
         </div>
 
-        <!-- Sezione Video (collegato al tuo file esatto) -->
+        <!-- Sezione Video in Autoplay -->
         <div class="video-container">
-            <video src="video 1.mp4" controls muted playsinline></video>
+            <video src="video 1.mp4" autoplay muted loop playsinline></video>
         </div>
 
         <div class="footer-note">
@@ -325,7 +337,6 @@
     <script>
         function startExperience() {
             var music = document.getElementById('bg-music');
-            // Forza la riproduzione dell'audio al click dell'utente
             music.play().then(function() {
                 console.log("Audio avviato con successo");
             }).catch(function(error) { 
