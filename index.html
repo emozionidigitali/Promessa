@@ -193,41 +193,25 @@
             color: #070d1a;
         }
 
-        /* Foto principale grande (ristorante 1) e le altre a supporto */
+        /* Foto principale del ristorante grande */
         .featured-photo {
             width: 100%;
-            height: 160px;
+            height: 170px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.4);
-            margin-bottom: 8px;
-            background: #000;
-        }
-
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin: 8px 0;
-        }
-
-        .media-grid img {
-            width: 100%;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid rgba(230, 197, 132, 0.3);
+            margin-bottom: 10px;
             background: #000;
         }
 
         /* Video in autoplay */
         .video-container {
-            margin-top: 8px;
+            margin-top: 5px;
         }
 
         .video-container video {
             width: 100%;
-            height: 120px;
+            height: 150px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.3);
@@ -328,16 +312,12 @@
 
         <div class="divider"></div>
 
-        <!-- Foto Ristorante 1 in primo piano (più grande) -->
+        <!-- Foto Ristorante 1 Grande in primo piano -->
         <img src="ristorante 1.jpeg" alt="Ristorante Al Convento" class="featured-photo">
 
-        <!-- Altre foto e video a supporto -->
-        <div class="media-grid">
-            <img src="ristorante 2.jpeg" alt="Panorama Al Convento">
-            <!-- Inserisci qui eventuale altra foto o lascialo bilanciato -->
-            <div class="video-container" style="grid-column: span 2; margin-top: 0;">
-                <video src="video 1.mp4" autoplay muted loop playsinline></video>
-            </div>
+        <!-- Nuovo Video 2 in Autoplay -->
+        <div class="video-container">
+            <video src="video 2.mp4" autoplay muted loop playsinline></video>
         </div>
 
         <div class="footer-note">
@@ -385,7 +365,7 @@
                 document.getElementById('fireworks-container').style.display = 'block';
             }, 12500);
 
-            // Rileva quando la canzone finisce per scatenare il gran finale con i fuochi d'artificio intensificati
+            // Rileva la fine della canzone per scatenare lo spettacolo pirotecnico finale
             music.onended = function() {
                 triggerGrandFinale();
             };
@@ -394,8 +374,7 @@
         function triggerGrandFinale() {
             var container = document.getElementById('fireworks-container');
             container.style.display = 'block';
-            // Aggiunge un effetto visivo extra alla fine della canzone
-            for(let i=0; i<6; i++) {
+            for(let i=0; i<8; i++) {
                 let fw = document.createElement('div');
                 fw.className = 'firework';
                 fw.style.top = Math.random() * 80 + '%';
