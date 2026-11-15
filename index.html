@@ -193,35 +193,50 @@
             color: #070d1a;
         }
 
-        /* Conto alla rovescia */
+        /* Conto alla rovescia in stile Capodanno / Tabellone luminoso */
+        .countdown-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e6c584;
+            margin-top: 8px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin: 8px 0;
+            gap: 6px;
+            margin: 6px 0 10px 0;
         }
 
         .countdown-box {
-            background: rgba(230, 197, 132, 0.1);
-            border: 1px solid rgba(230, 197, 132, 0.3);
-            border-radius: 6px;
-            padding: 5px 8px;
+            background: linear-gradient(135deg, #111b33 0%, #070d1a 100%);
+            border: 1.5px solid #e6c584;
+            border-radius: 8px;
+            padding: 6px 6px;
             text-align: center;
-            min-width: 48px;
+            min-width: 52px;
+            box-shadow: 0 0 12px rgba(230, 197, 132, 0.2);
         }
 
         .countdown-number {
-            font-size: 16px;
-            font-weight: 600;
-            color: #f7e2b3;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(247, 226, 179, 0.6);
             display: block;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .countdown-label {
-            font-size: 9px;
+            font-size: 8px;
             text-transform: uppercase;
-            color: #d1c7bd;
+            color: #e6c584;
             letter-spacing: 1px;
+            margin-top: 2px;
+            display: block;
         }
 
         /* Foto principale del ristorante grande */
@@ -398,7 +413,8 @@
             </div>
         </div>
 
-        <!-- Conto alla rovescia -->
+        <!-- Conto alla rovescia in stile Capodanno -->
+        <div class="countdown-title">Mancano al grande giorno:</div>
         <div class="countdown-container">
             <div class="countdown-box">
                 <span class="countdown-number" id="months">0</span>
