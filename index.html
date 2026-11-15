@@ -76,23 +76,31 @@
             transform: scale(1.05);
         }
 
-        /* Testi della sequenza */
+        /* Testi della sequenza con transizione per lo zoom finale */
         .story-step {
             position: absolute;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1.5s ease, visibility 1.5s ease;
+            transition: opacity 1.5s ease, visibility 1.5s ease, transform 2s ease, box-shadow 2s ease;
             text-align: center;
             color: #ffffff;
             width: 92%;
             max-width: 520px;
-            padding: 15px;
+            padding: 18px 16px;
             z-index: 10;
         }
 
         .visible {
             opacity: 1 !important;
             visibility: visible !important;
+        }
+
+        /* Classe per l'effetto ottico combinato finale (Opzione 1 & 2) */
+        .grand-finale-effect {
+            transform: scale(1.03);
+            box-shadow: 0 0 35px rgba(230, 197, 132, 0.7), inset 0 0 20px rgba(230, 197, 132, 0.3) !important;
+            border: 1.5px solid #fff !important;
+            background: rgba(18, 28, 50, 0.98) !important;
         }
 
         #step-1 {
@@ -114,7 +122,6 @@
         #step-3 {
             background: rgba(14, 23, 41, 0.97);
             border: 1px solid rgba(230, 197, 132, 0.4);
-            padding: 20px 18px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             z-index: 20;
@@ -133,7 +140,7 @@
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 42px;
+            font-size: 40px;
             margin: 0 0 2px 0;
             font-weight: normal;
             color: #f7e2b3;
@@ -151,7 +158,7 @@
             width: 50px;
             height: 1px;
             background-color: #e6c584;
-            margin: 8px auto;
+            margin: 6px auto;
         }
 
         /* Sezione Dettagli */
@@ -159,12 +166,12 @@
             font-size: 14px;
             line-height: 1.4;
             color: #e2ded8;
-            margin: 6px 0;
+            margin: 4px 0;
             text-align: left;
         }
 
         .detail-row {
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .detail-row strong {
@@ -172,10 +179,16 @@
             font-size: 15px;
         }
 
-        /* Pulsante Mappa */
-        .btn-map {
+        /* Pulsanti d'azione (Mappa & Calendario) */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .btn-action {
             display: inline-block;
-            margin-top: 3px;
             background-color: transparent;
             color: #e6c584;
             border: 1px solid #e6c584;
@@ -188,19 +201,19 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        .btn-map:hover {
+        .btn-action:hover {
             background-color: #e6c584;
             color: #070d1a;
         }
 
         /* Conto alla rovescia in stile Capodanno */
         .countdown-title {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #e6c584;
-            margin-top: 8px;
-            margin-bottom: 4px;
+            margin-top: 6px;
+            margin-bottom: 3px;
             font-weight: 600;
         }
 
@@ -208,26 +221,25 @@
             display: flex;
             justify-content: center;
             gap: 6px;
-            margin: 6px 0 10px 0;
+            margin: 4px 0 8px 0;
         }
 
         .countdown-box {
             background: linear-gradient(135deg, #111b33 0%, #070d1a 100%);
             border: 1.5px solid #e6c584;
-            border-radius: 8px;
-            padding: 6px 6px;
+            border-radius: 6px;
+            padding: 4px 6px;
             text-align: center;
-            min-width: 52px;
-            box-shadow: 0 0 12px rgba(230, 197, 132, 0.2);
+            min-width: 48px;
+            box-shadow: 0 0 10px rgba(230, 197, 132, 0.2);
         }
 
         .countdown-number {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             color: #ffffff;
-            text-shadow: 0 0 8px rgba(247, 226, 179, 0.6);
+            text-shadow: 0 0 6px rgba(247, 226, 179, 0.6);
             display: block;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .countdown-label {
@@ -235,18 +247,18 @@
             text-transform: uppercase;
             color: #e6c584;
             letter-spacing: 1px;
-            margin-top: 2px;
+            margin-top: 1px;
             display: block;
         }
 
         /* Video in autoplay (Video 3) */
         .video-container {
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         .video-container video {
             width: 100%;
-            height: 170px;
+            height: 150px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.4);
@@ -255,14 +267,14 @@
 
         /* Sezione RSVP Pulsanti WhatsApp */
         .rsvp-section {
-            margin-top: 8px;
+            margin-top: 6px;
             text-align: center;
         }
 
         .rsvp-title {
-            font-size: 13px;
+            font-size: 12px;
             color: #e6c584;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             font-style: italic;
         }
 
@@ -274,8 +286,8 @@
 
         .btn-rsvp {
             display: inline-block;
-            padding: 5px 14px;
-            font-size: 12px;
+            padding: 4px 12px;
+            font-size: 11px;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             border-radius: 20px;
@@ -287,7 +299,7 @@
             background-color: #25d366;
             color: #ffffff;
             border: none;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
 
         .btn-no {
@@ -300,18 +312,28 @@
             transform: scale(1.05);
         }
 
-        /* Frase Emozionante Finale */
+        /* Frase Emozionante Finale Pulsante (Opzione 2) */
         .final-quote {
             font-family: 'Great Vibes', cursive;
-            font-size: 20px;
+            font-size: 21px;
             color: #f7e2b3;
-            margin-top: 8px;
+            margin-top: 6px;
             margin-bottom: 2px;
             text-align: center;
+            transition: transform 0.5s ease, text-shadow 0.5s ease;
+        }
+
+        .pulse-quote {
+            animation: pulseGlow 1.8s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); text-shadow: 0 0 5px rgba(247, 226, 179, 0.4); }
+            100% { transform: scale(1.06); text-shadow: 0 0 18px rgba(247, 226, 179, 0.9), 0 0 25px rgba(230, 197, 132, 0.6); }
         }
 
         .footer-note {
-            font-size: 12px;
+            font-size: 11px;
             color: #d1c7bd;
             margin-top: 2px;
             font-style: italic;
@@ -340,7 +362,7 @@
 
         @keyframes explode {
             0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 #f7e2b3, 0 0 0 0 #e6c584; }
-            100% { transform: scale(40); opacity: 0; box-shadow: -40px -40px 0 2px #f7e2b3, 40px -40px 0 2px #e6c584, -40px 40px 0 2px #ffdf79, 40px 40px 0 2px #fff; }
+            100% { transform: scale(45); opacity: 0; box-shadow: -45px -45px 0 2px #f7e2b3, 45px -45px 0 2px #e6c584, -45px 45px 0 2px #ffdf79, 45px 45px 0 2px #fff; }
         }
     </style>
 </head>
@@ -393,12 +415,13 @@
             </div>
             <div class="detail-row">
                 📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 12px; color: #d1c7bd; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+                <span style="font-size: 11px; color: #d1c7bd; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
             </div>
             
-            <!-- Pulsante per aprire Google Maps -->
-            <div style="text-align: center;">
-                <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-map">Apri in Google Maps 🗺️</a>
+            <!-- Pulsanti Mappa e Calendario -->
+            <div class="action-buttons">
+                <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-action">Apri Mappa 🗺️</a>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Promessa+di+Matrimonio+-+Giovanni+%26+Eliana&dates=20270126T193000Z/20270126T233000Z&details=Vi+aspettiamo+per+la+nostra+promessa+di+matrimonio!&location=Al+Convento,+Via+Cupa+Camaldoli+14,+80131+Napoli" target="_blank" class="btn-action">Salva in Calendario 📅</a>
             </div>
         </div>
 
@@ -429,7 +452,7 @@
 
         <div class="divider"></div>
 
-        <!-- Nuovo Video 3 in Autoplay -->
+        <!-- Video 3 in Autoplay -->
         <div class="video-container">
             <video src="video 3.mp4" autoplay muted loop playsinline></video>
         </div>
@@ -443,8 +466,8 @@
             </div>
         </div>
 
-        <!-- Frase Emozionante Finale -->
-        <div class="final-quote">"Il nostro per sempre comincia con voi..."</div>
+        <!-- Frase Emozionante Finale (Con effetto ottico Opzione 2: Cuore Pulsante) -->
+        <div class="final-quote" id="finalQuoteText">"Il nostro per sempre comincia con voi..."</div>
 
         <div class="footer-note">
             La vostra presenza è il regalo più bello.
@@ -491,7 +514,7 @@
                 document.getElementById('fireworks-container').style.display = 'block';
             }, 12500);
 
-            // Rileva la fine della canzone per scatenare lo spettacolo pirotecnico finale
+            // Rileva la fine della canzone per scatenare lo spettacolo pirotecnico finale e gli effetti ottici (Opzione 1 & 2 insieme)
             music.onended = function() {
                 triggerGrandFinale();
             };
@@ -500,12 +523,22 @@
         function triggerGrandFinale() {
             var container = document.getElementById('fireworks-container');
             container.style.display = 'block';
-            for(let i=0; i<8; i++) {
+
+            // Attiva l'effetto ottico combinato (Zoom dorato + Luce calda diffusa)
+            var invitationCard = document.getElementById('step-3');
+            invitationCard.classList.add('grand-finale-effect');
+
+            // Attiva l'effetto cuore pulsante luminoso sulla frase finale
+            var quote = document.getElementById('finalQuoteText');
+            quote.classList.add('pulse-quote');
+
+            // Genera una pioggia extra di fuochi d'artificio
+            for(let i=0; i<10; i++) {
                 let fw = document.createElement('div');
                 fw.className = 'firework';
                 fw.style.top = Math.random() * 80 + '%';
                 fw.style.left = Math.random() * 80 + '%';
-                fw.style.animationDelay = (i * 0.2) + 's';
+                fw.style.animationDelay = (i * 0.15) + 's';
                 container.appendChild(fw);
             }
         }
