@@ -77,14 +77,14 @@
             transform: scale(1.05);
         }
 
-        /* Contenitore Video Intro corretto per adattarsi senza uscire dallo schermo */
+        /* Contenitore Video Intro ad altezza e larghezza contenute per non uscire dallo schermo */
         #intro-video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #232b22; /* Sfondo scuro elegante che riempie gli spazi vuoti se il video ha un formato diverso */
+            background: #232b22;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -97,10 +97,10 @@
         #intro-video {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Garantisce che il video rientri perfettamente nello schermo senza tagli o sbavature */
+            object-fit: contain;
         }
 
-        /* Scritte in sovraimpressione sopra il video intro (più frasi e curate) */
+        /* Scritte in sovraimpressione per tutta la durata dell'intro */
         .intro-overlay-text {
             position: absolute;
             z-index: 10000;
@@ -139,9 +139,17 @@
 
         #intro-text-3 {
             font-family: 'Great Vibes', cursive;
-            font-size: 42px;
+            font-size: 38px;
             color: #f7e2b3;
             text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+        }
+
+        #intro-text-4 {
+            font-size: 21px;
+            color: #fdfbf7;
+            font-style: italic;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+            letter-spacing: 1px;
         }
 
         .show-phrase {
@@ -192,7 +200,7 @@
         }
 
         #step-3 {
-            background: rgba(52, 63, 50, 0.97); /* Sfondo card verde salvia raffinato */
+            background: rgba(52, 63, 50, 0.97);
             border: 1px solid rgba(230, 197, 132, 0.4);
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
@@ -440,18 +448,24 @@
 </head>
 <body>
 
-    <!-- Canzone di sottofondo -->
+    <!-- Musica di sottofondo dell'Intro (di suspense) -->
+    <audio id="intro-music">
+        <source src="intro-music.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Canzone principale della promessa -->
     <audio id="bg-music">
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Contenitore Video Intro con più frasi in successione -->
+    <!-- Contenitore Video Intro con le frasi distribuite fino alla fine -->
     <div id="intro-video-container">
         <video id="intro-video" src="video 8.mp4" playsinline></video>
         <div class="intro-overlay-text">
-            <div id="intro-text-1" class="intro-phrase">Il nostro futuro comincia qui...</div>
-            <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno la nostra casa, la nostra vita insieme</div>
-            <div id="intro-text-3" class="intro-phrase">State per scoprire la nostra promessa</div>
+            <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
+            <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno una casa, un rifugio, una vita insieme</div>
+            <div id="intro-text-3" class="intro-phrase">Ogni battito ci ha condotti fin qui</div>
+            <div id="intro-text-4" class="intro-phrase">Preparatevi a vivere la nostra grande emozione</div>
         </div>
     </div>
 
@@ -557,12 +571,15 @@
     </div>
 
     <script>
+        var introMusic = document.getElementById('intro-music');
         var music = document.getElementById('bg-music');
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
+        
         var text1 = document.getElementById('intro-text-1');
         var text2 = document.getElementById('intro-text-2');
         var text3 = document.getElementById('intro-text-3');
+        var text4 = document.getElementById('intro-text-4');
 
         function startExperience() {
             var overlay = document.getElementById('start-overlay');
@@ -574,37 +591,28 @@
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
-            introVideo.play().then(function() {
-                console.log("Video intro avviato");
-            }).catch(function(error) {
-                console.log("Errore riproduzione video intro:", error);
+            // Avvia la musica di suspense/intro
+            introMusic.play().catch(function(error) {
+                console.log("Errore audio intro:", error);
+            });
+
+            introVideo.play().catch(function(error) {
+                console.log("Errore video intro:", error);
                 onIntroEnded();
             });
 
-            // Gestione sequenza frasi in sovraimpressione durante il video 8
-            setTimeout(function() {
-                text1.classList.add('show-phrase');
-            }, 1000);
+            // Gestione della sequenza delle frasi distribuite per intrattenere durante tutto il video 8
+            setTimeout(function() { text1.classList.add('show-phrase'); }, 1000);
+            setTimeout(function() { text1.classList.remove('show-phrase'); }, 4000);
 
-            setTimeout(function() {
-                text1.classList.remove('show-phrase');
-            }, 3800);
+            setTimeout(function() { text2.classList.add('show-phrase'); }, 4600);
+            setTimeout(function() { text2.classList.remove('show-phrase'); }, 7800);
 
-            setTimeout(function() {
-                text2.classList.add('show-phrase');
-            }, 4300);
+            setTimeout(function() { text3.classList.add('show-phrase'); }, 8400);
+            setTimeout(function() { text3.classList.remove('show-phrase'); }, 11400);
 
-            setTimeout(function() {
-                text2.classList.remove('show-phrase');
-            }, 7800);
-
-            setTimeout(function() {
-                text3.classList.add('show-phrase');
-            }, 8300);
-
-            setTimeout(function() {
-                text3.classList.remove('show-phrase');
-            }, 11500);
+            setTimeout(function() { text4.classList.add('show-phrase'); }, 12000);
+            setTimeout(function() { text4.classList.remove('show-phrase'); }, 15500);
 
             introVideo.onended = function() {
                 onIntroEnded();
@@ -612,15 +620,28 @@
         }
 
         function onIntroEnded() {
+            // Dissolvenza della musica d'intro
+            let fadeOutAudio = setInterval(function() {
+                if (introMusic.volume > 0.1) {
+                    introMusic.volume -= 0.1;
+                } else {
+                    introMusic.pause();
+                    introMusic.volume = 1.0;
+                    clearInterval(fadeOutAudio);
+                }
+            }, 100);
+
+            // Dissolvenza visiva del video intro
             introContainer.style.opacity = '0';
             setTimeout(function() {
                 introContainer.style.display = 'none';
             }, 1500);
 
+            // Avvia la canzone principale della promessa
             music.play().then(function() {
-                console.log("Audio di sottofondo avviato");
+                console.log("Canzone principale avviata");
             }).catch(function(error) { 
-                console.log("Errore riproduzione audio:", error); 
+                console.log("Errore riproduzione canzone principale:", error); 
             });
 
             runStorySequence();
