@@ -86,12 +86,23 @@
             height: 100vh;
             background: #232b22;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.8s ease;
+        }
+
+        /* Area superiore per il video e le foto sovrapposte */
+        .video-stage {
+            position: relative;
+            width: 100%;
+            height: 72vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #intro-video {
@@ -114,13 +125,13 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- FOTO RIDOTTE E CENTRATE IN SOVRAIMPRESSIONE SUL VIDEO --- */
+        /* --- FOTO RIDOTTE E TRASPARENTI SUL VIDEO --- */
         #intro-overlay-photos {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -130,8 +141,8 @@
 
         .intro-photo-item {
             position: absolute;
-            width: 240px;  /* Misura ridotta e compatta */
-            height: 160px; /* Proporzione rettangolare pulita */
+            width: 220px;
+            height: 150px;
             object-fit: cover;
             border-radius: 8px;
             border: 1.5px solid rgba(230, 197, 132, 0.7);
@@ -142,37 +153,38 @@
         }
 
         .show-intro-photo {
-            opacity: 0.35; /* Molto trasparente, il video 8 resta il protagonista assoluto */
+            opacity: 0.3; /* Trasparente per risaltare il video */
             transform: scale(1);
         }
 
-        /* Scritte in sovraimpressione per il video 8 */
+        /* Frasi posizionate SOTTO il video */
         .intro-overlay-text {
-            position: absolute;
-            z-index: 10002;
+            position: relative;
+            width: 100%;
+            height: 28vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             color: #ffffff;
-            width: 90%;
-            max-width: 600px;
-            pointer-events: none;
             padding: 0 20px;
+            z-index: 10002;
+            background: #232b22;
         }
 
         .intro-phrase {
             position: absolute;
-            width: 100%;
-            left: 0;
-            right: 0;
-            margin: auto;
+            width: 90%;
+            max-width: 700px;
             opacity: 0;
             transition: opacity 1.2s ease;
         }
 
-        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
-        #intro-text-2 { font-size: 21px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 12px rgba(0,0,0,0.9); letter-spacing: 1px; }
-        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 40px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
-        #intro-text-4 { font-size: 21px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 12px rgba(0,0,0,0.9); letter-spacing: 1px; }
-        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 42px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
+        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 36px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-2 { font-size: 20px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-4 { font-size: 20px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 40px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
 
         .show-phrase { opacity: 1 !important; }
 
@@ -486,23 +498,26 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Foto ridotte e trasparenti al centro in sovraimpressione sul video intro (da 11 a 20) -->
-    <div id="intro-overlay-photos">
-        <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
-        <img src="foto 12.jpg" class="intro-photo-item" alt="Foto 12">
-        <img src="foto 13.jpg" class="intro-photo-item" alt="Foto 13">
-        <img src="foto 14.jpg" class="intro-photo-item" alt="Foto 14">
-        <img src="foto 15.jpg" class="intro-photo-item" alt="Foto 15">
-        <img src="foto 16.jpg" class="intro-photo-item" alt="Foto 16">
-        <img src="foto 17.jpg" class="intro-photo-item" alt="Foto 17">
-        <img src="foto 18.jpg" class="intro-photo-item" alt="Foto 18">
-        <img src="foto 19.jpg" class="intro-photo-item" alt="Foto 19">
-        <img src="foto 20.jpg" class="intro-photo-item" alt="Foto 20">
-    </div>
-
     <!-- Contenitore Video Intro a tutto schermo -->
     <div id="intro-video-container">
-        <video id="intro-video" src="video 8.mp4" playsinline></video>
+        <!-- Area superiore con video e foto trasparenti al centro -->
+        <div class="video-stage">
+            <div id="intro-overlay-photos">
+                <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
+                <img src="foto 12.jpg" class="intro-photo-item" alt="Foto 12">
+                <img src="foto 13.jpg" class="intro-photo-item" alt="Foto 13">
+                <img src="foto 14.jpg" class="intro-photo-item" alt="Foto 14">
+                <img src="foto 15.jpg" class="intro-photo-item" alt="Foto 15">
+                <img src="foto 16.jpg" class="intro-photo-item" alt="Foto 16">
+                <img src="foto 17.jpg" class="intro-photo-item" alt="Foto 17">
+                <img src="foto 18.jpg" class="intro-photo-item" alt="Foto 18">
+                <img src="foto 19.jpg" class="intro-photo-item" alt="Foto 19">
+                <img src="foto 20.jpg" class="intro-photo-item" alt="Foto 20">
+            </div>
+            <video id="intro-video" src="video 8.mp4" playsinline></video>
+        </div>
+
+        <!-- Area inferiore per le frasi (Sotto il video) -->
         <div class="intro-overlay-text">
             <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
             <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno una casa, un rifugio, una vita insieme</div>
@@ -635,7 +650,7 @@
                 overlay.style.display = 'none';
             }, 1000);
 
-            // Avvia subito il video intro a tutto schermo
+            // Avvia subito il video intro
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
@@ -653,7 +668,7 @@
                 onIntroEnded();
             });
 
-            // Sequenza frasi sul video 8
+            // Sequenza frasi sotto il video
             setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
             setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
 
