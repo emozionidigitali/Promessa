@@ -98,7 +98,7 @@
         .video-stage {
             position: relative;
             width: 100%;
-            height: 60vh;
+            height: 70vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -114,7 +114,7 @@
         .intro-overlay-text {
             position: relative;
             width: 100%;
-            height: 20vh;
+            height: 30vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -132,55 +132,76 @@
             transition: opacity 1.2s ease;
         }
 
-        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 32px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-2 { font-size: 18px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 34px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-4 { font-size: 18px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 36px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 34px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-2 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 36px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-4 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
 
         .show-phrase { opacity: 1 !important; }
 
-        /* --- PULSANTE SPECIALE VERDE SALVIA CON CORNICE FLOREALE E SCINTILLE DORATE --- */
-        .intro-action-container {
-            position: relative;
-            width: 100%;
-            height: 20vh;
+        /* --- SCHERMATA INTERMEDIA CON IL PULSANTE MAGICO SALVIA E ORO --- */
+        #transition-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #3A4638;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: #232b22;
-            z-index: 10000;
+            z-index: 10002;
             opacity: 0;
-            pointer-events: none;
+            visibility: hidden;
             transition: opacity 1s ease;
+            text-align: center;
+            padding: 20px;
         }
 
-        .intro-action-container.show-btn-container {
+        #transition-screen.show-transition {
             opacity: 1;
-            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .transition-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 45px;
+            color: #f7e2b3;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+        }
+
+        .transition-subtitle {
+            font-size: 18px;
+            color: #f2efe9;
+            font-style: italic;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
         }
 
         .magic-btn-wrapper {
             position: relative;
             display: inline-block;
-            padding: 12px 20px;
+            padding: 15px 25px;
         }
 
         .magic-btn {
             position: relative;
-            background-color: #5A7363; /* Verde salvia coordinato */
+            background-color: #5A7363; /* Verde salvia elegante */
             color: #FFFFFF;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 600;
             letter-spacing: 3px;
             text-transform: uppercase;
-            padding: 14px 45px;
+            padding: 16px 50px;
             border: 2px solid #D4AF37; /* Cornice dorata */
             border-radius: 40px;
             cursor: pointer;
             outline: none;
-            box-shadow: 0 8px 25px rgba(90, 115, 99, 0.5), inset 0 0 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(212, 175, 55, 0.3);
             transition: all 0.4s ease;
             z-index: 2;
         }
@@ -193,7 +214,7 @@
             width: 100%;
             left: 0;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             color: #D4AF37;
             pointer-events: none;
             z-index: 3;
@@ -210,8 +231,8 @@
 
         .magic-btn:hover {
             background-color: #4A5F52;
-            transform: scale(1.04);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
         }
 
         /* Animazione delle scintille dorate che cadono */
@@ -229,15 +250,15 @@
 
         @keyframes fall-sparkle {
             0% {
-                transform: translateY(-15px) scale(0.3);
+                transform: translateY(-20px) scale(0.3);
                 opacity: 0;
             }
             30% {
                 opacity: 1;
-                transform: translateY(10px) scale(1);
+                transform: translateY(12px) scale(1);
             }
             100% {
-                transform: translateY(45px) scale(0);
+                transform: translateY(55px) scale(0);
                 opacity: 0;
             }
         }
@@ -548,7 +569,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Contenitore Video In a tutto schermo con frasi e pulsante finale -->
+    <!-- Contenitore Video In a tutto schermo con frasi -->
     <div id="intro-video-container">
         <div class="video-stage">
             <video id="intro-video" src="video in.mp4" playsinline></video>
@@ -560,10 +581,14 @@
             <div id="intro-text-4" class="intro-phrase">Due cuori, un solo cammino che sta per svelarsi</div>
             <div id="intro-text-5" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
         </div>
-        <div class="intro-action-container" id="btn-container">
-            <div class="magic-btn-wrapper" id="sparkle-wrapper">
-                <button class="magic-btn" onclick="onIntroEnded()">APRI ✨</button>
-            </div>
+    </div>
+
+    <!-- Schermata Intermedia con il Pulsante Magico (dopo che il video è finito) -->
+    <div id="transition-screen">
+        <div class="transition-title">Giovanni & Eliana</div>
+        <div class="transition-subtitle">Tutto è pronto per la nostra promessa</div>
+        <div class="magic-btn-wrapper" id="sparkle-wrapper">
+            <button class="magic-btn" onclick="startPromiseExperience()">APRI ✨</button>
         </div>
     </div>
 
@@ -581,7 +606,7 @@
         <div class="start-box">
             <h2>Giovanni & Eliana</h2>
             <p>Tocca per vivere l'emozione della nostra promessa</p>
-            <button class="btn-start" onclick="startExperience()">INIZIA</button>
+            <button class="btn-start" onclick="startIntro()">INIZIA</button>
         </div>
     </div>
 
@@ -667,8 +692,8 @@
         var music = document.getElementById('bg-music');
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
+        var transitionScreen = document.getElementById('transition-screen');
         var flashOverlay = document.getElementById('flash-overlay');
-        var btnContainer = document.getElementById('btn-container');
         var sparkleWrapper = document.getElementById('sparkle-wrapper');
 
         var text1 = document.getElementById('intro-text-1');
@@ -677,15 +702,15 @@
         var text4 = document.getElementById('intro-text-4');
         var text5 = document.getElementById('intro-text-5');
 
-        // Generatore automatico di scintille dorate che cadono sul pulsante
+        // Generatore di scintille dorate sul pulsante della schermata intermedia
         function createSparkle() {
-            if (introContainer.style.display === 'none') return;
+            if (!transitionScreen.classList.contains('show-transition')) return;
             var sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
             
             var randomX = Math.random() * sparkleWrapper.offsetWidth;
             sparkle.style.left = randomX + 'px';
-            sparkle.style.top = '-8px';
+            sparkle.style.top = '-10px';
             
             var randomDuration = 1.0 + Math.random() * 0.8;
             var randomDelay = Math.random() * 0.4;
@@ -701,7 +726,7 @@
 
         var sparkleInterval = setInterval(createSparkle, 250);
 
-        function startExperience() {
+        function startIntro() {
             var overlay = document.getElementById('start-overlay');
             overlay.style.opacity = '0';
             setTimeout(function() {
@@ -717,7 +742,7 @@
                 console.log("Errore video in:", error);
             });
 
-            // Sequenza frasi
+            // Sequenza frasi in sovraimpressione
             setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
             setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
 
@@ -733,22 +758,23 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Mostra il pulsante magico alla fine della sequenza video
-            setTimeout(function() {
-                btnContainer.classList.add('show-btn-container');
-            }, 18500);
-
+            // Quando il video introduttivo finisce completamente, scompare e compare la schermata intermedia col pulsante
             introVideo.onended = function() {
-                btnContainer.classList.add('show-btn-container');
+                introContainer.style.opacity = '0';
+                setTimeout(function() {
+                    introContainer.style.display = 'none';
+                    transitionScreen.classList.add('show-transition');
+                }, 800);
             };
         }
 
-        function onIntroEnded() {
-            clearInterval(sparkleInterval);
+        // Quando l'utente clicca sul pulsante elegante con le scintille
+        function startPromiseExperience() {
+            transitionScreen.style.opacity = '0';
             flashOverlay.style.opacity = '1';
 
             setTimeout(function() {
-                introContainer.style.display = 'none';
+                transitionScreen.style.display = 'none';
                 flashOverlay.style.opacity = '0';
 
                 music.volume = 1.0;
