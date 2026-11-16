@@ -99,7 +99,6 @@
         .video-stage {
             position: relative;
             width: 100%;
-            max-width: 900px;
             height: 70vh;
             display: flex;
             justify-content: center;
@@ -126,13 +125,13 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- RIQUADRO FOTO BLOCCATO ESATTAMENTE NELLO SPAZIO IN ALTO A DESTRA --- */
+        /* --- FOTO DENTRO IL VIDEO IN ALTO A DESTRA --- */
         #intro-overlay-photos {
             position: absolute;
-            top: 10%;   /* Posizionato in alto all'interno del video */
-            right: 8%;  /* Posizionato a destra all'interno del video */
-            width: 110px;  /* Dimensione piccola e precisa del riquadro */
-            height: 75px;  /* Proporzione corretta */
+            top: 15px;  /* Posizionato all'interno dell'area video in alto */
+            right: 20px; /* Posizionato all'interno dell'area video a destra */
+            width: 110px;  
+            height: 75px;  
             pointer-events: none;
             z-index: 10001;
         }
@@ -498,8 +497,9 @@
 
     <!-- Contenitore Video Intro a tutto schermo -->
     <div id="intro-video-container">
-        <!-- Area video e riquadro foto nell'angolo esatto -->
+        <!-- Area video con il riquadro foto posizionato esattamente all'interno -->
         <div class="video-stage">
+            <video id="intro-video" src="video 8.mp4" playsinline></video>
             <div id="intro-overlay-photos">
                 <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
                 <img src="foto 12.jpg" class="intro-photo-item" alt="Foto 12">
@@ -512,7 +512,6 @@
                 <img src="foto 19.jpg" class="intro-photo-item" alt="Foto 19">
                 <img src="foto 20.jpg" class="intro-photo-item" alt="Foto 20">
             </div>
-            <video id="intro-video" src="video 8.mp4" playsinline></video>
         </div>
 
         <!-- Area inferiore per le frasi (Sotto il video) -->
@@ -682,7 +681,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // GESTIONE FOTO NEL RIQUADRO ESATTO
+            // GESTIONE FOTO NEL RIQUADRO ESATTO DENTRO IL VIDEO
             let introPhotos = document.querySelectorAll('.intro-photo-item');
             let currentPhotoIndex = 0;
 
