@@ -624,7 +624,6 @@
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
-            // Sblocca subito gli audio sbloccandoli con una riproduzione lampo invisibile al tocco
             introMusic.volume = 1.0;
             introMusic.play().catch(function(e) { console.log(e); });
 
@@ -653,7 +652,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Attivazione forzata del battito cardiaco verso la fine dell'intro (a 11 secondi)
+            // Attivazione battito cardiaco
             setTimeout(function() {
                 heartbeatAudio.currentTime = 0;
                 heartbeatAudio.play().then(function() {
@@ -685,8 +684,21 @@
             setTimeout(function() {
                 introContainer.style.display = 'none';
                 
+                // Imposta il volume iniziale della seconda musica molto basso (es. 10%)
+                music.volume = 0.1;
                 music.play().then(function() {
-                    console.log("Canzone principale avviata");
+                    console.log("Canzone principale avviata con volume basso (fade-in)");
+                    
+                    // Effetto Fade-In graduale: fa salire il volume pian piano fino a 1.0 (100%)
+                    let fadeInInterval = setInterval(function() {
+                        if (music.volume < 0.95) {
+                            music.volume += 0.05;
+                        } else {
+                            music.volume = 1.0;
+                            clearInterval(fadeInInterval);
+                        }
+                    }, 200); // aumenta leggermente ogni 0.2 secondi
+
                 }).catch(function(error) { 
                     console.log("Errore riproduzione canzone principale:", error); 
                 });
