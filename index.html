@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promessa di Matrimonio - Giovanni & Eliana</title>
-    <!-- Font eleganti in stile matrimonio (Great Vibes & Cormorant Garamond) -->
+    <!-- Font eleganti in stile matrimonio -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
@@ -17,7 +17,7 @@
             width: 100%;
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background: #4A5847; /* Verde salvia scuro elegante */
+            background: #4A5847;
             overflow-x: hidden;
             display: flex;
             justify-content: center;
@@ -98,7 +98,7 @@
         .video-stage {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 60vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -114,7 +114,7 @@
         .intro-overlay-text {
             position: relative;
             width: 100%;
-            height: 30vh;
+            height: 20vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -132,13 +132,115 @@
             transition: opacity 1.2s ease;
         }
 
-        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 34px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-2 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 36px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-4 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 32px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-2 { font-size: 18px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 34px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-4 { font-size: 18px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 36px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
 
         .show-phrase { opacity: 1 !important; }
+
+        /* --- PULSANTE SPECIALE VERDE SALVIA CON CORNICE FLOREALE E SCINTILLE DORATE --- */
+        .intro-action-container {
+            position: relative;
+            width: 100%;
+            height: 20vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #232b22;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        .intro-action-container.show-btn-container {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .magic-btn-wrapper {
+            position: relative;
+            display: inline-block;
+            padding: 12px 20px;
+        }
+
+        .magic-btn {
+            position: relative;
+            background-color: #5A7363; /* Verde salvia coordinato */
+            color: #FFFFFF;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 14px 45px;
+            border: 2px solid #D4AF37; /* Cornice dorata */
+            border-radius: 40px;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 8px 25px rgba(90, 115, 99, 0.5), inset 0 0 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+
+        /* Cornice floreale stilizzata con decorazioni dorate */
+        .magic-btn-wrapper::before,
+        .magic-btn-wrapper::after {
+            content: '✨ 🌿 ⚜️ 🌿 ✨';
+            position: absolute;
+            width: 100%;
+            left: 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #D4AF37;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.95;
+        }
+
+        .magic-btn-wrapper::before {
+            top: 2px;
+        }
+
+        .magic-btn-wrapper::after {
+            bottom: 4px;
+        }
+
+        .magic-btn:hover {
+            background-color: #4A5F52;
+            transform: scale(1.04);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Animazione delle scintille dorate che cadono */
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #FFF 0%, #D4AF37 60%, transparent 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: fall-sparkle 1.8s infinite linear;
+            z-index: 4;
+        }
+
+        @keyframes fall-sparkle {
+            0% {
+                transform: translateY(-15px) scale(0.3);
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+                transform: translateY(10px) scale(1);
+            }
+            100% {
+                transform: translateY(45px) scale(0);
+                opacity: 0;
+            }
+        }
 
         /* Effetto Flash Lento per la transizione */
         #flash-overlay {
@@ -173,7 +275,6 @@
             visibility: visible !important;
         }
 
-        /* Classe per l'effetto ottico combinato finale */
         .grand-finale-effect {
             transform: scale(1.03);
             box-shadow: 0 0 35px rgba(230, 197, 132, 0.7), inset 0 0 20px rgba(230, 197, 132, 0.3) !important;
@@ -239,7 +340,6 @@
             margin: 6px auto;
         }
 
-        /* Sezione Dettagli */
         .details {
             font-size: 14px;
             line-height: 1.4;
@@ -257,7 +357,6 @@
             font-size: 15px;
         }
 
-        /* Pulsanti d'azione (Mappa & Calendario) */
         .action-buttons {
             display: flex;
             justify-content: center;
@@ -284,7 +383,6 @@
             color: #2F3B2E;
         }
 
-        /* Conto alla rovescia */
         .countdown-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -329,7 +427,6 @@
             display: block;
         }
 
-        /* Video 3 all'interno della card */
         .video-container {
             margin-top: 4px;
         }
@@ -343,7 +440,6 @@
             background: #000;
         }
 
-        /* Sezione RSVP Pulsanti WhatsApp */
         .rsvp-section {
             margin-top: 6px;
             text-align: center;
@@ -390,7 +486,6 @@
             transform: scale(1.05);
         }
 
-        /* Frase Emozionante Finale Pulsante */
         .final-quote {
             font-family: 'Great Vibes', cursive;
             font-size: 21px;
@@ -417,7 +512,6 @@
             font-style: italic;
         }
 
-        /* Fuochi d'artificio */
         #fireworks-container {
             position: fixed;
             top: 0;
@@ -446,7 +540,7 @@
 </head>
 <body>
 
-    <!-- Canzone Principale (Parte alla fine del video in) -->
+    <!-- Canzone Principale -->
     <audio id="bg-music" preload="auto">
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
@@ -454,7 +548,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Contenitore Video In a tutto schermo con frasi -->
+    <!-- Contenitore Video In a tutto schermo con frasi e pulsante finale -->
     <div id="intro-video-container">
         <div class="video-stage">
             <video id="intro-video" src="video in.mp4" playsinline></video>
@@ -465,6 +559,11 @@
             <div id="intro-text-3" class="intro-phrase">Ogni singolo istante ci ha condotti fin qui</div>
             <div id="intro-text-4" class="intro-phrase">Due cuori, un solo cammino che sta per svelarsi</div>
             <div id="intro-text-5" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
+        </div>
+        <div class="intro-action-container" id="btn-container">
+            <div class="magic-btn-wrapper" id="sparkle-wrapper">
+                <button class="magic-btn" onclick="onIntroEnded()">APRI ✨</button>
+            </div>
         </div>
     </div>
 
@@ -509,18 +608,16 @@
                 🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+                📍 <strong>Ristorante:</strong> Al Convento[span_0](start_span)[span_0](end_span)<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
             </div>
             
-            <!-- Pulsanti Mappa e Calendario -->
             <div class="action-buttons">
                 <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-action">Apri Mappa 🗺️</a>
                 <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Promessa+di+Matrimonio+-+Giovanni+%26+Eliana&dates=20270126T193000Z/20270126T233000Z&details=Vi+aspettiamo+per+la+nostra+promessa+di+matrimonio!&location=Al+Convento,+Via+Cupa+Camaldoli+14,+80131+Napoli" target="_blank" class="btn-action">Salva in Calendario 📅</a>
             </div>
         </div>
 
-        <!-- Conto alla rovescia -->
         <div class="countdown-title">Mancano al grande giorno:</div>
         <div class="countdown-container">
             <div class="countdown-box">
@@ -547,12 +644,10 @@
 
         <div class="divider"></div>
 
-        <!-- Video 3 all'interno della card -->
         <div class="video-container">
             <video src="video 3.mp4" autoplay muted loop playsinline></video>
         </div>
 
-        <!-- Sezione RSVP -->
         <div class="rsvp-section">
             <div class="rsvp-title">Conferma la tua presenza</div>
             <div class="rsvp-buttons">
@@ -561,7 +656,6 @@
             </div>
         </div>
 
-        <!-- Frase Emozionante Finale -->
         <div class="final-quote" id="finalQuoteText">"Il nostro per sempre comincia con voi..."</div>
 
         <div class="footer-note">
@@ -574,12 +668,38 @@
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
         var flashOverlay = document.getElementById('flash-overlay');
+        var btnContainer = document.getElementById('btn-container');
+        var sparkleWrapper = document.getElementById('sparkle-wrapper');
 
         var text1 = document.getElementById('intro-text-1');
         var text2 = document.getElementById('intro-text-2');
         var text3 = document.getElementById('intro-text-3');
         var text4 = document.getElementById('intro-text-4');
         var text5 = document.getElementById('intro-text-5');
+
+        // Generatore automatico di scintille dorate che cadono sul pulsante
+        function createSparkle() {
+            if (introContainer.style.display === 'none') return;
+            var sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            var randomX = Math.random() * sparkleWrapper.offsetWidth;
+            sparkle.style.left = randomX + 'px';
+            sparkle.style.top = '-8px';
+            
+            var randomDuration = 1.0 + Math.random() * 0.8;
+            var randomDelay = Math.random() * 0.4;
+            sparkle.style.animationDuration = randomDuration + 's';
+            sparkle.style.animationDelay = randomDelay + 's';
+            
+            sparkleWrapper.appendChild(sparkle);
+            
+            setTimeout(function() {
+                sparkle.remove();
+            }, (randomDuration + randomDelay) * 1000);
+        }
+
+        var sparkleInterval = setInterval(createSparkle, 250);
 
         function startExperience() {
             var overlay = document.getElementById('start-overlay');
@@ -588,7 +708,6 @@
                 overlay.style.display = 'none';
             }, 1000);
 
-            // Mostra e avvia il video in.mp4 con il suo audio originale
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
@@ -596,10 +715,9 @@
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
                 console.log("Errore video in:", error);
-                onIntroEnded();
             });
 
-            // Sequenza frasi sotto il video in.mp4
+            // Sequenza frasi
             setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
             setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
 
@@ -615,21 +733,24 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Quando finisce il video in.mp4, passa subito alla promessa
+            // Mostra il pulsante magico alla fine della sequenza video
+            setTimeout(function() {
+                btnContainer.classList.add('show-btn-container');
+            }, 18500);
+
             introVideo.onended = function() {
-                onIntroEnded();
+                btnContainer.classList.add('show-btn-container');
             };
         }
 
         function onIntroEnded() {
-            // Flash bianco/oro di transizione
+            clearInterval(sparkleInterval);
             flashOverlay.style.opacity = '1';
 
             setTimeout(function() {
                 introContainer.style.display = 'none';
                 flashOverlay.style.opacity = '0';
 
-                // Avvia la musica principale e la sequenza della promessa
                 music.volume = 1.0;
                 music.play().catch(function(error) { console.log(error); });
 
