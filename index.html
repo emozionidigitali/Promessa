@@ -77,7 +77,7 @@
             transform: scale(1.05);
         }
 
-        /* Contenitore Video A1 a tutto schermo */
+        /* Contenitore Video In a tutto schermo */
         #intro-video-container {
             position: fixed;
             top: 0;
@@ -95,7 +95,6 @@
             transition: opacity 0.8s ease;
         }
 
-        /* Area video */
         .video-stage {
             position: relative;
             width: 100%;
@@ -111,7 +110,7 @@
             object-fit: contain;
         }
 
-        /* Area inferiore per le frasi (Sotto il video) */
+        /* Frasi in sovraimpressione sotto il video */
         .intro-overlay-text {
             position: relative;
             width: 100%;
@@ -155,7 +154,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* Testi della sequenza successiva con transizione per lo zoom finale */
+        /* Testi della sequenza della promessa */
         .story-step {
             position: absolute;
             opacity: 0;
@@ -447,7 +446,7 @@
 </head>
 <body>
 
-    <!-- Canzone Principale (Parte alla fine del video a1) -->
+    <!-- Canzone Principale (Parte alla fine del video in) -->
     <audio id="bg-music" preload="auto">
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
@@ -455,10 +454,10 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Contenitore Video A1 Intro a tutto schermo con frasi sotto -->
+    <!-- Contenitore Video In a tutto schermo con frasi -->
     <div id="intro-video-container">
         <div class="video-stage">
-            <video id="intro-video" src="video a1.mp4" playsinline></video>
+            <video id="intro-video" src="video in.mp4" playsinline></video>
         </div>
         <div class="intro-overlay-text">
             <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
@@ -589,18 +588,18 @@
                 overlay.style.display = 'none';
             }, 1000);
 
-            // Mostra e avvia il video a1 con il suo volume originale
+            // Mostra e avvia il video in.mp4 con il suo audio originale
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
             introVideo.volume = 1.0; 
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
-                console.log("Errore video a1:", error);
+                console.log("Errore video in:", error);
                 onIntroEnded();
             });
 
-            // Sequenza frasi sotto il video a1
+            // Sequenza frasi sotto il video in.mp4
             setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
             setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
 
@@ -616,7 +615,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Quando finisce il video a1, passa alla sequenza della promessa
+            // Quando finisce il video in.mp4, passa subito alla promessa
             introVideo.onended = function() {
                 onIntroEnded();
             };
@@ -630,7 +629,7 @@
                 introContainer.style.display = 'none';
                 flashOverlay.style.opacity = '0';
 
-                // Avvia la musica principale e la sequenza dei messaggi
+                // Avvia la musica principale e la sequenza della promessa
                 music.volume = 1.0;
                 music.play().catch(function(error) { console.log(error); });
 
