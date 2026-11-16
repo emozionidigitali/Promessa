@@ -100,7 +100,7 @@
             object-fit: contain;
         }
 
-        /* Effetto Flash Lento per la transizione finale dell'intro */
+        /* Effetto Flash Lento per la transizione */
         #flash-overlay {
             position: fixed;
             top: 0;
@@ -112,6 +112,73 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 1.2s ease-in-out;
+        }
+
+        /* --- STILE DEL LIBRO DEI RICORDI (Foto da 11 a 20) --- */
+        #memory-book-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(35, 43, 34, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10002;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease;
+        }
+
+        .book {
+            width: 320px;
+            height: 440px;
+            background: #fdfbf7;
+            border-radius: 8px;
+            border: 3px solid #e6c584;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(230, 197, 132, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .book-page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+            padding: 15px;
+        }
+
+        .book-page.active-page {
+            opacity: 1;
+        }
+
+        .book-page img {
+            width: 100%;
+            height: 290px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #e6c584;
+            margin-bottom: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .book-page p {
+            font-family: 'Great Vibes', cursive;
+            font-size: 26px;
+            color: #4A5847;
+            margin: 0;
         }
 
         /* Scritte in sovraimpressione distribuite per tutto il video 8 */
@@ -136,46 +203,13 @@
             transition: opacity 1.2s ease;
         }
 
-        #intro-text-1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 38px;
-            color: #f7e2b3;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
-        }
+        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
+        #intro-text-2 { font-size: 21px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 12px rgba(0,0,0,0.9); letter-spacing: 1px; }
+        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 40px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
+        #intro-text-4 { font-size: 21px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 12px rgba(0,0,0,0.9); letter-spacing: 1px; }
+        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 42px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
 
-        #intro-text-2 {
-            font-size: 21px;
-            color: #fdfbf7;
-            font-style: italic;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
-            letter-spacing: 1px;
-        }
-
-        #intro-text-3 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 40px;
-            color: #f7e2b3;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
-        }
-
-        #intro-text-4 {
-            font-size: 21px;
-            color: #fdfbf7;
-            font-style: italic;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
-            letter-spacing: 1px;
-        }
-
-        #intro-text-5 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 42px;
-            color: #f7e2b3;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
-        }
-
-        .show-phrase {
-            opacity: 1 !important;
-        }
+        .show-phrase { opacity: 1 !important; }
 
         /* Testi della sequenza successiva con transizione per lo zoom finale */
         .story-step {
@@ -474,7 +508,7 @@
         <source src="intro-music.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Audio Battito Cardiaco (battito.mp3) -->
+    <!-- Audio Battito Cardiaco -->
     <audio id="heartbeat-audio" preload="auto">
         <source src="battito.mp3" type="audio/mp3">
     </audio>
@@ -484,8 +518,54 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Schermata Flash Lento per la transizione -->
+    <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
+
+    <!-- Libro dei Ricordi con le foto da 11 a 20 -->
+    <div id="memory-book-container">
+        <div class="book">
+            <div class="book-page active-page">
+                <img src="foto 11.jpg" alt="Ricordo 11">
+                <p>I nostri primi sogni...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 12.jpg" alt="Ricordo 12">
+                <p>Ogni attimo insieme...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 13.jpg" alt="Ricordo 13">
+                <p>Sorrisi rubati al tempo...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 14.jpg" alt="Ricordo 14">
+                <p>Sguardi che parlano d'amore...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 15.jpg" alt="Ricordo 15">
+                <p>M mano nella mano...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 16.jpg" alt="Ricordo 16">
+                <p>Promesse custodite nel cuore...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 17.jpg" alt="Ricordo 17">
+                <p>La nostra complicità...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 18.jpg" alt="Ricordo 18">
+                <p>Costruendo il nostro nido...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 19.jpg" alt="Ricordo 19">
+                <p>Uniti in ogni passo...</p>
+            </div>
+            <div class="book-page">
+                <img src="foto 20.jpg" alt="Ricordo 20">
+                <p>Verso il nostro per sempre</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Contenitore Video Intro e Frasi continue -->
     <div id="intro-video-container">
@@ -607,6 +687,7 @@
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
         var flashOverlay = document.getElementById('flash-overlay');
+        var memoryBook = document.getElementById('memory-book-container');
         
         var text1 = document.getElementById('intro-text-1');
         var text2 = document.getElementById('intro-text-2');
@@ -655,11 +736,7 @@
             // Attivazione battito cardiaco
             setTimeout(function() {
                 heartbeatAudio.currentTime = 0;
-                heartbeatAudio.play().then(function() {
-                    console.log("Battito cardiaco avviato con successo");
-                }).catch(function(error) {
-                    console.log("Errore riproduzione battito:", error);
-                });
+                heartbeatAudio.play().catch(function(error) { console.log(error); });
             }, 11000);
 
             introVideo.onended = function() {
@@ -668,6 +745,7 @@
         }
 
         function onIntroEnded() {
+            // 1. Flash bianco/oro
             flashOverlay.style.opacity = '1';
 
             let fadeOutAudio = setInterval(function() {
@@ -683,28 +761,47 @@
 
             setTimeout(function() {
                 introContainer.style.display = 'none';
-                
-                // Imposta il volume iniziale della seconda musica molto basso (es. 10%)
-                music.volume = 0.1;
-                music.play().then(function() {
-                    console.log("Canzone principale avviata con volume basso (fade-in)");
+                flashOverlay.style.opacity = '0'; // Rimuove il flash
+
+                // 2. Mostra il Libro dei Ricordi con le foto da 11 a 20 che scorrono velocemente
+                memoryBook.style.visibility = 'visible';
+                memoryBook.style.opacity = '1';
+
+                let pages = document.querySelectorAll('.book-page');
+                let currentPage = 0;
+
+                let flipInterval = setInterval(function() {
+                    pages[currentPage].classList.remove('active-page');
+                    currentPage++;
                     
-                    // Effetto Fade-In graduale: fa salire il volume pian piano fino a 1.0 (100%)
-                    let fadeInInterval = setInterval(function() {
-                        if (music.volume < 0.95) {
-                            music.volume += 0.05;
-                        } else {
-                            music.volume = 1.0;
-                            clearInterval(fadeInInterval);
-                        }
-                    }, 200); // aumenta leggermente ogni 0.2 secondi
+                    if (currentPage < pages.length) {
+                        pages[currentPage].classList.add('active-page');
+                    } else {
+                        // Fine del libro: chiude il libro, fa partire la musica in fade-in e mostra la promessa
+                        clearInterval(flipInterval);
+                        
+                        memoryBook.style.opacity = '0';
+                        setTimeout(function() {
+                            memoryBook.style.display = 'none';
+                            
+                            // Avvia la musica principale con Fade-In graduale
+                            music.volume = 0.1;
+                            music.play().then(function() {
+                                let fadeInInterval = setInterval(function() {
+                                    if (music.volume < 0.95) {
+                                        music.volume += 0.05;
+                                    } else {
+                                        music.volume = 1.0;
+                                        clearInterval(fadeInInterval);
+                                    }
+                                }, 200);
+                            }).catch(function(error) { console.log(error); });
 
-                }).catch(function(error) { 
-                    console.log("Errore riproduzione canzone principale:", error); 
-                });
+                            runStorySequence();
+                        }, 1000);
+                    }
+                }, 700); // Velocità di scorrimento delle 10 foto (ogni 0.7 secondi)
 
-                flashOverlay.style.opacity = '0';
-                runStorySequence();
             }, 1200);
         }
 
