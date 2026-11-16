@@ -91,7 +91,7 @@
             z-index: 9999;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1.5s ease;
+            transition: opacity 0.8s ease;
         }
 
         #intro-video {
@@ -114,140 +114,66 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- VERO ALBUM FOTOGRAFICO 3D CON EFFETTI OTTICI (Zoom, Sfocatura, Rotazione) --- */
-        #memory-book-container {
+        /* --- PRESENTAZIONE FOTO A SCHERMO INTERO CON FRASI EMOZIONANTI --- */
+        #photo-slideshow-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(35, 43, 34, 0.97);
+            background: #1a2219;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 10002;
             opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease;
-            perspective: 1600px;
         }
 
-        .book {
-            width: 330px;
-            height: 460px;
-            position: relative;
-            transform-style: preserve-3d;
-            /* Effetto ottico iniziale di zoom e leggera rotazione cinematografica */
-            animation: albumCinematicEntry 2.5s infinite alternate ease-in-out;
-        }
-
-        @keyframes albumCinematicEntry {
-            0% { transform: scale(0.97) rotate(0deg); filter: blur(0px); }
-            50% { transform: scale(1.02) rotate(0.5deg); filter: blur(0px); }
-            100% { transform: scale(0.98) rotate(-0.5deg); filter: blur(0px); }
-        }
-
-        .page {
+        .slide-item {
             position: absolute;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            transform-origin: left center;
-            transform-style: preserve-3d;
-            transition: transform 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-            background: #fdfbf7;
-            border-radius: 4px 12px 12px 4px;
-            border: 2px solid #e6c584;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
             padding: 20px;
-            backface-visibility: hidden;
         }
 
-        .page.flipped {
-            transform: rotateY(-180deg);
+        .slide-item.active-slide {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .page img {
+        .slide-item img {
             width: 100%;
-            height: 290px;
+            max-width: 650px;
+            height: 65vh;
             object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid #e6c584;
-            margin-bottom: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            /* Effetto ottico dinamico sulle foto: zoom lento continuo */
-            animation: photoZoomEffect 5s infinite alternate ease-in-out;
+            border-radius: 8px;
+            border: 2px solid #e6c584;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            animation: cinematicZoom 5s infinite alternate ease-in-out;
         }
 
-        @keyframes photoZoomEffect {
+        @keyframes cinematicZoom {
             0% { transform: scale(1); }
-            100% { transform: scale(1.04); }
+            100% { transform: scale(1.03); }
         }
 
-        .page p {
+        .slide-caption {
             font-family: 'Great Vibes', cursive;
-            font-size: 26px;
-            color: #4A5847;
-            margin: 0;
-            text-align: center;
-        }
-
-        /* Copertina Elegante dell'Album */
-        .cover-page {
-            background: radial-gradient(circle, #3d4c3a 0%, #253123 100%);
-            border: 4px double #e6c584;
+            font-size: 34px;
             color: #f7e2b3;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+            margin-top: 20px;
             text-align: center;
-            justify-content: center;
-            padding: 30px;
-        }
-
-        .cover-border {
-            border: 1px solid rgba(230, 197, 132, 0.4);
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-        }
-
-        .cover-page h3 {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #e6c584;
-            margin-bottom: 15px;
-        }
-
-        .cover-page h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 44px;
-            margin: 0 0 10px 0;
-            color: #f7e2b3;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .cover-ribbon {
-            width: 60px;
-            height: 1px;
-            background-color: #e6c584;
-            margin: 15px auto;
-        }
-
-        .cover-page p {
-            font-size: 16px;
-            font-style: italic;
-            color: #e1dad0;
-            letter-spacing: 1px;
+            max-width: 90%;
         }
 
         /* Scritte in sovraimpressione per il video 8 */
@@ -551,439 +477,3 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 5;
-            display: none;
-        }
-
-        .firework {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 #f7e2b3;
-            animation: explode 1.2s infinite ease-out;
-        }
-
-        @keyframes explode {
-            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 #f7e2b3, 0 0 0 0 #e6c584; }
-            100% { transform: scale(45); opacity: 0; box-shadow: -45px -45px 0 2px #f7e2b3, 45px -45px 0 2px #e6c584, -45px 45px 0 2px #ffdf79, 45px 45px 0 2px #fff; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Audio Intro (Suspense) -->
-    <audio id="intro-music" preload="auto">
-        <source src="intro-music.mp3" type="audio/mp3">
-    </audio>
-
-    <!-- Audio Battito Cardiaco (Fade-in iniziale e Fade-out preciso alla fine del video 8) -->
-    <audio id="heartbeat-audio" preload="auto">
-        <source src="battito.mp3" type="audio/mp3">
-    </audio>
-
-    <!-- Canzone Principale -->
-    <audio id="bg-music" preload="auto">
-        <source src="canzone.mp3.mp3" type="audio/mp3">
-    </audio>
-
-    <!-- Schermata Flash Lento -->
-    <div id="flash-overlay"></div>
-
-    <!-- Album Fotografico 3D con effetti ottici (Zoom, sfocatura, rotazione) e foto da 11 a 20 -->
-    <div id="memory-book-container">
-        <div class="book" id="realBook">
-            <!-- Copertina -->
-            <div class="page cover-page" style="z-index: 11;">
-                <div class="cover-border">
-                    <h3>Album dei Ricordi</h3>
-                    <h2>Giovanni & Eliana</h2>
-                    <div class="cover-ribbon"></div>
-                    <p>La nostra storia d'amore</p>
-                </div>
-            </div>
-            <!-- Pagine con le tue foto da 11 a 20 -->
-            <div class="page" style="z-index: 10;">
-                <img src="foto 20.jpg" alt="Ricordo 20">
-                <p>Verso il nostro per sempre</p>
-            </div>
-            <div class="page" style="z-index: 9;">
-                <img src="foto 19.jpg" alt="Ricordo 19">
-                <p>Uniti in ogni passo...</p>
-            </div>
-            <div class="page" style="z-index: 8;">
-                <img src="foto 18.jpg" alt="Ricordo 18">
-                <p>Costruendo il nostro nido...</p>
-            </div>
-            <div class="page" style="z-index: 7;">
-                <img src="foto 17.jpg" alt="Ricordo 17">
-                <p>La nostra complicità...</p>
-            </div>
-            <div class="page" style="z-index: 6;">
-                <img src="foto 16.jpg" alt="Ricordo 16">
-                <p>Promesse custodite nel cuore...</p>
-            </div>
-            <div class="page" style="z-index: 5;">
-                <img src="foto 15.jpg" alt="Ricordo 15">
-                <p>Mano nella mano...</p>
-            </div>
-            <div class="page" style="z-index: 4;">
-                <img src="foto 14.jpg" alt="Ricordo 14">
-                <p>Sguardi che parlano d'amore...</p>
-            </div>
-            <div class="page" style="z-index: 3;">
-                <img src="foto 13.jpg" alt="Ricordo 13">
-                <p>Sorrisi rubati al tempo...</p>
-            </div>
-            <div class="page" style="z-index: 2;">
-                <img src="foto 12.jpg" alt="Ricordo 12">
-                <p>Ogni attimo insieme...</p>
-            </div>
-            <div class="page" style="z-index: 1;">
-                <img src="foto 11.jpg" alt="Ricordo 11">
-                <p>I nostri primi sogni...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contenitore Video Intro -->
-    <div id="intro-video-container">
-        <video id="intro-video" src="video 8.mp4" playsinline></video>
-        <div class="intro-overlay-text">
-            <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
-            <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno una casa, un rifugio, una vita insieme</div>
-            <div id="intro-text-3" class="intro-phrase">Ogni singolo istante ci ha condotti fin qui</div>
-            <div id="intro-text-4" class="intro-phrase">Due cuori, un solo cammino che sta per svelarsi</div>
-            <div id="intro-text-5" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
-        </div>
-    </div>
-
-    <!-- Fuochi d'artificio -->
-    <div id="fireworks-container">
-        <div class="firework" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
-        <div class="firework" style="top: 30%; left: 80%; animation-delay: 0.4s;"></div>
-        <div class="firework" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
-        <div class="firework" style="top: 60%; left: 75%; animation-delay: 1.2s;"></div>
-        <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
-    </div>
-
-    <!-- Schermata iniziale -->
-    <div id="start-overlay">
-        <div class="start-box">
-            <h2>Giovanni & Eliana</h2>
-            <p>Tocca per vivere l'emozione della nostra promessa</p>
-            <button class="btn-start" onclick="startExperience()">INIZIA</button>
-        </div>
-    </div>
-
-    <!-- Messaggio 1 -->
-    <div class="story-step" id="step-1">
-        Ci sono momenti che cambiano la vita per sempre...
-    </div>
-
-    <!-- Messaggio 2 -->
-    <div class="story-step" id="step-2">
-        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
-    </div>
-
-    <!-- Messaggio 3: Invito Ufficiale -->
-    <div class="story-step" id="step-3">
-        <div class="tag">La Nostra Promessa</div>
-        <h1>Giovanni & Eliana</h1>
-        <div class="names">&mdash; 26 Gennaio 2027 &mdash;</div>
-        
-        <div class="divider"></div>
-
-        <div class="details">
-            <div class="detail-row">
-                🕒 <strong>Orario:</strong> ore 20:30
-            </div>
-            <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
-            </div>
-            
-            <!-- Pulsanti Mappa e Calendario -->
-            <div class="action-buttons">
-                <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-action">Apri Mappa 🗺️</a>
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Promessa+di+Matrimonio+-+Giovanni+%26+Eliana&dates=20270126T193000Z/20270126T233000Z&details=Vi+aspettiamo+per+la+nostra+promessa+di+matrimonio!&location=Al+Convento,+Via+Cupa+Camaldoli+14,+80131+Napoli" target="_blank" class="btn-action">Salva in Calendario 📅</a>
-            </div>
-        </div>
-
-        <!-- Conto alla rovescia -->
-        <div class="countdown-title">Mancano al grande giorno:</div>
-        <div class="countdown-container">
-            <div class="countdown-box">
-                <span class="countdown-number" id="months">0</span>
-                <span class="countdown-label">Mesi</span>
-            </div>
-            <div class="countdown-box">
-                <span class="countdown-number" id="days">0</span>
-                <span class="countdown-label">Giorni</span>
-            </div>
-            <div class="countdown-box">
-                <span class="countdown-number" id="hours">0</span>
-                <span class="countdown-label">Ore</span>
-            </div>
-            <div class="countdown-box">
-                <span class="countdown-number" id="minutes">0</span>
-                <span class="countdown-label">Min</span>
-            </div>
-            <div class="countdown-box">
-                <span class="countdown-number" id="seconds">0</span>
-                <span class="countdown-label">Sec</span>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Video 3 all'interno della card -->
-        <div class="video-container">
-            <video src="video 3.mp4" autoplay muted loop playsinline></video>
-        </div>
-
-        <!-- Sezione RSVP -->
-        <div class="rsvp-section">
-            <div class="rsvp-title">Conferma la tua presenza</div>
-            <div class="rsvp-buttons">
-                <a href="https://wa.me/393511481691?text=Ciao!%20Confermo%20con%20gioia%20la%20mia%20presenza%20alla%20vostra%20promessa!%20❤️" target="_blank" class="btn-rsvp btn-yes">Sì, ci sarò! ✨</a>
-                <a href="https://wa.me/393511481691?text=Ciao,%20purtroppo%20non%20potrò%20essere%20presente%20alla%20vostra%20promessa,%20vi%20auguro%20il%20meglio!%20🤍" target="_blank" class="btn-rsvp btn-no">Purtroppo no</a>
-            </div>
-        </div>
-
-        <!-- Frase Emozionante Finale -->
-        <div class="final-quote" id="finalQuoteText">"Il nostro per sempre comincia con voi..."</div>
-
-        <div class="footer-note">
-            La vostra presenza è il regalo più bello.
-        </div>
-    </div>
-
-    <script>
-        var introMusic = document.getElementById('intro-music');
-        var heartbeatAudio = document.getElementById('heartbeat-audio');
-        var music = document.getElementById('bg-music');
-        var introVideo = document.getElementById('intro-video');
-        var introContainer = document.getElementById('intro-video-container');
-        var flashOverlay = document.getElementById('flash-overlay');
-        var memoryBook = document.getElementById('memory-book-container');
-        
-        var text1 = document.getElementById('intro-text-1');
-        var text2 = document.getElementById('intro-text-2');
-        var text3 = document.getElementById('intro-text-3');
-        var text4 = document.getElementById('intro-text-4');
-        var text5 = document.getElementById('intro-text-5');
-
-        function startExperience() {
-            var overlay = document.getElementById('start-overlay');
-            overlay.style.opacity = '0';
-            setTimeout(function() {
-                overlay.style.display = 'none';
-            }, 1000);
-
-            introContainer.style.visibility = 'visible';
-            introContainer.style.opacity = '1';
-            
-            introMusic.volume = 1.0;
-            introMusic.play().catch(function(e) { console.log(e); });
-
-            // Sblocca il battito
-            heartbeatAudio.volume = 0.05; // Parte con volume bassissimo
-            heartbeatAudio.load();
-            heartbeatAudio.play().then(() => { heartbeatAudio.pause(); heartbeatAudio.currentTime = 0; }).catch(e => console.log(e));
-
-            introVideo.play().catch(function(error) {
-                console.log("Errore video intro:", error);
-                onIntroEnded();
-            });
-
-            // Sequenza frasi sul video 8
-            setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
-            setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
-
-            setTimeout(function() { text2.classList.add('show-phrase'); }, 4200);
-            setTimeout(function() { text2.classList.remove('show-phrase'); }, 7500);
-
-            setTimeout(function() { text3.classList.add('show-phrase'); }, 7900);
-            setTimeout(function() { text3.classList.remove('show-phrase'); }, 11000);
-
-            setTimeout(function() { text4.classList.add('show-phrase'); }, 11400);
-            setTimeout(function() { text4.classList.remove('show-phrase'); }, 14500);
-
-            setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
-            setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
-
-            // BATTITO: Parte basso e sale gradualmente
-            setTimeout(function() {
-                heartbeatAudio.currentTime = 0;
-                heartbeatAudio.volume = 0.1;
-                heartbeatAudio.play().catch(function(error) { console.log(error); });
-
-                let heartbeatFadeIn = setInterval(function() {
-                    if (heartbeatAudio.volume < 0.9) {
-                        heartbeatAudio.volume += 0.1;
-                    } else {
-                        clearInterval(heartbeatFadeIn);
-                    }
-                }, 200);
-            }, 11000);
-
-            introVideo.onended = function() {
-                // Dissolvenza in uscita rapida del battito esattamente alla fine del video 8
-                let heartbeatFadeOut = setInterval(function() {
-                    if (heartbeatAudio.volume > 0.1) {
-                        heartbeatAudio.volume -= 0.2;
-                    } else {
-                        heartbeatAudio.pause();
-                        heartbeatAudio.currentTime = 0;
-                        clearInterval(heartbeatFadeOut);
-                    }
-                }, 50);
-
-                onIntroEnded();
-            };
-        }
-
-        function onIntroEnded() {
-            // Flash bianco/oro
-            flashOverlay.style.opacity = '1';
-
-            let fadeOutAudio = setInterval(function() {
-                if (introMusic.volume > 0.1) introMusic.volume -= 0.1;
-                
-                if (introMusic.volume <= 0.1) {
-                    introMusic.pause();
-                    clearInterval(fadeOutAudio);
-                }
-            }, 100);
-
-            setTimeout(function() {
-                introContainer.style.display = 'none';
-                flashOverlay.style.opacity = '0'; // Rimuove il flash
-
-                // Mostra l'album con effetti ottici
-                memoryBook.style.visibility = 'visible';
-                memoryBook.style.opacity = '1';
-
-                let pages = document.querySelectorAll('.page');
-                let currentPage = 0;
-
-                setTimeout(function() {
-                    let flipInterval = setInterval(function() {
-                        if (currentPage < pages.length) {
-                            pages[currentPage].classList.add('flipped');
-                            currentPage++;
-                        } else {
-                            // Fine dell'album: chiude l'album, avvia la canzone principale in fade-in e mostra la promessa
-                            clearInterval(flipInterval);
-                            
-                            setTimeout(function() {
-                                memoryBook.style.opacity = '0';
-                                setTimeout(function() {
-                                    memoryBook.style.display = 'none';
-                                    
-                                    // Avvia la musica principale con Fade-In graduale
-                                    music.volume = 0.1;
-                                    music.play().then(function() {
-                                        let fadeInInterval = setInterval(function() {
-                                            if (music.volume < 0.95) {
-                                                music.volume += 0.05;
-                                            } else {
-                                                music.volume = 1.0;
-                                                clearInterval(fadeInInterval);
-                                            }
-                                        }, 200);
-                                    }).catch(function(error) { console.log(error); });
-
-                                    runStorySequence();
-                                }, 1000);
-                            }, 800);
-                        }
-                    }, 2400); // Velocità lenta e rilassante per gustarsi ogni foto con gli effetti ottici
-                }, 1500);
-
-            }, 1200);
-        }
-
-        function runStorySequence() {
-            setTimeout(function() {
-                document.getElementById('step-1').classList.add('visible');
-            }, 1000);
-
-            setTimeout(function() {
-                document.getElementById('step-1').classList.remove('visible');
-            }, 5000);
-
-            setTimeout(function() {
-                document.getElementById('step-2').classList.add('visible');
-            }, 6500);
-
-            setTimeout(function() {
-                document.getElementById('step-2').classList.remove('visible');
-            }, 11000);
-
-            setTimeout(function() {
-                document.getElementById('step-3').classList.add('visible');
-                document.getElementById('fireworks-container').style.display = 'block';
-            }, 12500);
-
-            music.onended = function() {
-                triggerGrandFinale();
-            };
-        }
-
-        function triggerGrandFinale() {
-            var container = document.getElementById('fireworks-container');
-            container.style.display = 'block';
-
-            var invitationCard = document.getElementById('step-3');
-            invitationCard.classList.add('grand-finale-effect');
-
-            var quote = document.getElementById('finalQuoteText');
-            quote.classList.add('pulse-quote');
-
-            for(let i=0; i<10; i++) {
-                let fw = document.createElement('div');
-                fw.className = 'firework';
-                fw.style.top = Math.random() * 80 + '%';
-                fw.style.left = Math.random() * 80 + '%';
-                fw.style.animationDelay = (i * 0.15) + 's';
-                container.appendChild(fw);
-            }
-        }
-
-        const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                document.getElementById("months").innerText = "0";
-                document.getElementById("days").innerText = "0";
-                document.getElementById("hours").innerText = "0";
-                document.getElementById("minutes").innerText = "0";
-                document.getElementById("seconds").innerText = "0";
-                return;
-            }
-
-            const daysTotal = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const months = Math.floor(daysTotal / 30);
-            const days = daysTotal % 30;
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("months").innerText = months;
-            document.getElementById("days").innerText = days;
-            document.getElementById("hours").innerText = hours;
-            document.getElementById("minutes").innerText = minutes;
-            document.getElementById("seconds").innerText = seconds;
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
-
-</body>
-</html>
