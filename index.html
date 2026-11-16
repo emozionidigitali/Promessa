@@ -474,9 +474,9 @@
         <source src="intro-music.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Audio Battito Cardiaco Accelerato -->
+    <!-- Audio Battito Cardiaco (battito.mp3) -->
     <audio id="heartbeat-audio" preload="auto">
-        <source src="heartbeat.mp3" type="audio/mp3">
+        <source src="battito.mp3" type="audio/mp3">
     </audio>
 
     <!-- Canzone Principale -->
@@ -654,7 +654,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Attivazione forzata del battito cardiaco verso la fine (regola i secondi se il video è più corto/lungo)
+            // Attivazione forzata del battito cardiaco verso la fine dell'intro
             setTimeout(function() {
                 heartbeatAudio.currentTime = 0;
                 heartbeatAudio.play().then(function() {
