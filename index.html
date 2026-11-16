@@ -399,7 +399,7 @@
 </head>
 <body>
 
-    <!-- Canzone Principale (mu.mp3) in loop dall'inizio -->
+    <!-- Canzone Principale in loop dall'inizio (mu.mp3) -->
     <audio id="bg-music" preload="auto" loop>
         <source src="mu.mp3" type="audio/mp3">
     </audio>
@@ -410,7 +410,7 @@
     <!-- Contenitore Video In in Loop con Pulsante APRI subito sotto -->
     <div id="intro-video-container">
         <div class="video-stage">
-            <video id="intro-video" src="intro.mp4" autoplay loop muted playsinline></video>
+            <video id="intro-video" src="intro.mp4" autoplay loop playsinline></video>
         </div>
         <div class="loop-action-wrapper">
             <button class="magic-btn-loop" onclick="startPromiseExperience()">APRI</button>
@@ -449,8 +449,8 @@
                 🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_0](start_span)[span_0](end_span)
+                📍 <strong>Ristorante:</strong> Al Convento[span_0](start_span)[span_0](end_span)<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
             </div>
             
             <!-- PULSANTI AZIONE -->
@@ -513,34 +513,37 @@
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
 
-        // Fa partire la musica e il video in loop fin dall'inizio (sbloccandosi al primo tocco sullo schermo)
+        // Fa partire subito video e musica in loop non appena la pagina viene toccata/cliccata la prima volta
         window.addEventListener('DOMContentLoaded', (event) => {
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
-                console.log("Errore autoplay video:", error);
+                console.log("Video autoplay in attesa:", error);
             });
 
-            function unlockAudio() {
+            function startAudioAndVideo() {
                 music.volume = 1.0;
                 music.play().then(() => {
-                    window.removeEventListener('click', unlockAudio);
-                    window.removeEventListener('touchstart', unlockAudio);
+                    // Rimuove gli ascoltatori una volta avviato con successo
+                    window.removeEventListener('click', startAudioAndVideo);
+                    window.removeEventListener('touchstart', startAudioAndVideo);
                 }).catch(function(error) {
-                    console.log("In attesa di interazione per l'audio:", error);
+                    console.log("In attesa di interazione per l'audio");
                 });
             }
 
-            window.addEventListener('click', unlockAudio);
-            window.addEventListener('touchstart', unlockAudio);
+            // Ascolta il primo tocco ovunque sullo schermo per sbloccare l'audio di Einaudi
+            window.addEventListener('click', startAudioAndVideo);
+            window.addEventListener('touchstart', startAudioAndVideo);
 
+            // Tenta l'avvio immediato
             music.volume = 1.0;
             music.play().catch(function(error) {
-                console.log("Audio in attesa del primo tocco dell'utente.");
+                console.log("Audio bloccato dal browser finché non tocchi lo schermo.");
             });
         });
 
         function startPromiseExperience() {
-            // FERMA completamente la musica e il video dell'intro quando clicchi APRI
+            // FERMA E SPEGNIE COMPLETAMENTE LA MUSICA E IL VIDEO DELL'INTRO
             music.pause();
             music.currentTime = 0;
             introVideo.pause();
