@@ -399,7 +399,7 @@
 </head>
 <body>
 
-    <!-- Canzone Principale in loop dall'inizio (mu.mp3) -->
+    <!-- Canzone Principale (mu.mp3) in loop -->
     <audio id="bg-music" preload="auto" loop>
         <source src="mu.mp3" type="audio/mp3">
     </audio>
@@ -410,7 +410,7 @@
     <!-- Contenitore Video In in Loop con Pulsante APRI subito sotto -->
     <div id="intro-video-container">
         <div class="video-stage">
-            <video id="intro-video" src="intro.mp4" autoplay loop playsinline></video>
+            <video id="intro-video" src="intro.mp4" autoplay loop muted playsinline></video>
         </div>
         <div class="loop-action-wrapper">
             <button class="magic-btn-loop" onclick="startPromiseExperience()">APRI</button>
@@ -513,37 +513,35 @@
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
 
-        // Fa partire subito video e musica in loop non appena la pagina viene toccata/cliccata la prima volta
+        // Avvia il video in loop e sblocca l'audio di mu.mp3 al primo tocco ovunque sullo schermo
         window.addEventListener('DOMContentLoaded', (event) => {
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
                 console.log("Video autoplay in attesa:", error);
             });
 
-            function startAudioAndVideo() {
+            function unlockAndPlayAudio() {
                 music.volume = 1.0;
                 music.play().then(() => {
-                    // Rimuove gli ascoltatori una volta avviato con successo
-                    window.removeEventListener('click', startAudioAndVideo);
-                    window.removeEventListener('touchstart', startAudioAndVideo);
+                    window.removeEventListener('click', unlockAndPlayAudio);
+                    window.removeEventListener('touchstart', unlockAndPlayAudio);
                 }).catch(function(error) {
                     console.log("In attesa di interazione per l'audio");
                 });
             }
 
-            // Ascolta il primo tocco ovunque sullo schermo per sbloccare l'audio di Einaudi
-            window.addEventListener('click', startAudioAndVideo);
-            window.addEventListener('touchstart', startAudioAndVideo);
+            window.addEventListener('click', unlockAndPlayAudio);
+            window.addEventListener('touchstart', unlockAndPlayAudio);
 
-            // Tenta l'avvio immediato
+            // Tenta l'avvio immediato nel caso il browser lo permetta
             music.volume = 1.0;
             music.play().catch(function(error) {
-                console.log("Audio bloccato dal browser finché non tocchi lo schermo.");
+                console.log("Audio in attesa del primo tocco dell'utente.");
             });
         });
 
         function startPromiseExperience() {
-            // FERMA E SPEGNIE COMPLETAMENTE LA MUSICA E IL VIDEO DELL'INTRO
+            // SPEGNIMENTO TOTALE: Ferma la musica e il video dell'intro all'istante quando si clicca APRI
             music.pause();
             music.currentTime = 0;
             introVideo.pause();
