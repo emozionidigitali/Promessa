@@ -430,7 +430,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Contenitore Video In in Loop con Frasi e Pulsante Apri (Parte subito all'avvio) -->
+    <!-- Contenitore Video In in Loop con Frasi e Pulsante Apri (Parte subito) -->
     <div id="intro-video-container">
         <div class="video-stage">
             <video id="intro-video" src="intro.mp4" autoplay loop muted playsinline></video>
@@ -545,16 +545,32 @@
         var text2 = document.getElementById('intro-text-2');
         var text3 = document.getElementById('intro-text-3');
 
-        // Avvia automaticamente l'intro e la musica appena la pagina si carica
+        // Fa partire subito il video in loop e sblocca l'audio al primo tocco ovunque sullo schermo
         window.addEventListener('DOMContentLoaded', (event) => {
-            music.volume = 1.0;
-            music.play().catch(function(error) {
-                console.log("Autoplay audio bloccato dal browser finché non si interagisce:", error);
-            });
-
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
-                console.log("Errore video in:", error);
+                console.log("Errore autoplay video:", error);
+            });
+
+            // Funzione per sbloccare l'audio non appena l'utente interagisce (tocca lo schermo)
+            function unlockAudio() {
+                music.volume = 1.0;
+                music.play().then(() => {
+                    // Rimuove l'ascoltatore una volta sbloccato con successo
+                    window.removeEventListener('click', unlockAudio);
+                    window.removeEventListener('touchstart', unlockAudio);
+                }).catch(function(error) {
+                    console.log("In attesa di interazione per l'audio:", error);
+                });
+            }
+
+            window.addEventListener('click', unlockAudio);
+            window.addEventListener('touchstart', unlockAudio);
+
+            // Tenta comunque l'avvio audio immediato nel caso il browser lo consenta
+            music.volume = 1.0;
+            music.play().catch(function(error) {
+                console.log("Audio in attesa del primo tocco dell'utente.");
             });
 
             loopPhrases();
