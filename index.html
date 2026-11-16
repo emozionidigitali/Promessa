@@ -114,7 +114,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- PRESENTAZIONE FOTO A SCHERMO INTERO CON FRASI EMOZIONANTI --- */
+        /* --- PRESENTAZIONE FOTO A SCHERMO INTERO CON EFFETTI OTTICI CINEMATOGRAFICI --- */
         #photo-slideshow-container {
             position: fixed;
             top: 0;
@@ -128,7 +128,7 @@
             z-index: 10002;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1s ease;
+            transition: opacity 0.6s ease;
         }
 
         .slide-item {
@@ -141,13 +141,15 @@
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            transform: scale(0.95);
+            transition: opacity 1.4s ease-in-out, transform 1.4s ease-in-out;
             padding: 20px;
         }
 
         .slide-item.active-slide {
             opacity: 1;
             visibility: visible;
+            transform: scale(1);
         }
 
         .slide-item img {
@@ -155,25 +157,31 @@
             max-width: 650px;
             height: 65vh;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 12px;
             border: 2px solid #e6c584;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            animation: cinematicZoom 5s infinite alternate ease-in-out;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            animation: photoCinematicZoom 6s infinite alternate ease-in-out;
         }
 
-        @keyframes cinematicZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.03); }
+        @keyframes photoCinematicZoom {
+            0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+            100% { transform: scale(1.05) rotate(0.5deg); filter: brightness(1.05); }
         }
 
         .slide-caption {
             font-family: 'Great Vibes', cursive;
-            font-size: 34px;
+            font-size: 36px;
             color: #f7e2b3;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 20px rgba(0,0,0,0.9);
             margin-top: 20px;
             text-align: center;
             max-width: 90%;
+            animation: captionFadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes captionFadeIn {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         /* Scritte in sovraimpressione per il video 8 */
@@ -508,7 +516,7 @@
         <source src="battito.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Canzone Principale -->
+    <!-- Canzone Principale (Parte subito a pieno volume) -->
     <audio id="bg-music" preload="auto">
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
@@ -516,7 +524,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Presentazione Foto a Schermo Intero con Frasi Emozionanti (da 11 a 20) -->
+    <!-- Presentazione Foto a Schermo Intero con Effetti Ottici (da 11 a 20) -->
     <div id="photo-slideshow-container">
         <div class="slide-item active-slide">
             <img src="foto 11.jpg" alt="Ricordo 11">
@@ -695,7 +703,7 @@
                 overlay.style.display = 'none';
             }, 1000);
 
-            // Rende visibile e avvia subito il video intro pulito
+            // Avvia subito il video intro pulito
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
@@ -775,7 +783,7 @@
                 introContainer.style.display = 'none';
                 flashOverlay.style.opacity = '0'; // Rimuove il flash
 
-                // Mostra la sequenza delle foto a schermo intero
+                // Mostra la sequenza delle foto a schermo intero con effetti ottici
                 slideshowContainer.style.visibility = 'visible';
                 slideshowContainer.style.opacity = '1';
 
@@ -789,57 +797,43 @@
                     if (currentSlide < slides.length) {
                         slides[currentSlide].classList.add('active-slide');
                     } else {
-                        // Fine delle foto: chiude la galleria, fa partire la musica principale in fade-in e mostra la promessa
+                        // Fine delle foto: chiude istantaneamente la galleria e fa partire la musica e la promessa
                         clearInterval(slideInterval);
                         
-                        setTimeout(function() {
-                            slideshowContainer.style.opacity = '0';
-                            setTimeout(function() {
-                                slideshowContainer.style.display = 'none';
-                                
-                                // Avvia la musica principale con Fade-In graduale
-                                music.volume = 0.1;
-                                music.play().then(function() {
-                                    let fadeInInterval = setInterval(function() {
-                                        if (music.volume < 0.95) {
-                                            music.volume += 0.05;
-                                        } else {
-                                            music.volume = 1.0;
-                                            clearInterval(fadeInInterval);
-                                        }
-                                    }, 200);
-                                }).catch(function(error) { console.log(error); });
+                        slideshowContainer.style.opacity = '0';
+                        slideshowContainer.style.display = 'none';
+                        
+                        // Avvia la musica principale subito a pieno volume (1.0) senza ritardi
+                        music.volume = 1.0;
+                        music.play().catch(function(error) { console.log(error); });
 
-                                runStorySequence();
-                            }, 1000);
-                        }, 800);
+                        runStorySequence();
                     }
-                }, 3200); // 3.2 secondi per ogni foto con la sua frase
+                }, 3500); // Tempo per ciascuna foto
 
             }, 1200);
         }
 
         function runStorySequence() {
-            setTimeout(function() {
-                document.getElementById('step-1').classList.add('visible');
-            }, 1000);
+            // Parte istantaneamente senza attese
+            document.getElementById('step-1').classList.add('visible');
 
             setTimeout(function() {
                 document.getElementById('step-1').classList.remove('visible');
-            }, 5000);
+            }, 4000);
 
             setTimeout(function() {
                 document.getElementById('step-2').classList.add('visible');
-            }, 6500);
+            }, 5500);
 
             setTimeout(function() {
                 document.getElementById('step-2').classList.remove('visible');
-            }, 11000);
+            }, 9500);
 
             setTimeout(function() {
                 document.getElementById('step-3').classList.add('visible');
                 document.getElementById('fireworks-container').style.display = 'block';
-            }, 12500);
+            }, 11000);
 
             music.onended = function() {
                 triggerGrandFinale();
