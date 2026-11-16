@@ -24,7 +24,7 @@
             align-items: center;
         }
 
-        /* Contenitore Video In in Loop a tutto schermo (attivo subito) */
+        /* Contenitore Video In in Loop con Pulsante in alto sotto il video */
         #intro-video-container {
             position: fixed;
             top: 0;
@@ -34,16 +34,18 @@
             background: #232b22;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             z-index: 9999;
-            padding: 25px 20px;
+            padding: 20px;
+            gap: 20px;
         }
 
         .video-stage {
             position: relative;
             width: 100%;
-            height: 60vh;
+            max-width: 500px;
+            height: 65vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -53,36 +55,11 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+            border-radius: 12px;
         }
 
-        .intro-overlay-text {
-            position: relative;
-            width: 100%;
-            height: 20vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #ffffff;
-            padding: 0 20px;
-        }
-
-        .intro-phrase {
-            position: absolute;
-            width: 90%;
-            max-width: 700px;
-            opacity: 0;
-            transition: opacity 1.2s ease;
-        }
-
-        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 30px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-2 { font-size: 17px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 32px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-
-        .show-phrase { opacity: 1 !important; }
-
+        /* Pulsante APRI posizionato più in alto, subito sotto il video */
         .loop-action-wrapper {
-            height: 15vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -93,7 +70,7 @@
             background: linear-gradient(135deg, #323d30 0%, #222b21 100%);
             color: #f7e2b3;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 600;
             letter-spacing: 6px;
             text-transform: uppercase;
@@ -422,23 +399,18 @@
 </head>
 <body>
 
-    <!-- Canzone Principale in loop -->
+    <!-- Canzone Principale in loop (mu.mp3) -->
     <audio id="bg-music" preload="auto" loop>
-        <source src="Ludovico Einaudi - Experience_1794868359895.mp3" type="audio/mp3">
+        <source src="mu.mp3" type="audio/mp3">
     </audio>
 
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Contenitore Video In in Loop con Frasi e Pulsante Apri (Parte subito) -->
+    <!-- Contenitore Video In in Loop con Pulsante APRI subito sotto -->
     <div id="intro-video-container">
         <div class="video-stage">
             <video id="intro-video" src="intro.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="intro-overlay-text">
-            <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
-            <div id="intro-text-2" class="intro-phrase">Ogni singolo istante ci ha condotti fin qui</div>
-            <div id="intro-text-3" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
         </div>
         <div class="loop-action-wrapper">
             <button class="magic-btn-loop" onclick="startPromiseExperience()">APRI</button>
@@ -541,22 +513,16 @@
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
 
-        var text1 = document.getElementById('intro-text-1');
-        var text2 = document.getElementById('intro-text-2');
-        var text3 = document.getElementById('intro-text-3');
-
-        // Fa partire subito il video in loop e sblocca l'audio al primo tocco ovunque sullo schermo
+        // Avvia subito il video in loop e sblocca l'audio al primo tocco ovunque sullo schermo
         window.addEventListener('DOMContentLoaded', (event) => {
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
                 console.log("Errore autoplay video:", error);
             });
 
-            // Funzione per sbloccare l'audio non appena l'utente interagisce (tocca lo schermo)
             function unlockAudio() {
                 music.volume = 1.0;
                 music.play().then(() => {
-                    // Rimuove l'ascoltatore una volta sbloccato con successo
                     window.removeEventListener('click', unlockAudio);
                     window.removeEventListener('touchstart', unlockAudio);
                 }).catch(function(error) {
@@ -567,35 +533,11 @@
             window.addEventListener('click', unlockAudio);
             window.addEventListener('touchstart', unlockAudio);
 
-            // Tenta comunque l'avvio audio immediato nel caso il browser lo consenta
             music.volume = 1.0;
             music.play().catch(function(error) {
                 console.log("Audio in attesa del primo tocco dell'utente.");
             });
-
-            loopPhrases();
         });
-
-        function loopPhrases() {
-            if (introContainer.style.opacity === '0') return;
-            
-            text1.classList.add('show-phrase');
-            setTimeout(function() { text1.classList.remove('show-phrase'); }, 3500);
-
-            setTimeout(function() {
-                if (introContainer.style.opacity === '0') return;
-                text2.classList.add('show-phrase');
-            }, 4000);
-            setTimeout(function() { text2.classList.remove('show-phrase'); }, 7500);
-
-            setTimeout(function() {
-                if (introContainer.style.opacity === '0') return;
-                text3.classList.add('show-phrase');
-            }, 8000);
-            setTimeout(function() { text3.classList.remove('show-phrase'); }, 11500);
-
-            setTimeout(loopPhrases, 12000);
-        }
 
         function startPromiseExperience() {
             introContainer.style.opacity = '0';
