@@ -77,8 +77,8 @@
             transform: scale(1.05);
         }
 
-        /* Contenitore Video Intro adattato allo schermo */
-        #intro-video-container {
+        /* Contenitore Video Intro e Video Album */
+        .video-overlay-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -94,7 +94,7 @@
             transition: opacity 1.5s ease;
         }
 
-        #intro-video {
+        .fullscreen-video {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -114,99 +114,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- STILE DEL VERO LIBRO 3D CHE SI GIRA --- */
-        #memory-book-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(35, 43, 34, 0.96);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10002;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 1s ease;
-            perspective: 1500px;
-        }
-
-        .book {
-            width: 320px;
-            height: 440px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s ease;
-        }
-
-        .page {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            transform-origin: left center;
-            transform-style: preserve-3d;
-            transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
-            background: #fdfbf7;
-            border-radius: 4px 10px 10px 4px;
-            border: 2px solid #e6c584;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            backface-visibility: hidden;
-        }
-
-        /* Classe per girare la pagina in 3D */
-        .page.flipped {
-            transform: rotateY(-180deg);
-        }
-
-        .page img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid #e6c584;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .page p {
-            font-family: 'Great Vibes', cursive;
-            font-size: 26px;
-            color: #4A5847;
-            margin: 0;
-            text-align: center;
-        }
-
-        /* Copertina iniziale del libro */
-        .cover-page {
-            background: linear-gradient(135deg, #3d4c3a 0%, #293427 100%);
-            border: 3px solid #e6c584;
-            color: #f7e2b3;
-            text-align: center;
-            justify-content: center;
-        }
-
-        .cover-page h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 42px;
-            margin: 0 0 10px 0;
-        }
-
-        .cover-page p {
-            font-size: 16px;
-            font-style: italic;
-            color: #e1dad0;
-        }
-
-        /* Scritte in sovraimpressione distribuite per tutto il video 8 */
+        /* Scritte in sovraimpressione per il video 8 */
         .intro-overlay-text {
             position: absolute;
             z-index: 10000;
@@ -546,61 +454,9 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Libro dei Ricordi 3D con le foto da 11 a 20 -->
-    <div id="memory-book-container">
-        <div class="book" id="realBook">
-            <!-- Copertina -->
-            <div class="page cover-page" style="z-index: 11;">
-                <h2>Il Nostro Cammino</h2>
-                <p>Sfoglia i ricordi...</p>
-            </div>
-            <!-- Pagine con le foto da 11 a 20 in ordine inverso per permettere la sfogliata perfetta -->
-            <div class="page" style="z-index: 10;">
-                <img src="foto 20.jpg" alt="Ricordo 20">
-                <p>Verso il nostro per sempre</p>
-            </div>
-            <div class="page" style="z-index: 9;">
-                <img src="foto 19.jpg" alt="Ricordo 19">
-                <p>Uniti in ogni passo...</p>
-            </div>
-            <div class="page" style="z-index: 8;">
-                <img src="foto 18.jpg" alt="Ricordo 18">
-                <p>Costruendo il nostro nido...</p>
-            </div>
-            <div class="page" style="z-index: 7;">
-                <img src="foto 17.jpg" alt="Ricordo 17">
-                <p>La nostra complicità...</p>
-            </div>
-            <div class="page" style="z-index: 6;">
-                <img src="foto 16.jpg" alt="Ricordo 16">
-                <p>Promesse custodite nel cuore...</p>
-            </div>
-            <div class="page" style="z-index: 5;">
-                <img src="foto 15.jpg" alt="Ricordo 15">
-                <p>Mano nella mano...</p>
-            </div>
-            <div class="page" style="z-index: 4;">
-                <img src="foto 14.jpg" alt="Ricordo 14">
-                <p>Sguardi che parlano d'amore...</p>
-            </div>
-            <div class="page" style="z-index: 3;">
-                <img src="foto 13.jpg" alt="Ricordo 13">
-                <p>Sorrisi rubati al tempo...</p>
-            </div>
-            <div class="page" style="z-index: 2;">
-                <img src="foto 12.jpg" alt="Ricordo 12">
-                <p>Ogni attimo insieme...</p>
-            </div>
-            <div class="page" style="z-index: 1;">
-                <img src="foto 11.jpg" alt="Ricordo 11">
-                <p>I nostri primi sogni...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contenitore Video Intro e Frasi continue -->
-    <div id="intro-video-container">
-        <video id="intro-video" src="video 8.mp4" playsinline></video>
+    <!-- Contenitore Video Intro (video 8.mp4) -->
+    <div id="intro-video-container" class="video-overlay-container">
+        <video id="intro-video" class="fullscreen-video" src="video 8.mp4" playsinline></video>
         <div class="intro-overlay-text">
             <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
             <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno una casa, un rifugio, una vita insieme</div>
@@ -608,6 +464,11 @@
             <div id="intro-text-4" class="intro-phrase">Due cuori, un solo cammino che sta per svelarsi</div>
             <div id="intro-text-5" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
         </div>
+    </div>
+
+    <!-- Contenitore Video Album (video a1.mp4 rallentato) -->
+    <div id="album-video-container" class="video-overlay-container">
+        <video id="album-video" class="fullscreen-video" src="video a1.mp4" playsinline></video>
     </div>
 
     <!-- Fuochi d'artificio -->
@@ -715,10 +576,14 @@
         var introMusic = document.getElementById('intro-music');
         var heartbeatAudio = document.getElementById('heartbeat-audio');
         var music = document.getElementById('bg-music');
+        
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
+
+        var albumVideo = document.getElementById('album-video');
+        var albumContainer = document.getElementById('album-video-container');
+
         var flashOverlay = document.getElementById('flash-overlay');
-        var memoryBook = document.getElementById('memory-book-container');
         
         var text1 = document.getElementById('intro-text-1');
         var text2 = document.getElementById('intro-text-2');
@@ -748,7 +613,7 @@
                 onIntroEnded();
             });
 
-            // Sequenza frasi
+            // Sequenza frasi video 8
             setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
             setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
 
@@ -771,14 +636,37 @@
             }, 11000);
 
             introVideo.onended = function() {
-                onIntroEnded();
+                onVideo8Ended();
             };
         }
 
-        function onIntroEnded() {
-            // 1. Flash bianco/oro
+        function onVideo8Ended() {
+            // Flash bianco/oro e transizione al video dell'album
             flashOverlay.style.opacity = '1';
 
+            setTimeout(function() {
+                introContainer.style.display = 'none';
+                flashOverlay.style.opacity = '0';
+
+                // Mostra e avvia il video dell'album (video a1.mp4 rallentato)
+                albumContainer.style.visibility = 'visible';
+                albumContainer.style.opacity = '1';
+
+                albumVideo.playbackRate = 0.85; // Rallenta leggermente il video per renderlo più dolce
+                albumVideo.play().catch(function(e) {
+                    console.log("Errore riproduzione album video:", e);
+                    onAlbumVideoEnded();
+                });
+
+                albumVideo.onended = function() {
+                    onAlbumVideoEnded();
+                };
+
+            }, 1200);
+        }
+
+        function onAlbumVideoEnded() {
+            // Dissolvenza audio intro/battito e avvio musica principale
             let fadeOutAudio = setInterval(function() {
                 if (introMusic.volume > 0.1) introMusic.volume -= 0.1;
                 if (heartbeatAudio.volume > 0.1) heartbeatAudio.volume -= 0.1;
@@ -790,53 +678,25 @@
                 }
             }, 100);
 
+            albumContainer.style.opacity = '0';
             setTimeout(function() {
-                introContainer.style.display = 'none';
-                flashOverlay.style.opacity = '0'; // Rimuove il flash
+                albumContainer.style.display = 'none';
 
-                // 2. Mostra il libro 3D
-                memoryBook.style.visibility = 'visible';
-                memoryBook.style.opacity = '1';
-
-                let pages = document.querySelectorAll('.page');
-                let currentPage = 0;
-
-                // Ritardo iniziale per ammirare la copertina
-                setTimeout(function() {
-                    let flipInterval = setInterval(function() {
-                        if (currentPage < pages.length) {
-                            pages[currentPage].classList.add('flipped');
-                            currentPage++;
+                // Avvia la canzone principale con Fade-In graduale
+                music.volume = 0.1;
+                music.play().then(function() {
+                    let fadeInInterval = setInterval(function() {
+                        if (music.volume < 0.95) {
+                            music.volume += 0.05;
                         } else {
-                            // Fine del libro: chiude il libro 3D, fa partire la musica in fade-in e mostra la promessa
-                            clearInterval(flipInterval);
-                            
-                            setTimeout(function() {
-                                memoryBook.style.opacity = '0';
-                                setTimeout(function() {
-                                    memoryBook.style.display = 'none';
-                                    
-                                    // Avvia la musica principale con Fade-In graduale
-                                    music.volume = 0.1;
-                                    music.play().then(function() {
-                                        let fadeInInterval = setInterval(function() {
-                                            if (music.volume < 0.95) {
-                                                music.volume += 0.05;
-                                            } else {
-                                                music.volume = 1.0;
-                                                clearInterval(fadeInInterval);
-                                            }
-                                        }, 200);
-                                    }).catch(function(error) { console.log(error); });
-
-                                    runStorySequence();
-                                }, 1000);
-                            }, 500);
+                            music.volume = 1.0;
+                            clearInterval(fadeInInterval);
                         }
-                    }, 1100); // Velocità rallentata (1.1 secondi a pagina) per godersi lo sfoglio realistico
-                }, 1000);
+                    }, 200);
+                }).catch(function(error) { console.log(error); });
 
-            }, 1200);
+                runStorySequence();
+            }, 1000);
         }
 
         function runStorySequence() {
