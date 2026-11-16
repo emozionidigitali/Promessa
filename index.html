@@ -24,7 +24,7 @@
             align-items: center;
         }
 
-        /* Schermata iniziale */
+        /* Schermata iniziale con pulsante */
         #start-overlay {
             position: fixed;
             top: 0;
@@ -40,6 +40,7 @@
             color: #fff;
             text-align: center;
             padding: 20px;
+            transition: opacity 1s ease;
         }
 
         .start-box h2 {
@@ -74,6 +75,29 @@
 
         .btn-start:hover {
             transform: scale(1.05);
+        }
+
+        /* Contenitore Video Intro a schermo intero o centrato */
+        #intro-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease;
+        }
+
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Testi della sequenza con transizione per lo zoom finale */
@@ -251,7 +275,7 @@
             display: block;
         }
 
-        /* Video in autoplay */
+        /* Video secondario dentro la card (se desiderato, es. video 3) */
         .video-container {
             margin-top: 4px;
         }
@@ -368,10 +392,16 @@
 </head>
 <body>
 
-    <!-- Audio di sottofondo -->
+    <!-- Canzone di sottofondo -->
     <audio id="bg-music">
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
+
+    <!-- Contenitore Video Intro -->
+    <div id="intro-video-container">
+        <!-- Sostituisci "video-intro.mp4" con il nome del tuo file video di benvenuto -->
+        <video id="intro-video" src="video-intro.mp4" playsinline></video>
+    </div>
 
     <!-- Fuochi d'artificio -->
     <div id="fireworks-container">
@@ -452,7 +482,7 @@
 
         <div class="divider"></div>
 
-        <!-- Video 3 in Autoplay -->
+        <!-- Video 3 all'interno della card -->
         <div class="video-container">
             <video src="video 3.mp4" autoplay muted loop playsinline></video>
         </div>
@@ -476,43 +506,74 @@
 
     <script>
         var music = document.getElementById('bg-music');
+        var introVideo = document.getElementById('intro-video');
+        var introContainer = document.getElementById('intro-video-container');
 
         function startExperience() {
-            music.play().then(function() {
-                console.log("Audio avviato con successo");
-            }).catch(function(error) { 
-                console.log("Errore riproduzione audio:", error); 
-            });
-
+            // Nasconde la schermata iniziale
             var overlay = document.getElementById('start-overlay');
             overlay.style.opacity = '0';
             setTimeout(function() {
                 overlay.style.display = 'none';
-                runStorySequence();
-            }, 800);
+            }, 1000);
+
+            // Mostra e fa partire il video di introduzione a schermo intero
+            introContainer.style.visibility = 'visible';
+            introContainer.style.opacity = '1';
+            
+            introVideo.play().then(function() {
+                console.log("Video intro avviato");
+            }).catch(function(error) {
+                console.log("Errore riproduzione video intro:", error);
+                // Se il browser blocca l'autoplay del video, saltiamo direttamente alla sequenza
+                onIntroEnded();
+            });
+
+            // Quando il video di intro finisce, parte la canzone e la sequenza dei testi
+            introVideo.onended = function() {
+                onIntroEnded();
+            };
+        }
+
+        function onIntroEnded() {
+            // Dissolvenza in uscita del video di intro
+            introContainer.style.opacity = '0';
+            setTimeout(function() {
+                introContainer.style.display = 'none';
+            }, 1000);
+
+            // Avvia la canzone di sottofondo
+            music.play().then(function() {
+                console.log("Audio di sottofondo avviato");
+            }).catch(function(error) { 
+                console.log("Errore riproduzione audio:", error); 
+            });
+
+            // Avvia la sequenza dei messaggi testuali
+            runStorySequence();
         }
 
         function runStorySequence() {
             setTimeout(function() {
                 document.getElementById('step-1').classList.add('visible');
-            }, 1000);
+            }, 500);
 
             setTimeout(function() {
                 document.getElementById('step-1').classList.remove('visible');
-            }, 5000);
+            }, 4500);
 
             setTimeout(function() {
                 document.getElementById('step-2').classList.add('visible');
-            }, 6500);
+            }, 6000);
 
             setTimeout(function() {
                 document.getElementById('step-2').classList.remove('visible');
-            }, 11000);
+            }, 10500);
 
             setTimeout(function() {
                 document.getElementById('step-3').classList.add('visible');
                 document.getElementById('fireworks-container').style.display = 'block';
-            }, 12500);
+            }, 12000);
 
             music.onended = function() {
                 triggerGrandFinale();
