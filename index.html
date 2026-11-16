@@ -17,7 +17,7 @@
             width: 100%;
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background: #3A4638;
+            background: #232b22;
             overflow-x: hidden;
             display: flex;
             justify-content: center;
@@ -31,7 +31,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #3A4638;
+            background: #232b22;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -140,14 +140,14 @@
 
         .show-phrase { opacity: 1 !important; }
 
-        /* --- SCHERMATA INTERMEDIA CON IL SOLO PULSANTE AL CENTRO (Stile Cornice Foto) --- */
+        /* --- NUOVO STILE PULSANTE: ELEGANTE, ORO E FLOREALE --- */
         #transition-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #3A4638;
+            background: #232b22;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -165,81 +165,93 @@
         .magic-btn-wrapper {
             position: relative;
             display: inline-block;
-            padding: 15px 25px;
+            padding: 25px 40px;
         }
 
         .magic-btn {
             position: relative;
-            background-color: #5A7363; /* Verde salvia elegante */
-            color: #FFFFFF;
+            background: linear-gradient(135deg, #3d4c3a 0%, #293427 100%);
+            color: #f7e2b3;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            padding: 16px 55px;
-            border: 2px solid #D4AF37; /* Cornice dorata */
-            border-radius: 40px;
+            padding: 18px 60px;
+            border: 2px solid #D4AF37;
+            border-radius: 50px;
             cursor: pointer;
             outline: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(212, 175, 55, 0.25);
             transition: all 0.4s ease;
             z-index: 2;
         }
 
-        /* Cornice floreale e decorazioni dorate attorno al pulsante */
+        /* Cornice floreale dorata disegnata geometricamente con grazia */
         .magic-btn-wrapper::before,
         .magic-btn-wrapper::after {
-            content: '✨ 🌿 ⚜️ 🌿 ✨';
+            content: '';
             position: absolute;
-            width: 100%;
-            left: 0;
-            text-align: center;
-            font-size: 0.95rem;
-            color: #D4AF37;
-            pointer-events: none;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 75%;
+            height: 12px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
             z-index: 3;
-            opacity: 0.95;
+            pointer-events: none;
         }
 
+        /* Decorazione floreale superiore in stile oro */
         .magic-btn-wrapper::before {
-            top: 2px;
+            top: 10px;
+            background-image: radial-gradient(circle, #D4AF37 40%, transparent 41%), linear-gradient(90deg, transparent, #D4AF37 30%, #fff 50%, #D4AF37 70%, transparent);
+            height: 6px;
+            width: 60%;
+            opacity: 0.8;
         }
 
+        /* Decorazione floreale inferiore */
         .magic-btn-wrapper::after {
-            bottom: 4px;
+            bottom: 10px;
+            background-image: radial-gradient(circle, #D4AF37 40%, transparent 41%), linear-gradient(90deg, transparent, #D4AF37 30%, #fff 50%, #D4AF37 70%, transparent);
+            height: 6px;
+            width: 60%;
+            opacity: 0.8;
         }
 
         .magic-btn:hover {
-            background-color: #4A5F52;
-            transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, #465743 0%, #303c2e 100%);
+            transform: scale(1.04);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4), inset 0 0 25px rgba(212, 175, 55, 0.4);
+            color: #fff;
         }
 
-        /* Scintille dorate che cadono */
+        /* Scintille dorate che cadono delicatamente */
         .sparkle {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, #FFF 0%, #D4AF37 60%, transparent 100%);
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle, #FFF 0%, #D4AF37 70%, transparent 100%);
             border-radius: 50%;
             pointer-events: none;
             opacity: 0;
-            animation: fall-sparkle 1.8s infinite linear;
+            animation: fall-sparkle 1.6s infinite linear;
             z-index: 4;
         }
 
         @keyframes fall-sparkle {
             0% {
-                transform: translateY(-20px) scale(0.3);
+                transform: translateY(-25px) scale(0.2);
                 opacity: 0;
             }
-            30% {
+            35% {
                 opacity: 1;
-                transform: translateY(12px) scale(1);
+                transform: translateY(15px) scale(1.1);
             }
             100% {
-                transform: translateY(55px) scale(0);
+                transform: translateY(65px) scale(0);
                 opacity: 0;
             }
         }
@@ -564,10 +576,10 @@
         </div>
     </div>
 
-    <!-- Schermata Intermedia con il SOLO PULSANTE MAGICO AL CENTRO -->
+    <!-- Schermata Intermedia con il PULSANTE PULITO AL CENTRO E CORNICE DORATA -->
     <div id="transition-screen">
         <div class="magic-btn-wrapper" id="sparkle-wrapper">
-            <button class="magic-btn" onclick="startPromiseExperience()">APRI ✨</button>
+            <button class="magic-btn" onclick="startPromiseExperience()">APRI</button>
         </div>
     </div>
 
@@ -612,8 +624,8 @@
                 🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento[span_2](start_span)[span_2](end_span)<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_3](start_span)[span_3](end_span)
+                📍 <strong>Ristorante:</strong> Al Convento[span_0](start_span)[span_0](end_span)<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
             </div>
             
             <div class="action-buttons">
@@ -681,7 +693,7 @@
         var text4 = document.getElementById('intro-text-4');
         var text5 = document.getElementById('intro-text-5');
 
-        // Generatore di scintille dorate sul pulsante pulito
+        // Generatore di scintille dorate pulite intorno al pulsante
         function createSparkle() {
             if (!transitionScreen.classList.contains('show-transition')) return;
             var sparkle = document.createElement('div');
@@ -737,7 +749,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Quando il video finisce del tutto, compare solo il pulsante al centro
+            // Quando il video finisce del tutto, compare solo il pulsante pulito al centro
             introVideo.onended = function() {
                 introContainer.style.opacity = '0';
                 setTimeout(function() {
@@ -747,7 +759,7 @@
             };
         }
 
-        // Quando l'utente clicca sul pulsante magico pulito
+        // Quando l'utente clicca sul pulsante pulito
         function startPromiseExperience() {
             transitionScreen.style.opacity = '0';
             flashOverlay.style.opacity = '1';
