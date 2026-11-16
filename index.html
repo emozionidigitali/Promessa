@@ -39,6 +39,7 @@
             z-index: 9999;
             padding: 20px;
             gap: 20px;
+            transition: opacity 1s ease;
         }
 
         .video-stage {
@@ -58,7 +59,7 @@
             border-radius: 12px;
         }
 
-        /* Pulsante APRI posizionato più in alto, subito sotto il video */
+        /* Pulsante APRI posizionato sotto il video */
         .loop-action-wrapper {
             display: flex;
             justify-content: center;
@@ -88,6 +89,29 @@
             transform: scale(1.04);
             box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5), inset 0 0 25px rgba(212, 175, 55, 0.5);
             color: #fff;
+        }
+
+        /* Contenitore per il video tram.mp4 */
+        #tram-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #232b22;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease;
+        }
+
+        #tram-video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         #flash-overlay {
@@ -399,7 +423,7 @@
 </head>
 <body>
 
-    <!-- Canzone Principale (mu.mp3) in loop -->
+    <!-- Canzone Principale in loop (mu.mp3) -->
     <audio id="bg-music" preload="auto" loop>
         <source src="mu.mp3" type="audio/mp3">
     </audio>
@@ -407,7 +431,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Contenitore Video In in Loop con Pulsante APRI subito sotto -->
+    <!-- Contenitore Video In in Loop con Pulsante APRI -->
     <div id="intro-video-container">
         <div class="video-stage">
             <video id="intro-video" src="intro.mp4" autoplay loop muted playsinline></video>
@@ -415,6 +439,11 @@
         <div class="loop-action-wrapper">
             <button class="magic-btn-loop" onclick="startPromiseExperience()">APRI</button>
         </div>
+    </div>
+
+    <!-- Contenitore Video Tram (tram.mp4) che parte dopo APRI -->
+    <div id="tram-video-container">
+        <video id="tram-video" src="tram.mp4" playsinline></video>
     </div>
 
     <!-- Fuochi d'artificio -->
@@ -449,8 +478,8 @@
                 🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento[span_0](start_span)[span_0](end_span)<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
+                📍 <strong>Ristorante:</strong> Al Convento[span_2](start_span)[span_2](end_span)<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_3](start_span)[span_3](end_span)
             </div>
             
             <!-- PULSANTI AZIONE -->
@@ -512,6 +541,8 @@
         var music = document.getElementById('bg-music');
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
+        var tramVideo = document.getElementById('tram-video');
+        var tramContainer = document.getElementById('tram-video-container');
 
         // Avvia il video in loop e sblocca l'audio di mu.mp3 al primo tocco ovunque sullo schermo
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -533,7 +564,6 @@
             window.addEventListener('click', unlockAndPlayAudio);
             window.addEventListener('touchstart', unlockAndPlayAudio);
 
-            // Tenta l'avvio immediato nel caso il browser lo permetta
             music.volume = 1.0;
             music.play().catch(function(error) {
                 console.log("Audio in attesa del primo tocco dell'utente.");
@@ -541,23 +571,40 @@
         });
 
         function startPromiseExperience() {
-            // SPEGNIMENTO TOTALE: Ferma la musica e il video dell'intro all'istante quando si clicca APRI
+            // Ferma la musica e il video dell'intro
             music.pause();
             music.currentTime = 0;
             introVideo.pause();
 
+            // Nasconde l'intro e mostra il video tram.mp4
             introContainer.style.opacity = '0';
+            setTimeout(function() {
+                introContainer.style.display = 'none';
+                
+                tramContainer.style.visibility = 'visible';
+                tramContainer.style.opacity = '1';
+                
+                tramVideo.currentTime = 0;
+                tramVideo.play().catch(function(error) {
+                    console.log("Errore riproduzione tram:", error);
+                });
+            }, 1000);
+        }
+
+        // Quando il video tram.mp4 finisce, parte la sequenza dell'invito
+        tramVideo.onended = function() {
+            tramContainer.style.opacity = '0';
             var flashOverlay = document.getElementById('flash-overlay');
             flashOverlay.style.opacity = '1';
 
             setTimeout(function() {
-                introContainer.style.display = 'none';
+                tramContainer.style.display = 'none';
                 flashOverlay.style.opacity = '0';
 
                 runStorySequence();
 
             }, 1200);
-        }
+        };
 
         function runStorySequence() {
             document.getElementById('step-1').classList.add('visible');
@@ -578,26 +625,6 @@
                 document.getElementById('step-3').classList.add('visible');
                 document.getElementById('fireworks-container').style.display = 'block';
             }, 11000);
-        }
-
-        function triggerGrandFinale() {
-            var container = document.getElementById('fireworks-container');
-            container.style.display = 'block';
-
-            var invitationCard = document.getElementById('step-3');
-            invitationCard.classList.add('grand-finale-effect');
-
-            var quote = document.getElementById('finalQuoteText');
-            quote.classList.add('pulse-quote');
-
-            for(let i=0; i<10; i++) {
-                let fw = document.createElement('div');
-                fw.className = 'firework';
-                fw.style.top = Math.random() * 80 + '%';
-                fw.style.left = Math.random() * 80 + '%';
-                fw.style.animationDelay = (i * 0.15) + 's';
-                container.appendChild(fw);
-            }
         }
 
         const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
