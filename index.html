@@ -95,7 +95,7 @@
             transition: opacity 0.8s ease;
         }
 
-        /* Area superiore per il video e le foto sovrapposte */
+        /* Area superiore per il video e il riquadro delle foto nell'angolo esatto */
         .video-stage {
             position: relative;
             width: 100%;
@@ -125,36 +125,33 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- FOTO RIDOTTE E TRASPARENTI SUL VIDEO --- */
+        /* --- RIQUADRO FOTO POSIZIONATO ESATTAMENTE NELLO SPAZIO INDICATO --- */
         #intro-overlay-photos {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            top: 15%;  <!-- Posizionato in alto a destra sopra il video -->
+            right: 8%;
+            width: 130px;  <!-- Larghezza precisa del riquadro -->
+            height: 90px;  <!-- Altezza precisa del riquadro -->
             pointer-events: none;
             z-index: 10001;
         }
 
         .intro-photo-item {
             position: absolute;
-            width: 220px;
-            height: 150px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 8px;
-            border: 1.5px solid rgba(230, 197, 132, 0.7);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+            border-radius: 6px;
+            border: 1px solid rgba(230, 197, 132, 0.8);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.8);
             opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+            transition: opacity 1s ease-in-out;
         }
 
         .show-intro-photo {
-            opacity: 0.3; /* Trasparente per risaltare il video */
-            transform: scale(1);
+            opacity: 0.45; /* Trasparenza delicata nel riquadro */
         }
 
         /* Frasi posizionate SOTTO il video */
@@ -500,7 +497,7 @@
 
     <!-- Contenitore Video Intro a tutto schermo -->
     <div id="intro-video-container">
-        <!-- Area superiore con video e foto trasparenti al centro -->
+        <!-- Area superiore con video e riquadro foto nell'angolo esatto -->
         <div class="video-stage">
             <div id="intro-overlay-photos">
                 <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
@@ -684,7 +681,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // GESTIONE FOTO RIDOTTE E TRASPARENTI SUL VIDEO 8
+            // GESTIONE FOTO NEL RIQUADRO ESATTO
             let introPhotos = document.querySelectorAll('.intro-photo-item');
             let currentPhotoIndex = 0;
 
