@@ -470,17 +470,17 @@
 <body>
 
     <!-- Audio Intro (Suspense) -->
-    <audio id="intro-music">
+    <audio id="intro-music" preload="auto">
         <source src="intro-music.mp3" type="audio/mp3">
     </audio>
 
     <!-- Audio Battito Cardiaco Accelerato -->
-    <audio id="heartbeat-audio">
+    <audio id="heartbeat-audio" preload="auto">
         <source src="heartbeat.mp3" type="audio/mp3">
     </audio>
 
     <!-- Canzone Principale -->
-    <audio id="bg-music">
+    <audio id="bg-music" preload="auto">
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
@@ -624,17 +624,21 @@
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
-            // Avvia la musica dell'intro
+            // Sblocca e avvia subito gli audio al tocco del pulsante
+            introMusic.volume = 1.0;
             introMusic.play().catch(function(error) {
                 console.log("Errore audio intro:", error);
             });
+
+            heartbeatAudio.volume = 1.0;
+            heartbeatAudio.load();
 
             introVideo.play().catch(function(error) {
                 console.log("Errore video intro:", error);
                 onIntroEnded();
             });
 
-            // Gestione sequenza frasi coprendo tutto il video
+            // Sequenza frasi
             setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
             setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
 
@@ -650,11 +654,13 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Avvia il battito cardiaco verso la fine dell'intro (es. a 12 secondi dall'inizio)
+            // Attivazione forzata del battito cardiaco verso la fine (regola i secondi se il video è più corto/lungo)
             setTimeout(function() {
-                heartbeatAudio.playbackRate = 1.1; // Aumenta leggermente la velocità per dare pathos
-                heartbeatAudio.play().catch(function(error) {
-                    console.log("Errore battito cardiaco:", error);
+                heartbeatAudio.currentTime = 0;
+                heartbeatAudio.play().then(function() {
+                    console.log("Battito cardiaco avviato con successo");
+                }).catch(function(error) {
+                    console.log("Errore riproduzione battito:", error);
                 });
             }, 12000);
 
@@ -664,22 +670,15 @@
         }
 
         function onIntroEnded() {
-            // Effetto dissolvenza a flash lento (schermo luminoso che sfuma)
             flashOverlay.style.opacity = '1';
 
-            // Dissolvenza audio intro e battito
             let fadeOutAudio = setInterval(function() {
-                if (introMusic.volume > 0.1) {
-                    introMusic.volume -= 0.1;
-                }
-                if (heartbeatAudio.volume > 0.1) {
-                    heartbeatAudio.volume -= 0.1;
-                }
+                if (introMusic.volume > 0.1) introMusic.volume -= 0.1;
+                if (heartbeatAudio.volume > 0.1) heartbeatAudio.volume -= 0.1;
+                
                 if (introMusic.volume <= 0.1 && heartbeatAudio.volume <= 0.1) {
                     introMusic.pause();
                     heartbeatAudio.pause();
-                    introMusic.volume = 1.0;
-                    heartbeatAudio.volume = 1.0;
                     clearInterval(fadeOutAudio);
                 }
             }, 100);
@@ -687,14 +686,12 @@
             setTimeout(function() {
                 introContainer.style.display = 'none';
                 
-                // Avvia la canzone principale
                 music.play().then(function() {
                     console.log("Canzone principale avviata");
                 }).catch(function(error) { 
                     console.log("Errore riproduzione canzone principale:", error); 
                 });
 
-                // Rimuove il flash lentamente rivelando la schermata successiva
                 flashOverlay.style.opacity = '0';
                 runStorySequence();
             }, 1200);
@@ -776,7 +773,7 @@
             document.getElementById("seconds").innerText = seconds;
         }
 
-        setInterval(updateUpdateCountdown = updateCountdown, 1000);
+        setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
 
