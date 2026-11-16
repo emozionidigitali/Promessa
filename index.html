@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="URL-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promessa di Matrimonio - Giovanni & Eliana</title>
     <!-- Font eleganti in stile matrimonio -->
@@ -77,7 +77,7 @@
             transform: scale(1.05);
         }
 
-        /* Contenitore Video In a tutto schermo */
+        /* Contenitore Video In a tutto schermo con Pulsante Incorporato nel Loop */
         #intro-video-container {
             position: fixed;
             top: 0;
@@ -87,18 +87,19 @@
             background: #232b22;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             z-index: 9999;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.8s ease;
+            padding: 30px 20px;
         }
 
         .video-stage {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 62vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -114,14 +115,13 @@
         .intro-overlay-text {
             position: relative;
             width: 100%;
-            height: 30vh;
+            height: 18vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: #ffffff;
             padding: 0 20px;
-            background: #232b22;
         }
 
         .intro-phrase {
@@ -132,119 +132,43 @@
             transition: opacity 1.2s ease;
         }
 
-        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 34px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-2 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 36px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-4 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 32px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-2 { font-size: 18px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 34px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
 
         .show-phrase { opacity: 1 !important; }
 
-        /* Schermata Intermedia con Scintille a Schermo Intero */
-        #transition-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #232b22;
+        /* Pulsante APRI fisso sotto il video in loop */
+        .loop-action-wrapper {
+            height: 15vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10002;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 1s ease;
-            overflow: hidden;
+            z-index: 10010;
         }
 
-        #transition-screen.show-transition {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .magic-btn-wrapper {
-            position: relative;
-            display: inline-block;
-            padding: 30px 40px;
-            z-index: 10;
-        }
-
-        .magic-btn {
-            position: relative;
+        .magic-btn-loop {
             background: linear-gradient(135deg, #323d30 0%, #222b21 100%);
             color: #f7e2b3;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            padding: 18px 65px;
+            padding: 14px 50px;
             border: 2px solid #D4AF37;
             border-radius: 50px;
             cursor: pointer;
             outline: none;
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(212, 175, 55, 0.25);
             transition: all 0.4s ease;
-            z-index: 2;
         }
 
-        .magic-btn-wrapper::before,
-        .magic-btn-wrapper::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 75%;
-            height: 5px;
-            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
-            z-index: 3;
-            pointer-events: none;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
-        }
-
-        .magic-btn-wrapper::before {
-            top: 8px;
-        }
-
-        .magic-btn-wrapper::after {
-            bottom: 8px;
-        }
-
-        .magic-btn:hover {
+        .magic-btn-loop:hover {
             background: linear-gradient(135deg, #3d4c3a 0%, #293427 100%);
             transform: scale(1.04);
             box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5), inset 0 0 25px rgba(212, 175, 55, 0.5);
             color: #fff;
-        }
-
-        .full-screen-sparkle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, #FFF 0%, #D4AF37 70%, transparent 100%);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-            animation: fall-full-screen linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes fall-full-screen {
-            0% {
-                transform: translateY(-20px) scale(0.3);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.9;
-            }
-            80% {
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(105vh) scale(1.2);
-                opacity: 0;
-            }
         }
 
         #flash-overlay {
@@ -387,7 +311,6 @@
             color: #2F3B2E;
         }
 
-        /* Pulsante WhatsApp per il Regalo/IBAN in stile coordinato */
         .btn-whatsapp-gift {
             background-color: #25d366 !important;
             color: #ffffff !important;
@@ -557,32 +480,26 @@
 </head>
 <body>
 
-    <!-- Canzone Principale -->
-    <audio id="bg-music" preload="auto">
-        <source src="canzone.mp3.mp3" type="audio/mp3">
+    <!-- Canzone Principale (Aggiornata con il nome corretto del file audio di Ludovico Einaudi) -->
+    <audio id="bg-music" preload="auto" loop>
+        <source src="Ludovico Einaudi -...mp3" type="audio/mp3">
     </audio>
 
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Contenitore Video In a tutto schermo con frasi -->
+    <!-- Contenitore Video In in Loop con Frasi e Pulsante Apri -->
     <div id="intro-video-container">
         <div class="video-stage">
-            <video id="intro-video" src="video in.mp4" playsinline></video>
+            <video id="intro-video" src="intro.mp4" autoplay loop muted playsinline></video>
         </div>
         <div class="intro-overlay-text">
             <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
-            <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno una casa, un rifugio, una vita insieme</div>
-            <div id="intro-text-3" class="intro-phrase">Ogni singolo istante ci ha condotti fin qui</div>
-            <div id="intro-text-4" class="intro-phrase">Due cuori, un solo cammino che sta per svelarsi</div>
-            <div id="intro-text-5" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
+            <div id="intro-text-2" class="intro-phrase">Ogni singolo istante ci ha condotti fin qui</div>
+            <div id="intro-text-3" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
         </div>
-    </div>
-
-    <!-- Schermata Intermedia con Scintille a Schermo Intero e Pulsante Pulito -->
-    <div id="transition-screen">
-        <div class="magic-btn-wrapper">
-            <button class="magic-btn" onclick="startPromiseExperience()">APRI</button>
+        <div class="loop-action-wrapper">
+            <button class="magic-btn-loop" onclick="startPromiseExperience()">APRI</button>
         </div>
     </div>
 
@@ -627,15 +544,14 @@
                 🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento[span_0](start_span)[span_0](end_span)<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
+                📍 <strong>Ristorante:</strong> Al Convento<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
             </div>
             
-            <!-- PULSANTI AZIONE (Mappa, Calendario e WhatsApp Contributo) -->
+            <!-- PULSANTI AZIONE -->
             <div class="action-buttons">
                 <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-action">Apri Mappa 🗺️</a>
                 <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Promessa+di+Matrimonio+-+Giovanni+%26+Eliana&dates=20270126T193000Z/20270126T233000Z&details=Vi+aspettiamo+per+la+nostra+promessa+di+matrimonio!&location=Al+Convento,+Via+Cupa+Camaldoli+14,+80131+Napoli" target="_blank" class="btn-action">Salva in Calendario 📅</a>
-                <!-- Pulsante WhatsApp per IBAN e Messaggio -->
                 <a href="https://wa.me/393511481691?text=Ciao!%20Desidero%20avere%20le%20informazioni%20sull'IBAN%20per%20contribuire%20al%20vostro%20futuro!%20🎁" target="_blank" class="btn-action btn-whatsapp-gift">Contributo Futuro 💬</a>
             </div>
         </div>
@@ -691,49 +607,10 @@
         var music = document.getElementById('bg-music');
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
-        var transitionScreen = document.getElementById('transition-screen');
-        var flashOverlay = document.getElementById('flash-overlay');
 
         var text1 = document.getElementById('intro-text-1');
         var text2 = document.getElementById('intro-text-2');
         var text3 = document.getElementById('intro-text-3');
-        var text4 = document.getElementById('intro-text-4');
-        var text5 = document.getElementById('intro-text-5');
-
-        function initFullScreenSparkles() {
-            for (var i = 0; i < 35; i++) {
-                createScreenSparkle(true);
-            }
-        }
-
-        function createScreenSparkle(isInitial) {
-            if (!transitionScreen.classList.contains('show-transition')) return;
-            var sparkle = document.createElement('div');
-            sparkle.classList.add('full-screen-sparkle');
-            
-            var randomX = Math.random() * window.innerWidth;
-            sparkle.style.left = randomX + 'px';
-            
-            if (isInitial) {
-                sparkle.style.top = (Math.random() * window.innerHeight) + 'px';
-            } else {
-                sparkle.style.top = '-20px';
-            }
-            
-            var randomDuration = 1.5 + Math.random() * 2.0;
-            var randomDelay = Math.random() * 1.5;
-            sparkle.style.animationDuration = randomDuration + 's';
-            sparkle.style.animationDelay = randomDelay + 's';
-            
-            transitionScreen.appendChild(sparkle);
-            
-            setTimeout(function() {
-                sparkle.remove();
-                if (transitionScreen.classList.contains('show-transition')) {
-                    createScreenSparkle(false);
-                }
-            }, (randomDuration + randomDelay) * 1000);
-        }
 
         function startIntro() {
             var overlay = document.getElementById('start-overlay');
@@ -745,48 +622,52 @@
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
-            introVideo.volume = 1.0; 
+            // Fai partire la musica di Einaudi in loop fin dall'inizio dell'intro
+            music.volume = 1.0;
+            music.play().catch(function(error) {
+                console.log("Errore audio:", error);
+            });
+
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
                 console.log("Errore video in:", error);
             });
 
-            setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
-            setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
+            // Effetto frasi a rotazione ciclica durante il loop del video
+            function loopPhrases() {
+                if (introContainer.style.opacity === '0') return;
+                
+                text1.classList.add('show-phrase');
+                setTimeout(function() { text1.classList.remove('show-phrase'); }, 3500);
 
-            setTimeout(function() { text2.classList.add('show-phrase'); }, 4200);
-            setTimeout(function() { text2.classList.remove('show-phrase'); }, 7500);
-
-            setTimeout(function() { text3.classList.add('show-phrase'); }, 7900);
-            setTimeout(function() { text3.classList.remove('show-phrase'); }, 11000);
-
-            setTimeout(function() { text4.classList.add('show-phrase'); }, 11400);
-            setTimeout(function() { text4.classList.remove('show-phrase'); }, 14500);
-
-            setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
-            setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
-
-            introVideo.onended = function() {
-                introContainer.style.opacity = '0';
                 setTimeout(function() {
-                    introContainer.style.display = 'none';
-                    transitionScreen.classList.add('show-transition');
-                    initFullScreenSparkles();
-                }, 800);
-            };
+                    if (introContainer.style.opacity === '0') return;
+                    text2.classList.add('show-phrase');
+                }, 4000);
+                setTimeout(function() { text2.classList.remove('show-phrase'); }, 7500);
+
+                setTimeout(function() {
+                    if (introContainer.style.opacity === '0') return;
+                    text3.classList.add('show-phrase');
+                }, 8000);
+                setTimeout(function() { text3.classList.remove('show-phrase'); }, 11500);
+
+                setTimeout(loopPhrases, 12000);
+            }
+
+            loopPhrases();
         }
 
         function startPromiseExperience() {
-            transitionScreen.style.opacity = '0';
+            introContainer.style.opacity = '0';
+            var flashOverlay = document.getElementById('flash-overlay');
             flashOverlay.style.opacity = '1';
 
             setTimeout(function() {
-                transitionScreen.style.display = 'none';
+                introContainer.style.display = 'none';
                 flashOverlay.style.opacity = '0';
 
-                music.volume = 1.0;
-                music.play().catch(function(error) { console.log(error); });
-
+                // La musica di Einaudi continua a suonare senza interruzioni
                 runStorySequence();
 
             }, 1200);
@@ -866,7 +747,7 @@
             document.getElementById("seconds").innerText = seconds;
         }
 
-        setInterval(updateCommand = updateCountdown, 1000);
+        setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
 
