@@ -77,7 +77,7 @@
             transform: scale(1.05);
         }
 
-        /* Contenitore principale intro */
+        /* Contenitore Video Intro a tutto schermo */
         #intro-video-container {
             position: fixed;
             top: 0;
@@ -86,24 +86,12 @@
             height: 100vh;
             background: #232b22;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.8s ease;
-        }
-
-        /* Area video */
-        .video-stage {
-            position: relative;
-            width: 100%;
-            max-width: 650px;
-            height: 65vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         #intro-video {
@@ -126,63 +114,66 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- FOTO POSIZIONATE ESATTAMENTE DENTRO IL VIDEO IN ALTO A DESTRA --- */
+        /* --- FOTO SOVRAPPOSTE CENTRALI (RITAGLIATE E PROPORZIONATE AL VIDEO) --- */
         #intro-overlay-photos {
             position: absolute;
-            top: 12px;   /* Margine superiore dall'interno del video */
-            right: 15px;  /* Margine destro dall'interno del video */
-            width: 110px;  /* Piccole e discrete */
-            height: 75px;  
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             pointer-events: none;
             z-index: 10001;
         }
 
         .intro-photo-item {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid rgba(230, 197, 132, 0.8);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+            max-width: 650px;
+            height: 65vh;
+            object-fit: cover; /* Ritaglia e riempie perfettamente la dimensione del video */
+            border-radius: 12px;
+            border: 2px solid rgba(230, 197, 132, 0.8);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transform: scale(0.95);
+            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
         }
 
         .show-intro-photo {
-            opacity: 0.55; /* Trasparenza delicata sopra il video */
+            opacity: 0.85; /* Perfettamente visibili e d'impatto sopra il video */
+            transform: scale(1);
         }
 
-        /* Frasi posizionate SOTTO il video */
+        /* Scritte in sovraimpressione per il video 8 */
         .intro-overlay-text {
-            position: relative;
-            width: 100%;
-            height: 25vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: absolute;
+            z-index: 10002;
             text-align: center;
             color: #ffffff;
+            width: 90%;
+            max-width: 600px;
+            pointer-events: none;
             padding: 0 20px;
-            z-index: 10002;
-            background: #232b22;
         }
 
         .intro-phrase {
             position: absolute;
-            width: 90%;
-            max-width: 700px;
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin: auto;
             opacity: 0;
             transition: opacity 1.2s ease;
         }
 
-        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 34px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-2 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 36px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        #intro-text-4 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
-        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
+        #intro-text-2 { font-size: 21px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 12px rgba(0,0,0,0.9); letter-spacing: 1px; }
+        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 40px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
+        #intro-text-4 { font-size: 21px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 12px rgba(0,0,0,0.9); letter-spacing: 1px; }
+        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 42px; color: #f7e2b3; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
 
         .show-phrase { opacity: 1 !important; }
 
@@ -496,26 +487,23 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
+    <!-- Foto centrali sovrapposte al video intro (da 11 a 20) -->
+    <div id="intro-overlay-photos" style="display: none;">
+        <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
+        <img src="foto 12.jpg" class="intro-photo-item" alt="Foto 12">
+        <img src="foto 13.jpg" class="intro-photo-item" alt="Foto 13">
+        <img src="foto 14.jpg" class="intro-photo-item" alt="Foto 14">
+        <img src="foto 15.jpg" class="intro-photo-item" alt="Foto 15">
+        <img src="foto 16.jpg" class="intro-photo-item" alt="Foto 16">
+        <img src="foto 17.jpg" class="intro-photo-item" alt="Foto 17">
+        <img src="foto 18.jpg" class="intro-photo-item" alt="Foto 18">
+        <img src="foto 19.jpg" class="intro-photo-item" alt="Foto 19">
+        <img src="foto 20.jpg" class="intro-photo-item" alt="Foto 20">
+    </div>
+
     <!-- Contenitore Video Intro a tutto schermo -->
     <div id="intro-video-container">
-        <!-- Area video con il riquadro foto posizionato esattamente all'interno del riquadro del video -->
-        <div class="video-stage">
-            <video id="intro-video" src="video 8.mp4" playsinline></video>
-            <div id="intro-overlay-photos">
-                <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
-                <img src="foto 12.jpg" class="intro-photo-item" alt="Foto 12">
-                <img src="foto 13.jpg" class="intro-photo-item" alt="Foto 13">
-                <img src="foto 14.jpg" class="intro-photo-item" alt="Foto 14">
-                <img src="foto 15.jpg" class="intro-photo-item" alt="Foto 15">
-                <img src="foto 16.jpg" class="intro-photo-item" alt="Foto 16">
-                <img src="foto 17.jpg" class="intro-photo-item" alt="Foto 17">
-                <img src="foto 18.jpg" class="intro-photo-item" alt="Foto 18">
-                <img src="foto 19.jpg" class="intro-photo-item" alt="Foto 19">
-                <img src="foto 20.jpg" class="intro-photo-item" alt="Foto 20">
-            </div>
-        </div>
-
-        <!-- Area inferiore per le frasi (Sotto il video) -->
+        <video id="intro-video" src="video 8.mp4" playsinline></video>
         <div class="intro-overlay-text">
             <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
             <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno una casa, un rifugio, una vita insieme</div>
@@ -666,7 +654,7 @@
                 onIntroEnded();
             });
 
-            // Sequenza frasi sotto il video
+            // Sequenza frasi sul video 8
             setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
             setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
 
@@ -682,26 +670,37 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // GESTIONE FOTO NEL RIQUADRO ESATTO DENTRO IL VIDEO
-            let introPhotos = document.querySelectorAll('.intro-photo-item');
-            let currentPhotoIndex = 0;
+            // FOTO CENTRALI: PARTONO CON 1 SECONDO DI RITARDO RISPETTO AL VIDEO
+            setTimeout(function() {
+                introPhotosContainer.style.display = 'flex';
+                let introPhotos = document.querySelectorAll('.intro-photo-item');
+                let currentPhotoIndex = 0;
 
-            let photoInterval = setInterval(function() {
-                if (currentPhotoIndex < introPhotos.length) {
-                    introPhotos[currentPhotoIndex].classList.add('show-intro-photo');
-                    
-                    let prevIndex = currentPhotoIndex - 1;
-                    if (prevIndex >= 0) {
-                        introPhotos[prevIndex].classList.remove('show-intro-photo');
+                let photoInterval = setInterval(function() {
+                    if (currentPhotoIndex < introPhotos.length) {
+                        introPhotos[currentPhotoIndex].classList.add('show-intro-photo');
+                        
+                        let prevIndex = currentPhotoIndex - 1;
+                        if (prevIndex >= 0) {
+                            introPhotos[prevIndex].classList.remove('show-intro-photo');
+                        }
+                        currentPhotoIndex++;
+                    } else {
+                        if (introPhotos.length > 0) {
+                            introPhotos[introPhotos.length - 1].classList.remove('show-intro-photo');
+                        }
+                        clearInterval(photoInterval);
+                        introPhotosContainer.style.display = 'none';
                     }
-                    currentPhotoIndex++;
-                } else {
-                    if (introPhotos.length > 0) {
-                        introPhotos[introPhotos.length - 1].classList.remove('show-intro-photo');
-                    }
+                }, 1700); // Durata di visualizzazione per ciascuna foto
+
+                // Salva il riferimento per pulire l'intervallo se il video finisce prima
+                introVideo.onended = function() {
                     clearInterval(photoInterval);
-                }
-            }, 1700);
+                    introPhotosContainer.style.display = 'none';
+                    stopHeartbeatAndProceed();
+                };
+            }, 1000); // <-- Ritardo di 1 secondo esatto prima che partano le foto
 
             // BATTITO: Fade-in graduale verso la fine del video 8
             setTimeout(function() {
@@ -719,8 +718,6 @@
             }, 11000);
 
             introVideo.onended = function() {
-                clearInterval(photoInterval);
-                introPhotosContainer.style.display = 'none';
                 stopHeartbeatAndProceed();
             };
         }
