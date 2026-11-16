@@ -630,6 +630,7 @@
                 console.log("Errore audio intro:", error);
             });
 
+            // Precaricamento forzato del battito
             heartbeatAudio.volume = 1.0;
             heartbeatAudio.load();
 
@@ -654,7 +655,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Attivazione forzata del battito cardiaco verso la fine dell'intro
+            // Attivazione forzata del battito cardiaco verso la fine dell'intro (impostato a 11 secondi)
             setTimeout(function() {
                 heartbeatAudio.currentTime = 0;
                 heartbeatAudio.play().then(function() {
@@ -662,7 +663,7 @@
                 }).catch(function(error) {
                     console.log("Errore riproduzione battito:", error);
                 });
-            }, 12000);
+            }, 11000);
 
             introVideo.onended = function() {
                 onIntroEnded();
