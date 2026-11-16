@@ -624,15 +624,13 @@
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
-            // Sblocca e avvia subito gli audio al tocco del pulsante
+            // Sblocca subito gli audio sbloccandoli con una riproduzione lampo invisibile al tocco
             introMusic.volume = 1.0;
-            introMusic.play().catch(function(error) {
-                console.log("Errore audio intro:", error);
-            });
+            introMusic.play().catch(function(e) { console.log(e); });
 
-            // Precaricamento forzato del battito
             heartbeatAudio.volume = 1.0;
             heartbeatAudio.load();
+            heartbeatAudio.play().then(() => { heartbeatAudio.pause(); heartbeatAudio.currentTime = 0; }).catch(e => console.log(e));
 
             introVideo.play().catch(function(error) {
                 console.log("Errore video intro:", error);
@@ -655,7 +653,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Attivazione forzata del battito cardiaco verso la fine dell'intro (impostato a 11 secondi)
+            // Attivazione forzata del battito cardiaco verso la fine dell'intro (a 11 secondi)
             setTimeout(function() {
                 heartbeatAudio.currentTime = 0;
                 heartbeatAudio.play().then(function() {
