@@ -77,14 +77,14 @@
             transform: scale(1.05);
         }
 
-        /* Contenitore Video Intro a schermo intero */
+        /* Contenitore Video Intro corretto per adattarsi senza uscire dallo schermo */
         #intro-video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #000;
+            background: #232b22; /* Sfondo scuro elegante che riempie gli spazi vuoti se il video ha un formato diverso */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -97,26 +97,36 @@
         #intro-video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Garantisce che il video rientri perfettamente nello schermo senza tagli o sbavature */
         }
 
-        /* Scritte in sovraimpressione sopra il video intro */
+        /* Scritte in sovraimpressione sopra il video intro (più frasi e curate) */
         .intro-overlay-text {
             position: absolute;
             z-index: 10000;
             text-align: center;
             color: #ffffff;
             width: 90%;
+            max-width: 600px;
             pointer-events: none;
+            padding: 0 20px;
+        }
+
+        .intro-phrase {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            opacity: 0;
+            transition: opacity 1.2s ease;
         }
 
         #intro-text-1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 44px;
+            font-size: 40px;
             color: #f7e2b3;
             text-shadow: 0 2px 15px rgba(0,0,0,0.9);
-            opacity: 0;
-            transition: opacity 1.5s ease;
         }
 
         #intro-text-2 {
@@ -124,12 +134,17 @@
             color: #fdfbf7;
             font-style: italic;
             text-shadow: 0 2px 12px rgba(0,0,0,0.9);
-            margin-top: 10px;
-            opacity: 0;
-            transition: opacity 1.5s ease;
+            letter-spacing: 1px;
         }
 
-        .show-intro-text {
+        #intro-text-3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 42px;
+            color: #f7e2b3;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+        }
+
+        .show-phrase {
             opacity: 1 !important;
         }
 
@@ -430,12 +445,13 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Contenitore Video Intro con Scritte -->
+    <!-- Contenitore Video Intro con più frasi in successione -->
     <div id="intro-video-container">
         <video id="intro-video" src="video 8.mp4" playsinline></video>
         <div class="intro-overlay-text">
-            <div id="intro-text-1">La nostra promessa...</div>
-            <div id="intro-text-2">Un nuovo capitolo della nostra vita insieme</div>
+            <div id="intro-text-1" class="intro-phrase">Il nostro futuro comincia qui...</div>
+            <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno la nostra casa, la nostra vita insieme</div>
+            <div id="intro-text-3" class="intro-phrase">State per scoprire la nostra promessa</div>
         </div>
     </div>
 
@@ -546,16 +562,15 @@
         var introContainer = document.getElementById('intro-video-container');
         var text1 = document.getElementById('intro-text-1');
         var text2 = document.getElementById('intro-text-2');
+        var text3 = document.getElementById('intro-text-3');
 
         function startExperience() {
-            // Nasconde la schermata iniziale
             var overlay = document.getElementById('start-overlay');
             overlay.style.opacity = '0';
             setTimeout(function() {
                 overlay.style.display = 'none';
             }, 1000);
 
-            // Mostra e fa partire il video intro con le scritte
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
@@ -566,36 +581,48 @@
                 onIntroEnded();
             });
 
-            // Gestione comparsa scritte in sovraimpressione durante il video 8
+            // Gestione sequenza frasi in sovraimpressione durante il video 8
             setTimeout(function() {
-                text1.classList.add('show-intro-text');
-            }, 800);
+                text1.classList.add('show-phrase');
+            }, 1000);
 
             setTimeout(function() {
-                text2.classList.add('show-intro-text');
-            }, 2500);
+                text1.classList.remove('show-phrase');
+            }, 3800);
 
-            // Quando il video 8 finisce, dissolvenza, parte la musica e i messaggi
+            setTimeout(function() {
+                text2.classList.add('show-phrase');
+            }, 4300);
+
+            setTimeout(function() {
+                text2.classList.remove('show-phrase');
+            }, 7800);
+
+            setTimeout(function() {
+                text3.classList.add('show-phrase');
+            }, 8300);
+
+            setTimeout(function() {
+                text3.classList.remove('show-phrase');
+            }, 11500);
+
             introVideo.onended = function() {
                 onIntroEnded();
             };
         }
 
         function onIntroEnded() {
-            // Dissolvenza in uscita del video intro
             introContainer.style.opacity = '0';
             setTimeout(function() {
                 introContainer.style.display = 'none';
             }, 1500);
 
-            // Avvia la canzone di sottofondo
             music.play().then(function() {
                 console.log("Audio di sottofondo avviato");
             }).catch(function(error) { 
                 console.log("Errore riproduzione audio:", error); 
             });
 
-            // Avvia la sequenza dei messaggi testuali
             runStorySequence();
         }
 
