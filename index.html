@@ -114,80 +114,42 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- PRESENTAZIONE FOTO A SCHERMO INTERO CON EFFETTI OTTICI CINEMATOGRAFICI --- */
-        #photo-slideshow-container {
-            position: fixed;
+        /* --- FOTO IN SOVRAIMPRESSIONE SUL VIDEO INTRO --- */
+        #intro-overlay-photos {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #1a2219;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10002;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.6s ease;
+            pointer-events: none;
+            z-index: 10001;
         }
 
-        .slide-item {
+        .intro-photo-item {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.95);
-            transition: opacity 1.4s ease-in-out, transform 1.4s ease-in-out;
-            padding: 20px;
-        }
-
-        .slide-item.active-slide {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
-
-        .slide-item img {
-            width: 100%;
-            max-width: 650px;
-            height: 65vh;
+            width: 260px;
+            height: 340px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 10px;
             border: 2px solid #e6c584;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            animation: photoCinematicZoom 6s infinite alternate ease-in-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
         }
 
-        @keyframes photoCinematicZoom {
-            0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
-            100% { transform: scale(1.05) rotate(0.5deg); filter: brightness(1.05); }
-        }
-
-        .slide-caption {
-            font-family: 'Great Vibes', cursive;
-            font-size: 36px;
-            color: #f7e2b3;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.9);
-            margin-top: 20px;
-            text-align: center;
-            max-width: 90%;
-            animation: captionFadeIn 1.5s ease-in-out;
-        }
-
-        @keyframes captionFadeIn {
-            0% { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .show-intro-photo {
+            opacity: 0.85; /* Leggermente trasparente in sovraimpressione */
+            transform: scale(1);
         }
 
         /* Scritte in sovraimpressione per il video 8 */
         .intro-overlay-text {
             position: absolute;
-            z-index: 10000;
+            z-index: 10002;
             text-align: center;
             color: #ffffff;
             width: 90%;
@@ -524,48 +486,18 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Presentazione Foto a Schermo Intero con Effetti Ottici (da 11 a 20) -->
-    <div id="photo-slideshow-container">
-        <div class="slide-item active-slide">
-            <img src="foto 11.jpg" alt="Ricordo 11">
-            <div class="slide-caption">I nostri primi sogni insieme...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 12.jpg" alt="Ricordo 12">
-            <div class="slide-caption">Ogni attimo custodito nell'anima...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 13.jpg" alt="Ricordo 13">
-            <div class="slide-caption">Sorrisi rubati e promesse sussurrate...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 14.jpg" alt="Ricordo 14">
-            <div class="slide-caption">Sguardi che parlano di futuro...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 15.jpg" alt="Ricordo 15">
-            <div class="slide-caption">Mano nella mano, ovunque...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 16.jpg" alt="Ricordo 16">
-            <div class="slide-caption">Un cammino costruito giorno dopo giorno...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 17.jpg" alt="Ricordo 17">
-            <div class="slide-caption">La complicità che ci lega indissolubilmente...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 18.jpg" alt="Ricordo 18">
-            <div class="slide-caption">Il nostro nido, il nostro rifugio d'amore...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 19.jpg" alt="Ricordo 19">
-            <div class="slide-caption">Tutto ci ha condotti a questo momento straordinario...</div>
-        </div>
-        <div class="slide-item">
-            <img src="foto 20.jpg" alt="Ricordo 20">
-            <div class="slide-caption">Tutto è pronto per la nostra Promessa...</div>
-        </div>
+    <!-- Foto in sovraimpressione durante il Video Intro (da 11 a 20) -->
+    <div id="intro-overlay-photos">
+        <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
+        <img src="foto 12.jpg" class="intro-photo-item" alt="Foto 12">
+        <img src="foto 13.jpg" class="intro-photo-item" alt="Foto 13">
+        <img src="foto 14.jpg" class="intro-photo-item" alt="Foto 14">
+        <img src="foto 15.jpg" class="intro-photo-item" alt="Foto 15">
+        <img src="foto 16.jpg" class="intro-photo-item" alt="Foto 16">
+        <img src="foto 17.jpg" class="intro-photo-item" alt="Foto 17">
+        <img src="foto 18.jpg" class="intro-photo-item" alt="Foto 18">
+        <img src="foto 19.jpg" class="intro-photo-item" alt="Foto 19">
+        <img src="foto 20.jpg" class="intro-photo-item" alt="Foto 20">
     </div>
 
     <!-- Contenitore Video Intro -->
@@ -688,7 +620,7 @@
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
         var flashOverlay = document.getElementById('flash-overlay');
-        var slideshowContainer = document.getElementById('photo-slideshow-container');
+        var introPhotosContainer = document.getElementById('intro-overlay-photos');
         
         var text1 = document.getElementById('intro-text-1');
         var text2 = document.getElementById('intro-text-2');
@@ -737,6 +669,30 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
+            // GESTIONE FOTO IN SOVRAIMPRESSIONE SUL VIDEO INTRO
+            let introPhotos = document.querySelectorAll('.intro-photo-item');
+            let currentPhotoIndex = 0;
+
+            let photoInterval = setInterval(function() {
+                if (currentPhotoIndex < introPhotos.length) {
+                    // Mostra la foto corrente
+                    introPhotos[currentPhotoIndex].classList.add('show-intro-photo');
+                    
+                    // Nascondi la foto precedente dopo un po'
+                    let prevIndex = currentPhotoIndex - 1;
+                    if (prevIndex >= 0) {
+                        introPhotos[prevIndex].classList.remove('show-intro-photo');
+                    }
+                    currentPhotoIndex++;
+                } else {
+                    // Nascondi l'ultima foto prima della fine
+                    if (introPhotos.length > 0) {
+                        introPhotos[introPhotos.length - 1].classList.remove('show-intro-photo');
+                    }
+                    clearInterval(photoInterval);
+                }
+            }, 1800); // Ogni 1.8 secondi appare una foto in trasparenza mentre scorre il video 8
+
             // BATTITO: Fade-in graduale verso la fine del video 8
             setTimeout(function() {
                 heartbeatAudio.currentTime = 0;
@@ -753,6 +709,8 @@
             }, 11000);
 
             introVideo.onended = function() {
+                clearInterval(photoInterval);
+                introPhotosContainer.style.display = 'none';
                 stopHeartbeatAndProceed();
             };
         }
@@ -783,39 +741,17 @@
                 introContainer.style.display = 'none';
                 flashOverlay.style.opacity = '0'; // Rimuove il flash
 
-                // Mostra la sequenza delle foto a schermo intero con effetti ottici
-                slideshowContainer.style.visibility = 'visible';
-                slideshowContainer.style.opacity = '1';
+                // Avvia subito la musica principale a pieno volume (1.0) e fai partire la promessa senza attese
+                music.volume = 1.0;
+                music.play().catch(function(error) { console.log(error); });
 
-                let slides = document.querySelectorAll('.slide-item');
-                let currentSlide = 0;
-
-                let slideInterval = setInterval(function() {
-                    slides[currentSlide].classList.remove('active-slide');
-                    currentSlide++;
-                    
-                    if (currentSlide < slides.length) {
-                        slides[currentSlide].classList.add('active-slide');
-                    } else {
-                        // Fine delle foto: chiude istantaneamente la galleria e fa partire la musica e la promessa
-                        clearInterval(slideInterval);
-                        
-                        slideshowContainer.style.opacity = '0';
-                        slideshowContainer.style.display = 'none';
-                        
-                        // Avvia la musica principale subito a pieno volume (1.0) senza ritardi
-                        music.volume = 1.0;
-                        music.play().catch(function(error) { console.log(error); });
-
-                        runStorySequence();
-                    }
-                }, 3500); // Tempo per ciascuna foto
+                runStorySequence();
 
             }, 1200);
         }
 
         function runStorySequence() {
-            // Parte istantaneamente senza attese
+            // Parte istantaneamente senza attese dopo l'intro
             document.getElementById('step-1').classList.add('visible');
 
             setTimeout(function() {
