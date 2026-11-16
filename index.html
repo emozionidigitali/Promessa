@@ -477,3 +477,427 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 5;
+            display: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 #f7e2b3;
+            animation: explode 1.2s infinite ease-out;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 #f7e2b3, 0 0 0 0 #e6c584; }
+            100% { transform: scale(45); opacity: 0; box-shadow: -45px -45px 0 2px #f7e2b3, 45px -45px 0 2px #e6c584, -45px 45px 0 2px #ffdf79, 45px 45px 0 2px #fff; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Intro (Suspense) -->
+    <audio id="intro-music" preload="auto">
+        <source src="intro-music.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Audio Battito Cardiaco -->
+    <audio id="heartbeat-audio" preload="auto">
+        <source src="battito.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Canzone Principale -->
+    <audio id="bg-music" preload="auto">
+        <source src="canzone.mp3.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Schermata Flash Lento -->
+    <div id="flash-overlay"></div>
+
+    <!-- Presentazione Foto a Schermo Intero con Frasi Emozionanti (da 11 a 20) -->
+    <div id="photo-slideshow-container">
+        <div class="slide-item active-slide">
+            <img src="foto 11.jpg" alt="Ricordo 11">
+            <div class="slide-caption">I nostri primi sogni insieme...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 12.jpg" alt="Ricordo 12">
+            <div class="slide-caption">Ogni attimo custodito nell'anima...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 13.jpg" alt="Ricordo 13">
+            <div class="slide-caption">Sorrisi rubati e promesse sussurrate...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 14.jpg" alt="Ricordo 14">
+            <div class="slide-caption">Sguardi che parlano di futuro...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 15.jpg" alt="Ricordo 15">
+            <div class="slide-caption">Mano nella mano, ovunque...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 16.jpg" alt="Ricordo 16">
+            <div class="slide-caption">Un cammino costruito giorno dopo giorno...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 17.jpg" alt="Ricordo 17">
+            <div class="slide-caption">La complicità che ci lega indissolubilmente...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 18.jpg" alt="Ricordo 18">
+            <div class="slide-caption">Il nostro nido, il nostro rifugio d'amore...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 19.jpg" alt="Ricordo 19">
+            <div class="slide-caption">Tutto ci ha condotti a questo momento straordinario...</div>
+        </div>
+        <div class="slide-item">
+            <img src="foto 20.jpg" alt="Ricordo 20">
+            <div class="slide-caption">Tutto è pronto per la nostra Promessa...</div>
+        </div>
+    </div>
+
+    <!-- Contenitore Video Intro -->
+    <div id="intro-video-container">
+        <video id="intro-video" src="video 8.mp4" playsinline></video>
+        <div class="intro-overlay-text">
+            <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
+            <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno una casa, un rifugio, una vita insieme</div>
+            <div id="intro-text-3" class="intro-phrase">Ogni singolo istante ci ha condotti fin qui</div>
+            <div id="intro-text-4" class="intro-phrase">Due cuori, un solo cammino che sta per svelarsi</div>
+            <div id="intro-text-5" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
+        </div>
+    </div>
+
+    <!-- Fuochi d'artificio -->
+    <div id="fireworks-container">
+        <div class="firework" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
+        <div class="firework" style="top: 30%; left: 80%; animation-delay: 0.4s;"></div>
+        <div class="firework" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
+        <div class="firework" style="top: 60%; left: 75%; animation-delay: 1.2s;"></div>
+        <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
+    </div>
+
+    <!-- Schermata iniziale -->
+    <div id="start-overlay">
+        <div class="start-box">
+            <h2>Giovanni & Eliana</h2>
+            <p>Tocca per vivere l'emozione della nostra promessa</p>
+            <button class="btn-start" onclick="startExperience()">INIZIA</button>
+        </div>
+    </div>
+
+    <!-- Messaggio 1 -->
+    <div class="story-step" id="step-1">
+        Ci sono momenti che cambiano la vita per sempre...
+    </div>
+
+    <!-- Messaggio 2 -->
+    <div class="story-step" id="step-2">
+        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
+    </div>
+
+    <!-- Messaggio 3: Invito Ufficiale -->
+    <div class="story-step" id="step-3">
+        <div class="tag">La Nostra Promessa</div>
+        <h1>Giovanni & Eliana</h1>
+        <div class="names">&mdash; 26 Gennaio 2027 &mdash;</div>
+        
+        <div class="divider"></div>
+
+        <div class="details">
+            <div class="detail-row">
+                🕒 <strong>Orario:</strong> ore 20:30
+            </div>
+            <div class="detail-row">
+                📍 <strong>Ristorante:</strong> Al Convento<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+            </div>
+            
+            <!-- Pulsanti Mappa e Calendario -->
+            <div class="action-buttons">
+                <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-action">Apri Mappa 🗺️</a>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Promessa+di+Matrimonio+-+Giovanni+%26+Eliana&dates=20270126T193000Z/20270126T233000Z&details=Vi+aspettiamo+per+la+nostra+promessa+di+matrimonio!&location=Al+Convento,+Via+Cupa+Camaldoli+14,+80131+Napoli" target="_blank" class="btn-action">Salva in Calendario 📅</a>
+            </div>
+        </div>
+
+        <!-- Conto alla rovescia -->
+        <div class="countdown-title">Mancano al grande giorno:</div>
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <span class="countdown-number" id="months">0</span>
+                <span class="countdown-label">Mesi</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="days">0</span>
+                <span class="countdown-label">Giorni</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="hours">0</span>
+                <span class="countdown-label">Ore</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="minutes">0</span>
+                <span class="countdown-label">Min</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="seconds">0</span>
+                <span class="countdown-label">Sec</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Video 3 all'interno della card -->
+        <div class="video-container">
+            <video src="video 3.mp4" autoplay muted loop playsinline></video>
+        </div>
+
+        <!-- Sezione RSVP -->
+        <div class="rsvp-section">
+            <div class="rsvp-title">Conferma la tua presenza</div>
+            <div class="rsvp-buttons">
+                <a href="https://wa.me/393511481691?text=Ciao!%20Confermo%20con%20gioia%20la%20mia%20presenza%20alla%20vostra%20promessa!%20❤️" target="_blank" class="btn-rsvp btn-yes">Sì, ci sarò! ✨</a>
+                <a href="https://wa.me/393511481691?text=Ciao,%20purtroppo%20non%20potrò%20essere%20presente%20alla%20vostra%20promessa,%20vi%20auguro%20il%20meglio!%20🤍" target="_blank" class="btn-rsvp btn-no">Purtroppo no</a>
+            </div>
+        </div>
+
+        <!-- Frase Emozionante Finale -->
+        <div class="final-quote" id="finalQuoteText">"Il nostro per sempre comincia con voi..."</div>
+
+        <div class="footer-note">
+            La vostra presenza è il regalo più bello.
+        </div>
+    </div>
+
+    <script>
+        var introMusic = document.getElementById('intro-music');
+        var heartbeatAudio = document.getElementById('heartbeat-audio');
+        var music = document.getElementById('bg-music');
+        var introVideo = document.getElementById('intro-video');
+        var introContainer = document.getElementById('intro-video-container');
+        var flashOverlay = document.getElementById('flash-overlay');
+        var slideshowContainer = document.getElementById('photo-slideshow-container');
+        
+        var text1 = document.getElementById('intro-text-1');
+        var text2 = document.getElementById('intro-text-2');
+        var text3 = document.getElementById('intro-text-3');
+        var text4 = document.getElementById('intro-text-4');
+        var text5 = document.getElementById('intro-text-5');
+
+        function startExperience() {
+            var overlay = document.getElementById('start-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 1000);
+
+            // Rende visibile e avvia subito il video intro pulito
+            introContainer.style.visibility = 'visible';
+            introContainer.style.opacity = '1';
+            
+            introMusic.volume = 1.0;
+            introMusic.play().catch(function(e) { console.log(e); });
+
+            // Sblocca il battito
+            heartbeatAudio.volume = 0.05;
+            heartbeatAudio.load();
+            heartbeatAudio.play().then(() => { heartbeatAudio.pause(); heartbeatAudio.currentTime = 0; }).catch(e => console.log(e));
+
+            introVideo.currentTime = 0;
+            introVideo.play().catch(function(error) {
+                console.log("Errore video intro:", error);
+                onIntroEnded();
+            });
+
+            // Sequenza frasi sul video 8
+            setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
+            setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
+
+            setTimeout(function() { text2.classList.add('show-phrase'); }, 4200);
+            setTimeout(function() { text2.classList.remove('show-phrase'); }, 7500);
+
+            setTimeout(function() { text3.classList.add('show-phrase'); }, 7900);
+            setTimeout(function() { text3.classList.remove('show-phrase'); }, 11000);
+
+            setTimeout(function() { text4.classList.add('show-phrase'); }, 11400);
+            setTimeout(function() { text4.classList.remove('show-phrase'); }, 14500);
+
+            setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
+            setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
+
+            // BATTITO: Fade-in graduale verso la fine del video 8
+            setTimeout(function() {
+                heartbeatAudio.currentTime = 0;
+                heartbeatAudio.volume = 0.1;
+                heartbeatAudio.play().catch(function(error) { console.log(error); });
+
+                let heartbeatFadeIn = setInterval(function() {
+                    if (heartbeatAudio.volume < 0.9) {
+                        heartbeatAudio.volume += 0.1;
+                    } else {
+                        clearInterval(heartbeatFadeIn);
+                    }
+                }, 200);
+            }, 11000);
+
+            introVideo.onended = function() {
+                stopHeartbeatAndProceed();
+            };
+        }
+
+        function stopHeartbeatAndProceed() {
+            // Interrompe INSTANTANEAMENTE il battito cardiaco nello stesso identico momento in cui finisce il video 8
+            heartbeatAudio.pause();
+            heartbeatAudio.currentTime = 0;
+            heartbeatAudio.volume = 0;
+
+            onIntroEnded();
+        }
+
+        function onIntroEnded() {
+            // Flash bianco/oro
+            flashOverlay.style.opacity = '1';
+
+            let fadeOutAudio = setInterval(function() {
+                if (introMusic.volume > 0.1) introMusic.volume -= 0.1;
+                
+                if (introMusic.volume <= 0.1) {
+                    introMusic.pause();
+                    clearInterval(fadeOutAudio);
+                }
+            }, 100);
+
+            setTimeout(function() {
+                introContainer.style.display = 'none';
+                flashOverlay.style.opacity = '0'; // Rimuove il flash
+
+                // Mostra la sequenza delle foto a schermo intero
+                slideshowContainer.style.visibility = 'visible';
+                slideshowContainer.style.opacity = '1';
+
+                let slides = document.querySelectorAll('.slide-item');
+                let currentSlide = 0;
+
+                let slideInterval = setInterval(function() {
+                    slides[currentSlide].classList.remove('active-slide');
+                    currentSlide++;
+                    
+                    if (currentSlide < slides.length) {
+                        slides[currentSlide].classList.add('active-slide');
+                    } else {
+                        // Fine delle foto: chiude la galleria, fa partire la musica principale in fade-in e mostra la promessa
+                        clearInterval(slideInterval);
+                        
+                        setTimeout(function() {
+                            slideshowContainer.style.opacity = '0';
+                            setTimeout(function() {
+                                slideshowContainer.style.display = 'none';
+                                
+                                // Avvia la musica principale con Fade-In graduale
+                                music.volume = 0.1;
+                                music.play().then(function() {
+                                    let fadeInInterval = setInterval(function() {
+                                        if (music.volume < 0.95) {
+                                            music.volume += 0.05;
+                                        } else {
+                                            music.volume = 1.0;
+                                            clearInterval(fadeInInterval);
+                                        }
+                                    }, 200);
+                                }).catch(function(error) { console.log(error); });
+
+                                runStorySequence();
+                            }, 1000);
+                        }, 800);
+                    }
+                }, 3200); // 3.2 secondi per ogni foto con la sua frase
+
+            }, 1200);
+        }
+
+        function runStorySequence() {
+            setTimeout(function() {
+                document.getElementById('step-1').classList.add('visible');
+            }, 1000);
+
+            setTimeout(function() {
+                document.getElementById('step-1').classList.remove('visible');
+            }, 5000);
+
+            setTimeout(function() {
+                document.getElementById('step-2').classList.add('visible');
+            }, 6500);
+
+            setTimeout(function() {
+                document.getElementById('step-2').classList.remove('visible');
+            }, 11000);
+
+            setTimeout(function() {
+                document.getElementById('step-3').classList.add('visible');
+                document.getElementById('fireworks-container').style.display = 'block';
+            }, 12500);
+
+            music.onended = function() {
+                triggerGrandFinale();
+            };
+        }
+
+        function triggerGrandFinale() {
+            var container = document.getElementById('fireworks-container');
+            container.style.display = 'block';
+
+            var invitationCard = document.getElementById('step-3');
+            invitationCard.classList.add('grand-finale-effect');
+
+            var quote = document.getElementById('finalQuoteText');
+            quote.classList.add('pulse-quote');
+
+            for(let i=0; i<10; i++) {
+                let fw = document.createElement('div');
+                fw.className = 'firework';
+                fw.style.top = Math.random() * 80 + '%';
+                fw.style.left = Math.random() * 80 + '%';
+                fw.style.animationDelay = (i * 0.15) + 's';
+                container.appendChild(fw);
+            }
+        }
+
+        const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("months").innerText = "0";
+                document.getElementById("days").innerText = "0";
+                document.getElementById("hours").innerText = "0";
+                document.getElementById("minutes").innerText = "0";
+                document.getElementById("seconds").innerText = "0";
+                return;
+            }
+
+            const daysTotal = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const months = Math.floor(daysTotal / 30);
+            const days = daysTotal % 30;
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("months").innerText = months;
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+</body>
+</html>
