@@ -24,7 +24,7 @@
             align-items: center;
         }
 
-        /* Contenitore Video In in Loop con Pulsante in alto sotto il video */
+        /* Contenitore Video In in Loop con Pulsante sotto il video */
         #intro-video-container {
             position: fixed;
             top: 0;
@@ -38,28 +38,31 @@
             align-items: center;
             z-index: 9999;
             padding: 20px;
-            gap: 20px;
+            gap: 15px;
             transition: opacity 1s ease;
         }
 
         .video-stage {
             position: relative;
             width: 100%;
-            max-width: 500px;
-            height: 65vh;
+            max-width: 450px;
+            height: 68vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(230, 197, 132, 0.3);
         }
 
         #intro-video {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
+            object-fit: cover;
         }
 
-        /* Pulsante APRI posizionato sotto il video */
+        /* Pulsante APRI posizionato subito sotto il video */
         .loop-action-wrapper {
             display: flex;
             justify-content: center;
@@ -71,11 +74,11 @@
             background: linear-gradient(135deg, #323d30 0%, #222b21 100%);
             color: #f7e2b3;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: 6px;
             text-transform: uppercase;
-            padding: 12px 45px;
+            padding: 10px 40px;
             border: 2px solid #D4AF37;
             border-radius: 50px;
             cursor: pointer;
@@ -91,18 +94,18 @@
             color: #fff;
         }
 
-        /* Contenitore per il video tram.mp4 */
+        /* Contenitore Sottofondo Video Tram (tram.mp4) attivo dopo APRI */
         #tram-video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #232b22;
+            background: #000;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10001;
+            z-index: 1;
             opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease;
@@ -111,7 +114,7 @@
         #tram-video {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
 
         #flash-overlay {
@@ -127,17 +130,22 @@
             transition: opacity 1.2s ease-in-out;
         }
 
+        /* Scritte sovrapposte al video tram */
         .story-step {
-            position: absolute;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1.5s ease, visibility 1.5s ease, transform 2s ease, box-shadow 2s ease;
+            transition: opacity 1.5s ease, visibility 1.5s ease;
             text-align: center;
             color: #ffffff;
-            width: 92%;
+            width: 90%;
             max-width: 520px;
-            padding: 18px 16px;
+            padding: 20px;
             z-index: 10;
+            pointer-events: none;
         }
 
         .visible {
@@ -146,17 +154,17 @@
         }
 
         .grand-finale-effect {
-            transform: scale(1.03);
+            transform: translate(-50%, -50%) scale(1.02);
             box-shadow: 0 0 35px rgba(230, 197, 132, 0.7), inset 0 0 20px rgba(230, 197, 132, 0.3) !important;
             border: 1.5px solid #fff !important;
-            background: rgba(58, 70, 56, 0.98) !important;
+            background: rgba(35, 43, 34, 0.92) !important;
         }
 
         #step-1 {
             font-family: 'Great Vibes', cursive;
             font-size: 42px;
             color: #f7e2b3;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
             line-height: 1.3;
         }
 
@@ -165,17 +173,23 @@
             color: #fdfbf7;
             line-height: 1.6;
             font-style: italic;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
         }
 
         #step-3 {
-            background: rgba(52, 63, 50, 0.97);
+            position: absolute; /* Ritorna a scorrere/scrollabile all'interno della pagina se lungo */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(35, 43, 34, 0.95);
             border: 1.5px solid rgba(230, 197, 132, 0.4);
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             z-index: 20;
-            max-height: 94vh;
+            max-height: 90vh;
             overflow-y: auto;
+            pointer-events: auto;
+            padding: 20px 16px;
         }
 
         .tag {
@@ -189,7 +203,7 @@
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 40px;
+            font-size: 38px;
             margin: 0 0 2px 0;
             font-weight: normal;
             color: #f7e2b3;
@@ -316,7 +330,7 @@
 
         .video-container video {
             width: 100%;
-            height: 130px;
+            height: 110px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid rgba(230, 197, 132, 0.4);
@@ -371,7 +385,7 @@
 
         .final-quote {
             font-family: 'Great Vibes', cursive;
-            font-size: 20px;
+            font-size: 19px;
             color: #f7e2b3;
             margin-top: 6px;
             margin-bottom: 2px;
@@ -441,9 +455,9 @@
         </div>
     </div>
 
-    <!-- Contenitore Video Tram (tram.mp4) che parte dopo APRI -->
+    <!-- Sottofondo Video Tram (tram.mp4) che rimane attivo mentre compaiono le scritte sovrapposte -->
     <div id="tram-video-container">
-        <video id="tram-video" src="tram.mp4" playsinline></video>
+        <video id="tram-video" src="tram.mp4" autoplay muted loop playsinline></video>
     </div>
 
     <!-- Fuochi d'artificio -->
@@ -455,17 +469,17 @@
         <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
     </div>
 
-    <!-- Messaggio 1 -->
+    <!-- Messaggio 1 sovrapposto al video tram -->
     <div class="story-step" id="step-1">
         Ci sono momenti che cambiano la vita per sempre...
     </div>
 
-    <!-- Messaggio 2 -->
+    <!-- Messaggio 2 sovrapposto al video tram -->
     <div class="story-step" id="step-2">
         Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
     </div>
 
-    <!-- Messaggio 3: Invito Ufficiale -->
+    <!-- Messaggio 3: Invito Ufficiale sovrapposto al video tram -->
     <div class="story-step" id="step-3">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
@@ -478,8 +492,8 @@
                 🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento[span_2](start_span)[span_2](end_span)<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_3](start_span)[span_3](end_span)
+                📍 <strong>Ristorante:</strong> Al Convento[span_0](start_span)[span_0](end_span)<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
             </div>
             
             <!-- PULSANTI AZIONE -->
@@ -544,9 +558,9 @@
         var tramVideo = document.getElementById('tram-video');
         var tramContainer = document.getElementById('tram-video-container');
 
-        // Avvia il video in loop e sblocca l'audio di mu.mp3 al primo tocco ovunque sullo schermo
+        // Avvia il video in loop e sblocca l'audio al primo tocco
         window.addEventListener('DOMContentLoaded', (event) => {
-            introVideo.currentTime = 0;
+            introVideo.muted = true;
             introVideo.play().catch(function(error) {
                 console.log("Video autoplay in attesa:", error);
             });
@@ -566,7 +580,7 @@
 
             music.volume = 1.0;
             music.play().catch(function(error) {
-                console.log("Audio in attesa del primo tocco dell'utente.");
+                console.log("Audio in attesa del primo tocco.");
             });
         });
 
@@ -576,7 +590,7 @@
             music.currentTime = 0;
             introVideo.pause();
 
-            // Nasconde l'intro e mostra il video tram.mp4
+            // Transizione fluida: nasconde l'intro e fa partire in sottofondo il video tram.mp4
             introContainer.style.opacity = '0';
             setTimeout(function() {
                 introContainer.style.display = 'none';
@@ -588,23 +602,12 @@
                 tramVideo.play().catch(function(error) {
                     console.log("Errore riproduzione tram:", error);
                 });
-            }, 1000);
-        }
 
-        // Quando il video tram.mp4 finisce, parte la sequenza dell'invito
-        tramVideo.onended = function() {
-            tramContainer.style.opacity = '0';
-            var flashOverlay = document.getElementById('flash-overlay');
-            flashOverlay.style.opacity = '1';
-
-            setTimeout(function() {
-                tramContainer.style.display = 'none';
-                flashOverlay.style.opacity = '0';
-
+                // Avvia subito la sequenza delle scritte sovrapposte sopra il video tram
                 runStorySequence();
 
-            }, 1200);
-        };
+            }, 1000);
+        }
 
         function runStorySequence() {
             document.getElementById('step-1').classList.add('visible');
