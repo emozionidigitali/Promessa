@@ -399,7 +399,7 @@
 </head>
 <body>
 
-    <!-- Canzone Principale in loop per l'intro (mu.mp3) -->
+    <!-- Canzone Principale (mu.mp3) in loop dall'inizio -->
     <audio id="bg-music" preload="auto" loop>
         <source src="mu.mp3" type="audio/mp3">
     </audio>
@@ -513,7 +513,7 @@
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
 
-        // Avvia la musica e il video in loop fin dall'inizio
+        // Fa partire la musica e il video in loop fin dall'inizio (sbloccandosi al primo tocco sullo schermo)
         window.addEventListener('DOMContentLoaded', (event) => {
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
@@ -540,7 +540,7 @@
         });
 
         function startPromiseExperience() {
-            // Ferma e mette in pausa la musica e il video dell'intro non appena si clicca APRI
+            // FERMA completamente la musica e il video dell'intro quando clicchi APRI
             music.pause();
             music.currentTime = 0;
             introVideo.pause();
