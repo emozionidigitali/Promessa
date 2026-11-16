@@ -399,7 +399,7 @@
 </head>
 <body>
 
-    <!-- Canzone Principale in loop (mu.mp3) -->
+    <!-- Canzone Principale in loop per l'intro (mu.mp3) -->
     <audio id="bg-music" preload="auto" loop>
         <source src="mu.mp3" type="audio/mp3">
     </audio>
@@ -450,7 +450,7 @@
             </div>
             <div class="detail-row">
                 📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_0](start_span)[span_0](end_span)
             </div>
             
             <!-- PULSANTI AZIONE -->
@@ -513,7 +513,7 @@
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
 
-        // Avvia subito il video in loop e sblocca l'audio al primo tocco ovunque sullo schermo
+        // Avvia la musica e il video in loop fin dall'inizio
         window.addEventListener('DOMContentLoaded', (event) => {
             introVideo.currentTime = 0;
             introVideo.play().catch(function(error) {
@@ -540,6 +540,11 @@
         });
 
         function startPromiseExperience() {
+            // Ferma e mette in pausa la musica e il video dell'intro non appena si clicca APRI
+            music.pause();
+            music.currentTime = 0;
+            introVideo.pause();
+
             introContainer.style.opacity = '0';
             var flashOverlay = document.getElementById('flash-overlay');
             flashOverlay.style.opacity = '1';
@@ -572,10 +577,6 @@
                 document.getElementById('step-3').classList.add('visible');
                 document.getElementById('fireworks-container').style.display = 'block';
             }, 11000);
-
-            music.onended = function() {
-                triggerGrandFinale();
-            };
         }
 
         function triggerGrandFinale() {
