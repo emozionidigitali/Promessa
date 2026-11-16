@@ -114,7 +114,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- FOTO SOVRAPPOSTE CENTRALI (RITAGLIATE E PROPORZIONATE AL VIDEO) --- */
+        /* --- FOTO PIÙ PICCOLE E MOLTO PIÙ TRASPARENTI --- */
         #intro-overlay-photos {
             position: absolute;
             top: 0;
@@ -131,19 +131,19 @@
         .intro-photo-item {
             position: absolute;
             width: 100%;
-            max-width: 650px;
-            height: 65vh;
-            object-fit: cover; /* Ritaglia e riempie perfettamente la dimensione del video */
-            border-radius: 12px;
-            border: 2px solid rgba(230, 197, 132, 0.8);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            max-width: 480px; /* Rimpicciolite rispetto a prima */
+            height: 50vh;    /* Altezza ridotta e proporzionata */
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid rgba(230, 197, 132, 0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
             opacity: 0;
             transform: scale(0.95);
             transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
         }
 
         .show-intro-photo {
-            opacity: 0.85; /* Perfettamente visibili e d'impatto sopra il video */
+            opacity: 0.35; /* Molto trasparenti, lasciano risaltare al massimo il video */
             transform: scale(1);
         }
 
@@ -487,7 +487,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Foto centrali sovrapposte al video intro (da 11 a 20) -->
+    <!-- Foto centrali più piccole e trasparenti sovrapposte al video intro (da 11 a 20) -->
     <div id="intro-overlay-photos" style="display: none;">
         <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
         <img src="foto 12.jpg" class="intro-photo-item" alt="Foto 12">
@@ -692,15 +692,14 @@
                         clearInterval(photoInterval);
                         introPhotosContainer.style.display = 'none';
                     }
-                }, 1700); // Durata di visualizzazione per ciascuna foto
+                }, 1700);
 
-                // Salva il riferimento per pulire l'intervallo se il video finisce prima
                 introVideo.onended = function() {
                     clearInterval(photoInterval);
                     introPhotosContainer.style.display = 'none';
                     stopHeartbeatAndProceed();
                 };
-            }, 1000); // <-- Ritardo di 1 secondo esatto prima che partano le foto
+            }, 1000); // Ritardo di 1 secondo esatto
 
             // BATTITO: Fade-in graduale verso la fine del video 8
             setTimeout(function() {
