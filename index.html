@@ -99,7 +99,8 @@
         .video-stage {
             position: relative;
             width: 100%;
-            height: 70vh;
+            max-width: 650px;
+            height: 65vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -125,12 +126,12 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- FOTO DENTRO IL VIDEO IN ALTO A DESTRA --- */
+        /* --- FOTO POSIZIONATE ESATTAMENTE DENTRO IL VIDEO IN ALTO A DESTRA --- */
         #intro-overlay-photos {
             position: absolute;
-            top: 15px;  /* Posizionato all'interno dell'area video in alto */
-            right: 20px; /* Posizionato all'interno dell'area video a destra */
-            width: 110px;  
+            top: 12px;   /* Margine superiore dall'interno del video */
+            right: 15px;  /* Margine destro dall'interno del video */
+            width: 110px;  /* Piccole e discrete */
             height: 75px;  
             pointer-events: none;
             z-index: 10001;
@@ -144,21 +145,21 @@
             height: 100%;
             object-fit: cover;
             border-radius: 6px;
-            border: 1px solid rgba(230, 197, 132, 0.9);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.9);
+            border: 1px solid rgba(230, 197, 132, 0.8);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.8);
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
 
         .show-intro-photo {
-            opacity: 0.5; /* Trasparenza delicata */
+            opacity: 0.55; /* Trasparenza delicata sopra il video */
         }
 
         /* Frasi posizionate SOTTO il video */
         .intro-overlay-text {
             position: relative;
             width: 100%;
-            height: 30vh;
+            height: 25vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -497,7 +498,7 @@
 
     <!-- Contenitore Video Intro a tutto schermo -->
     <div id="intro-video-container">
-        <!-- Area video con il riquadro foto posizionato esattamente all'interno -->
+        <!-- Area video con il riquadro foto posizionato esattamente all'interno del riquadro del video -->
         <div class="video-stage">
             <video id="intro-video" src="video 8.mp4" playsinline></video>
             <div id="intro-overlay-photos">
