@@ -114,7 +114,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- FOTO DEL SECONDO LIVELLO: DIMENSIONE ESATTA DEL VIDEO E MOLTO PIÙ TRASPARENTI --- */
+        /* --- FOTO RIDOTTE E CENTRATE IN SOVRAIMPRESSIONE SUL VIDEO --- */
         #intro-overlay-photos {
             position: absolute;
             top: 0;
@@ -130,15 +130,20 @@
 
         .intro-photo-item {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Rispetta le proporzioni esatte del video senza uscire fuori */
+            width: 240px;  /* Misura ridotta e compatta */
+            height: 160px; /* Proporzione rettangolare pulita */
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1.5px solid rgba(230, 197, 132, 0.7);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            transform: scale(0.95);
+            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
         }
 
         .show-intro-photo {
-            opacity: 0.25; /* Molto trasparenti, così il video 8 resta il vero protagonista in primo piano */
+            opacity: 0.35; /* Molto trasparente, il video 8 resta il protagonista assoluto */
+            transform: scale(1);
         }
 
         /* Scritte in sovraimpressione per il video 8 */
@@ -481,7 +486,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Foto trasparenti a dimensione schermo in sovraimpressione sul video intro (da 11 a 20) -->
+    <!-- Foto ridotte e trasparenti al centro in sovraimpressione sul video intro (da 11 a 20) -->
     <div id="intro-overlay-photos">
         <img src="foto 11.jpg" class="intro-photo-item" alt="Foto 11">
         <img src="foto 12.jpg" class="intro-photo-item" alt="Foto 12">
@@ -664,7 +669,7 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // GESTIONE FOTO TRASPARENTI A DIMENSIONE SCHERMO SUL VIDEO 8
+            // GESTIONE FOTO RIDOTTE E TRASPARENTI SUL VIDEO 8
             let introPhotos = document.querySelectorAll('.intro-photo-item');
             let currentPhotoIndex = 0;
 
@@ -683,7 +688,7 @@
                     }
                     clearInterval(photoInterval);
                 }
-            }, 1700); // Ogni 1.7 secondi transizione morbida tra le foto
+            }, 1700);
 
             // BATTITO: Fade-in graduale verso la fine del video 8
             setTimeout(function() {
