@@ -77,7 +77,7 @@
             transform: scale(1.05);
         }
 
-        /* Contenitore Video Intro a schermo intero o centrato */
+        /* Contenitore Video Intro a schermo intero */
         #intro-video-container {
             position: fixed;
             top: 0;
@@ -91,7 +91,7 @@
             z-index: 9999;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1s ease;
+            transition: opacity 1.5s ease;
         }
 
         #intro-video {
@@ -100,7 +100,40 @@
             object-fit: cover;
         }
 
-        /* Testi della sequenza con transizione per lo zoom finale */
+        /* Scritte in sovraimpressione sopra il video intro */
+        .intro-overlay-text {
+            position: absolute;
+            z-index: 10000;
+            text-align: center;
+            color: #ffffff;
+            width: 90%;
+            pointer-events: none;
+        }
+
+        #intro-text-1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 44px;
+            color: #f7e2b3;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        #intro-text-2 {
+            font-size: 22px;
+            color: #fdfbf7;
+            font-style: italic;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .show-intro-text {
+            opacity: 1 !important;
+        }
+
+        /* Testi della sequenza successiva con transizione per lo zoom finale */
         .story-step {
             position: absolute;
             opacity: 0;
@@ -275,7 +308,7 @@
             display: block;
         }
 
-        /* Video secondario dentro la card (se desiderato, es. video 3) */
+        /* Video 3 all'interno della card */
         .video-container {
             margin-top: 4px;
         }
@@ -397,10 +430,13 @@
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Contenitore Video Intro -->
+    <!-- Contenitore Video Intro con Scritte -->
     <div id="intro-video-container">
-        <!-- Sostituisci "video-intro.mp4" con il nome del tuo file video di benvenuto -->
-        <video id="intro-video" src="video-intro.mp4" playsinline></video>
+        <video id="intro-video" src="video 8.mp4" playsinline></video>
+        <div class="intro-overlay-text">
+            <div id="intro-text-1">La nostra promessa...</div>
+            <div id="intro-text-2">Un nuovo capitolo della nostra vita insieme</div>
+        </div>
     </div>
 
     <!-- Fuochi d'artificio -->
@@ -508,6 +544,8 @@
         var music = document.getElementById('bg-music');
         var introVideo = document.getElementById('intro-video');
         var introContainer = document.getElementById('intro-video-container');
+        var text1 = document.getElementById('intro-text-1');
+        var text2 = document.getElementById('intro-text-2');
 
         function startExperience() {
             // Nasconde la schermata iniziale
@@ -517,7 +555,7 @@
                 overlay.style.display = 'none';
             }, 1000);
 
-            // Mostra e fa partire il video di introduzione a schermo intero
+            // Mostra e fa partire il video intro con le scritte
             introContainer.style.visibility = 'visible';
             introContainer.style.opacity = '1';
             
@@ -525,22 +563,30 @@
                 console.log("Video intro avviato");
             }).catch(function(error) {
                 console.log("Errore riproduzione video intro:", error);
-                // Se il browser blocca l'autoplay del video, saltiamo direttamente alla sequenza
                 onIntroEnded();
             });
 
-            // Quando il video di intro finisce, parte la canzone e la sequenza dei testi
+            // Gestione comparsa scritte in sovraimpressione durante il video 8
+            setTimeout(function() {
+                text1.classList.add('show-intro-text');
+            }, 800);
+
+            setTimeout(function() {
+                text2.classList.add('show-intro-text');
+            }, 2500);
+
+            // Quando il video 8 finisce, dissolvenza, parte la musica e i messaggi
             introVideo.onended = function() {
                 onIntroEnded();
             };
         }
 
         function onIntroEnded() {
-            // Dissolvenza in uscita del video di intro
+            // Dissolvenza in uscita del video intro
             introContainer.style.opacity = '0';
             setTimeout(function() {
                 introContainer.style.display = 'none';
-            }, 1000);
+            }, 1500);
 
             // Avvia la canzone di sottofondo
             music.play().then(function() {
@@ -556,24 +602,24 @@
         function runStorySequence() {
             setTimeout(function() {
                 document.getElementById('step-1').classList.add('visible');
-            }, 500);
+            }, 1000);
 
             setTimeout(function() {
                 document.getElementById('step-1').classList.remove('visible');
-            }, 4500);
+            }, 5000);
 
             setTimeout(function() {
                 document.getElementById('step-2').classList.add('visible');
-            }, 6000);
+            }, 6500);
 
             setTimeout(function() {
                 document.getElementById('step-2').classList.remove('visible');
-            }, 10500);
+            }, 11000);
 
             setTimeout(function() {
                 document.getElementById('step-3').classList.add('visible');
                 document.getElementById('fireworks-container').style.display = 'block';
-            }, 12000);
+            }, 12500);
 
             music.onended = function() {
                 triggerGrandFinale();
