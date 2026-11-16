@@ -140,7 +140,7 @@
 
         .show-phrase { opacity: 1 !important; }
 
-        /* --- NUOVO STILE PULSANTE: ELEGANTE, ORO E FLOREALE --- */
+        /* --- SCHERMATA INTERMEDIA CON IL NUOVO PULSANTE MINIMALE E DORATO --- */
         #transition-screen {
             position: fixed;
             top: 0;
@@ -165,66 +165,55 @@
         .magic-btn-wrapper {
             position: relative;
             display: inline-block;
-            padding: 25px 40px;
+            padding: 22px 35px;
         }
 
         .magic-btn {
             position: relative;
-            background: linear-gradient(135deg, #3d4c3a 0%, #293427 100%);
+            background: linear-gradient(135deg, #323d30 0%, #222b21 100%);
             color: #f7e2b3;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
             font-weight: 600;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            padding: 18px 60px;
+            padding: 16px 55px;
             border: 2px solid #D4AF37;
             border-radius: 50px;
             cursor: pointer;
             outline: none;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(212, 175, 55, 0.2);
             transition: all 0.4s ease;
             z-index: 2;
         }
 
-        /* Cornice floreale dorata disegnata geometricamente con grazia */
+        /* Linee dorate sfumate sopra e sotto esattamente come nell'immagine di riferimento */
         .magic-btn-wrapper::before,
         .magic-btn-wrapper::after {
             content: '';
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 75%;
-            height: 12px;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
             z-index: 3;
             pointer-events: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
         }
 
-        /* Decorazione floreale superiore in stile oro */
         .magic-btn-wrapper::before {
-            top: 10px;
-            background-image: radial-gradient(circle, #D4AF37 40%, transparent 41%), linear-gradient(90deg, transparent, #D4AF37 30%, #fff 50%, #D4AF37 70%, transparent);
-            height: 6px;
-            width: 60%;
-            opacity: 0.8;
+            top: 6px;
         }
 
-        /* Decorazione floreale inferiore */
         .magic-btn-wrapper::after {
-            bottom: 10px;
-            background-image: radial-gradient(circle, #D4AF37 40%, transparent 41%), linear-gradient(90deg, transparent, #D4AF37 30%, #fff 50%, #D4AF37 70%, transparent);
-            height: 6px;
-            width: 60%;
-            opacity: 0.8;
+            bottom: 6px;
         }
 
         .magic-btn:hover {
-            background: linear-gradient(135deg, #465743 0%, #303c2e 100%);
+            background: linear-gradient(135deg, #3d4c3a 0%, #293427 100%);
             transform: scale(1.04);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4), inset 0 0 25px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.4);
             color: #fff;
         }
 
@@ -576,7 +565,7 @@
         </div>
     </div>
 
-    <!-- Schermata Intermedia con il PULSANTE PULITO AL CENTRO E CORNICE DORATA -->
+    <!-- Schermata Intermedia con il Pulsante Minimal ed Elegante -->
     <div id="transition-screen">
         <div class="magic-btn-wrapper" id="sparkle-wrapper">
             <button class="magic-btn" onclick="startPromiseExperience()">APRI</button>
@@ -624,8 +613,8 @@
                 🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento[span_0](start_span)[span_0](end_span)<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
+                📍 <strong>Ristorante:</strong> Al Convento[span_1](start_span)[span_1](end_span)<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_2](start_span)[span_2](end_span)
             </div>
             
             <div class="action-buttons">
