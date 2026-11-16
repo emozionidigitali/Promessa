@@ -114,7 +114,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* --- VERO ALBUM FOTOGRAFICO 3D CON LE TUE FOTO (Da 11 a 20) --- */
+        /* --- VERO ALBUM FOTOGRAFICO 3D CON EFFETTI OTTICI (Zoom, Sfocatura, Rotazione) --- */
         #memory-book-container {
             position: fixed;
             top: 0;
@@ -138,6 +138,14 @@
             height: 460px;
             position: relative;
             transform-style: preserve-3d;
+            /* Effetto ottico iniziale di zoom e leggera rotazione cinematografica */
+            animation: albumCinematicEntry 2.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes albumCinematicEntry {
+            0% { transform: scale(0.97) rotate(0deg); filter: blur(0px); }
+            50% { transform: scale(1.02) rotate(0.5deg); filter: blur(0px); }
+            100% { transform: scale(0.98) rotate(-0.5deg); filter: blur(0px); }
         }
 
         .page {
@@ -148,7 +156,6 @@
             left: 0;
             transform-origin: left center;
             transform-style: preserve-3d;
-            /* Transizione lenta e fluida per lo sfoglio delle pagine */
             transition: transform 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
             background: #fdfbf7;
             border-radius: 4px 12px 12px 4px;
@@ -174,6 +181,13 @@
             border: 1px solid #e6c584;
             margin-bottom: 12px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            /* Effetto ottico dinamico sulle foto: zoom lento continuo */
+            animation: photoZoomEffect 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes photoZoomEffect {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.04); }
         }
 
         .page p {
@@ -563,7 +577,7 @@
         <source src="intro-music.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Audio Battito Cardiaco (Sincronizzato: si ferma esattamente alla fine del video 8) -->
+    <!-- Audio Battito Cardiaco (Fade-in iniziale e Fade-out preciso alla fine del video 8) -->
     <audio id="heartbeat-audio" preload="auto">
         <source src="battito.mp3" type="audio/mp3">
     </audio>
@@ -576,7 +590,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Album Fotografico 3D con le foto reali da 11 a 20 -->
+    <!-- Album Fotografico 3D con effetti ottici (Zoom, sfocatura, rotazione) e foto da 11 a 20 -->
     <div id="memory-book-container">
         <div class="book" id="realBook">
             <!-- Copertina -->
@@ -774,7 +788,7 @@
             introMusic.play().catch(function(e) { console.log(e); });
 
             // Sblocca il battito
-            heartbeatAudio.volume = 1.0;
+            heartbeatAudio.volume = 0.05; // Parte con volume bassissimo
             heartbeatAudio.load();
             heartbeatAudio.play().then(() => { heartbeatAudio.pause(); heartbeatAudio.currentTime = 0; }).catch(e => console.log(e));
 
@@ -799,22 +813,39 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // SINCRONIZZAZIONE BATTITO: Parte verso la fine e si interrompe esattamente quando finisce il video 8
+            // BATTITO: Parte basso e sale gradualmente
             setTimeout(function() {
                 heartbeatAudio.currentTime = 0;
+                heartbeatAudio.volume = 0.1;
                 heartbeatAudio.play().catch(function(error) { console.log(error); });
-            }, 12500); // Inizia a battere negli ultimi secondi
+
+                let heartbeatFadeIn = setInterval(function() {
+                    if (heartbeatAudio.volume < 0.9) {
+                        heartbeatAudio.volume += 0.1;
+                    } else {
+                        clearInterval(heartbeatFadeIn);
+                    }
+                }, 200);
+            }, 11000);
 
             introVideo.onended = function() {
-                // Ferma immediatamente il battito cardiaco nello stesso istante in cui finisce il video 8
-                heartbeatAudio.pause();
-                heartbeatAudio.currentTime = 0;
+                // Dissolvenza in uscita rapida del battito esattamente alla fine del video 8
+                let heartbeatFadeOut = setInterval(function() {
+                    if (heartbeatAudio.volume > 0.1) {
+                        heartbeatAudio.volume -= 0.2;
+                    } else {
+                        heartbeatAudio.pause();
+                        heartbeatAudio.currentTime = 0;
+                        clearInterval(heartbeatFadeOut);
+                    }
+                }, 50);
+
                 onIntroEnded();
             };
         }
 
         function onIntroEnded() {
-            // 1. Flash bianco/oro
+            // Flash bianco/oro
             flashOverlay.style.opacity = '1';
 
             let fadeOutAudio = setInterval(function() {
@@ -830,7 +861,7 @@
                 introContainer.style.display = 'none';
                 flashOverlay.style.opacity = '0'; // Rimuove il flash
 
-                // 2. Mostra il libro 3D con le foto da 11 a 20
+                // Mostra l'album con effetti ottici
                 memoryBook.style.visibility = 'visible';
                 memoryBook.style.opacity = '1';
 
@@ -843,7 +874,7 @@
                             pages[currentPage].classList.add('flipped');
                             currentPage++;
                         } else {
-                            // Fine del libro: chiude l'album, avvia la canzone principale in fade-in e mostra la promessa
+                            // Fine dell'album: chiude l'album, avvia la canzone principale in fade-in e mostra la promessa
                             clearInterval(flipInterval);
                             
                             setTimeout(function() {
@@ -868,7 +899,7 @@
                                 }, 1000);
                             }, 800);
                         }
-                    }, 2200); // Velocità lenta e rilassante (2.2 secondi a pagina)
+                    }, 2400); // Velocità lenta e rilassante per gustarsi ogni foto con gli effetti ottici
                 }, 1500);
 
             }, 1200);
