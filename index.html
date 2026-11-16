@@ -17,7 +17,7 @@
             width: 100%;
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background: #070d1a;
+            background: #4A5847; /* Verde salvia scuro elegante */
             overflow-x: hidden;
             display: flex;
             justify-content: center;
@@ -31,7 +31,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #070d1a;
+            background: #4A5847;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -51,7 +51,7 @@
         }
 
         .start-box p {
-            color: #d1c7bd;
+            color: #f1ede1;
             font-size: 18px;
             margin-bottom: 30px;
             font-style: italic;
@@ -59,7 +59,7 @@
 
         .btn-start {
             background-color: #e6c584;
-            color: #070d1a;
+            color: #2F3B2E;
             border: none;
             padding: 15px 45px;
             font-size: 18px;
@@ -95,12 +95,12 @@
             visibility: visible !important;
         }
 
-        /* Classe per l'effetto ottico combinato finale (Opzione 1 & 2) */
+        /* Classe per l'effetto ottico combinato finale */
         .grand-finale-effect {
             transform: scale(1.03);
             box-shadow: 0 0 35px rgba(230, 197, 132, 0.7), inset 0 0 20px rgba(230, 197, 132, 0.3) !important;
             border: 1.5px solid #fff !important;
-            background: rgba(18, 28, 50, 0.98) !important;
+            background: rgba(58, 70, 56, 0.98) !important;
         }
 
         #step-1 {
@@ -120,7 +120,7 @@
         }
 
         #step-3 {
-            background: rgba(14, 23, 41, 0.97);
+            background: rgba(52, 63, 50, 0.97); /* Sfondo card verde salvia raffinato */
             border: 1px solid rgba(230, 197, 132, 0.4);
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
@@ -148,7 +148,7 @@
 
         .names {
             font-size: 15px;
-            color: #d1c7bd;
+            color: #e1dad0;
             margin-bottom: 6px;
             font-style: italic;
             letter-spacing: 1px;
@@ -165,7 +165,7 @@
         .details {
             font-size: 14px;
             line-height: 1.4;
-            color: #e2ded8;
+            color: #f2efe9;
             margin: 4px 0;
             text-align: left;
         }
@@ -203,10 +203,10 @@
 
         .btn-action:hover {
             background-color: #e6c584;
-            color: #070d1a;
+            color: #2F3B2E;
         }
 
-        /* Conto alla rovescia in stile Capodanno */
+        /* Conto alla rovescia */
         .countdown-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -225,7 +225,7 @@
         }
 
         .countdown-box {
-            background: linear-gradient(135deg, #111b33 0%, #070d1a 100%);
+            background: linear-gradient(135deg, #3d4c3a 0%, #293427 100%);
             border: 1.5px solid #e6c584;
             border-radius: 6px;
             padding: 4px 6px;
@@ -251,7 +251,7 @@
             display: block;
         }
 
-        /* Video in autoplay (Video 3) */
+        /* Video in autoplay */
         .video-container {
             margin-top: 4px;
         }
@@ -304,15 +304,15 @@
 
         .btn-no {
             background-color: transparent;
-            color: #d1c7bd;
-            border: 1px solid #d1c7bd;
+            color: #e1dad0;
+            border: 1px solid #e1dad0;
         }
 
         .btn-rsvp:hover {
             transform: scale(1.05);
         }
 
-        /* Frase Emozionante Finale Pulsante (Opzione 2) */
+        /* Frase Emozionante Finale Pulsante */
         .final-quote {
             font-family: 'Great Vibes', cursive;
             font-size: 21px;
@@ -334,7 +334,7 @@
 
         .footer-note {
             font-size: 11px;
-            color: #d1c7bd;
+            color: #e1dad0;
             margin-top: 2px;
             font-style: italic;
         }
@@ -415,7 +415,7 @@
             </div>
             <div class="detail-row">
                 📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 11px; color: #d1c7bd; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
             </div>
             
             <!-- Pulsanti Mappa e Calendario -->
@@ -425,7 +425,7 @@
             </div>
         </div>
 
-        <!-- Conto alla rovescia in stile Capodanno -->
+        <!-- Conto alla rovescia -->
         <div class="countdown-title">Mancano al grande giorno:</div>
         <div class="countdown-container">
             <div class="countdown-box">
@@ -457,7 +457,7 @@
             <video src="video 3.mp4" autoplay muted loop playsinline></video>
         </div>
 
-        <!-- Sezione RSVP con invio WhatsApp diretto agli sposi -->
+        <!-- Sezione RSVP -->
         <div class="rsvp-section">
             <div class="rsvp-title">Conferma la tua presenza</div>
             <div class="rsvp-buttons">
@@ -466,7 +466,7 @@
             </div>
         </div>
 
-        <!-- Frase Emozionante Finale (Con effetto ottico Opzione 2: Cuore Pulsante) -->
+        <!-- Frase Emozionante Finale -->
         <div class="final-quote" id="finalQuoteText">"Il nostro per sempre comincia con voi..."</div>
 
         <div class="footer-note">
@@ -514,7 +514,6 @@
                 document.getElementById('fireworks-container').style.display = 'block';
             }, 12500);
 
-            // Rileva la fine della canzone per scatenare lo spettacolo pirotecnico finale e gli effetti ottici (Opzione 1 & 2 insieme)
             music.onended = function() {
                 triggerGrandFinale();
             };
@@ -524,15 +523,12 @@
             var container = document.getElementById('fireworks-container');
             container.style.display = 'block';
 
-            // Attiva l'effetto ottico combinato (Zoom dorato + Luce calda diffusa)
             var invitationCard = document.getElementById('step-3');
             invitationCard.classList.add('grand-finale-effect');
 
-            // Attiva l'effetto cuore pulsante luminoso sulla frase finale
             var quote = document.getElementById('finalQuoteText');
             quote.classList.add('pulse-quote');
 
-            // Genera una pioggia extra di fuochi d'artificio
             for(let i=0; i<10; i++) {
                 let fw = document.createElement('div');
                 fw.className = 'firework';
@@ -543,7 +539,6 @@
             }
         }
 
-        // Funzione Conto alla Rovescia (Countdown)
         const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
 
         function updateCountdown() {
