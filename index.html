@@ -140,7 +140,7 @@
 
         .show-phrase { opacity: 1 !important; }
 
-        /* --- SCHERMATA INTERMEDIA CON IL NUOVO PULSANTE MINIMALE E DORATO --- */
+        /* --- SCHERMATA INTERMEDIA CON CORNICE ESATTA E SCINTILLE A SCHERMO INTERO --- */
         #transition-screen {
             position: fixed;
             top: 0;
@@ -155,6 +155,7 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease;
+            overflow: hidden;
         }
 
         #transition-screen.show-transition {
@@ -165,7 +166,8 @@
         .magic-btn-wrapper {
             position: relative;
             display: inline-block;
-            padding: 22px 35px;
+            padding: 30px 40px;
+            z-index: 10;
         }
 
         .magic-btn {
@@ -173,74 +175,76 @@
             background: linear-gradient(135deg, #323d30 0%, #222b21 100%);
             color: #f7e2b3;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 600;
-            letter-spacing: 6px;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            padding: 16px 55px;
+            padding: 18px 65px;
             border: 2px solid #D4AF37;
             border-radius: 50px;
             cursor: pointer;
             outline: none;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(212, 175, 55, 0.25);
             transition: all 0.4s ease;
             z-index: 2;
         }
 
-        /* Linee dorate sfumate sopra e sotto esattamente come nell'immagine di riferimento */
+        /* Linee dorate sfumate sopra e sotto esattamente come nell'immagine richiesta */
         .magic-btn-wrapper::before,
         .magic-btn-wrapper::after {
             content: '';
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 70%;
-            height: 4px;
+            width: 75%;
+            height: 5px;
             background: linear-gradient(90deg, transparent, #D4AF37, transparent);
             z-index: 3;
             pointer-events: none;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
         }
 
         .magic-btn-wrapper::before {
-            top: 6px;
+            top: 8px;
         }
 
         .magic-btn-wrapper::after {
-            bottom: 6px;
+            bottom: 8px;
         }
 
         .magic-btn:hover {
             background: linear-gradient(135deg, #3d4c3a 0%, #293427 100%);
             transform: scale(1.04);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5), inset 0 0 25px rgba(212, 175, 55, 0.5);
             color: #fff;
         }
 
-        /* Scintille dorate che cadono delicatamente */
-        .sparkle {
+        /* Scintille dorate che cadono su tutto lo schermo */
+        .full-screen-sparkle {
             position: absolute;
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             background: radial-gradient(circle, #FFF 0%, #D4AF37 70%, transparent 100%);
             border-radius: 50%;
             pointer-events: none;
             opacity: 0;
-            animation: fall-sparkle 1.6s infinite linear;
-            z-index: 4;
+            animation: fall-full-screen linear infinite;
+            z-index: 1;
         }
 
-        @keyframes fall-sparkle {
+        @keyframes fall-full-screen {
             0% {
-                transform: translateY(-25px) scale(0.2);
+                transform: translateY(-20px) scale(0.3);
                 opacity: 0;
             }
-            35% {
-                opacity: 1;
-                transform: translateY(15px) scale(1.1);
+            20% {
+                opacity: 0.9;
+            }
+            80% {
+                opacity: 0.9;
             }
             100% {
-                transform: translateY(65px) scale(0);
+                transform: translateY(105vh) scale(1.2);
                 opacity: 0;
             }
         }
@@ -565,9 +569,9 @@
         </div>
     </div>
 
-    <!-- Schermata Intermedia con il Pulsante Minimal ed Elegante -->
+    <!-- Schermata Intermedia con Scintille a Schermo Intero e Cornice Esatta sul Pulsante -->
     <div id="transition-screen">
-        <div class="magic-btn-wrapper" id="sparkle-wrapper">
+        <div class="magic-btn-wrapper">
             <button class="magic-btn" onclick="startPromiseExperience()">APRI</button>
         </div>
     </div>
@@ -613,8 +617,8 @@
                 🕒 <strong>Orario:</strong> ore 20:30
             </div>
             <div class="detail-row">
-                📍 <strong>Ristorante:</strong> Al Convento[span_1](start_span)[span_1](end_span)<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_2](start_span)[span_2](end_span)
+                📍 <strong>Ristorante:</strong> Al Convento[span_0](start_span)[span_0](end_span)<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
             </div>
             
             <div class="action-buttons">
@@ -674,7 +678,6 @@
         var introContainer = document.getElementById('intro-video-container');
         var transitionScreen = document.getElementById('transition-screen');
         var flashOverlay = document.getElementById('flash-overlay');
-        var sparkleWrapper = document.getElementById('sparkle-wrapper');
 
         var text1 = document.getElementById('intro-text-1');
         var text2 = document.getElementById('intro-text-2');
@@ -682,29 +685,41 @@
         var text4 = document.getElementById('intro-text-4');
         var text5 = document.getElementById('intro-text-5');
 
-        // Generatore di scintille dorate pulite intorno al pulsante
-        function createSparkle() {
+        // Generatore di scintille a schermo intero
+        function initFullScreenSparkles() {
+            for (var i = 0; i < 35; i++) {
+                createScreenSparkle(true);
+            }
+        }
+
+        function createScreenSparkle(isInitial) {
             if (!transitionScreen.classList.contains('show-transition')) return;
             var sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
+            sparkle.classList.add('full-screen-sparkle');
             
-            var randomX = Math.random() * sparkleWrapper.offsetWidth;
+            var randomX = Math.random() * window.innerWidth;
             sparkle.style.left = randomX + 'px';
-            sparkle.style.top = '-10px';
             
-            var randomDuration = 1.0 + Math.random() * 0.8;
-            var randomDelay = Math.random() * 0.4;
+            if (isInitial) {
+                sparkle.style.top = (Math.random() * window.innerHeight) + 'px';
+            } else {
+                sparkle.style.top = '-20px';
+            }
+            
+            var randomDuration = 1.5 + Math.random() * 2.0;
+            var randomDelay = Math.random() * 1.5;
             sparkle.style.animationDuration = randomDuration + 's';
             sparkle.style.animationDelay = randomDelay + 's';
             
-            sparkleWrapper.appendChild(sparkle);
+            transitionScreen.appendChild(sparkle);
             
             setTimeout(function() {
                 sparkle.remove();
+                if (transitionScreen.classList.contains('show-transition')) {
+                    createScreenSparkle(false);
+                }
             }, (randomDuration + randomDelay) * 1000);
         }
-
-        var sparkleInterval = setInterval(createSparkle, 250);
 
         function startIntro() {
             var overlay = document.getElementById('start-overlay');
@@ -738,17 +753,18 @@
             setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
             setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
 
-            // Quando il video finisce del tutto, compare solo il pulsante pulito al centro
+            // Quando il video finisce, parte la schermata con la cornice e le scintille su tutto lo schermo
             introVideo.onended = function() {
                 introContainer.style.opacity = '0';
                 setTimeout(function() {
                     introContainer.style.display = 'none';
                     transitionScreen.classList.add('show-transition');
+                    initFullScreenSparkles();
                 }, 800);
             };
         }
 
-        // Quando l'utente clicca sul pulsante pulito
+        // Quando l'utente clicca sul pulsante con la cornice dorata
         function startPromiseExperience() {
             transitionScreen.style.opacity = '0';
             flashOverlay.style.opacity = '1';
