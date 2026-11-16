@@ -3,309 +3,718 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Nostra Promessa | Giovanni & Eliana</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Promessa di Matrimonio - Giovanni & Eliana</title>
+    <!-- Font eleganti in stile matrimonio (Great Vibes & Cormorant Garamond) -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary-sage: #5A7363;
-            --light-sage: #8EA395;
-            --soft-bg: #F4F7F5;
-            --text-dark: #2C3E35;
-            --white: #FFFFFF;
-        }
-
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--soft-bg);
-            color: var(--text-dark);
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Cormorant Garamond', serif;
+            background: #4A5847; /* Verde salvia scuro elegante */
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* --- SCHERMATA INTRODUTTIVA & VIDEO --- */
-        #intro-overlay {
+        /* Schermata iniziale con pulsante */
+        #start-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #000;
-            z-index: 9999;
+            background: #4A5847;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease, visibility 1s ease;
+            z-index: 99999;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 1s ease;
         }
 
-        #intro-overlay.fade-out {
-            opacity: 0;
-            visibility: hidden;
+        .start-box h2 {
+            font-family: 'Great Vibes', cursive;
+            color: #e6c584;
+            font-size: 52px;
+            margin: 0 0 10px 0;
+            font-weight: normal;
         }
 
-        .video-container {
-            width: 100%;
-            height: 100%;
-            position: absolute;
+        .start-box p {
+            color: #f1ede1;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .btn-start {
+            background-color: #e6c584;
+            color: #2F3B2E;
+            border: none;
+            padding: 15px 45px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(230, 197, 132, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-start:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contenitore Video In a tutto schermo */
+        #intro-video-container {
+            position: fixed;
             top: 0;
             left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #232b22;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease;
+        }
+
+        .video-stage {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Frasi in sovraimpressione sotto il video */
+        .intro-overlay-text {
+            position: relative;
+            width: 100%;
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            padding: 0 20px;
+            background: #232b22;
+        }
+
+        .intro-phrase {
+            position: absolute;
+            width: 90%;
+            max-width: 700px;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        #intro-text-1 { font-family: 'Great Vibes', cursive; font-size: 34px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-2 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-3 { font-family: 'Great Vibes', cursive; font-size: 36px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #intro-text-4 { font-size: 19px; color: #fdfbf7; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        #intro-text-5 { font-family: 'Great Vibes', cursive; font-size: 38px; color: #f7e2b3; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+
+        .show-phrase { opacity: 1 !important; }
+
+        /* Effetto Flash Lento per la transizione */
+        #flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #f7e2b3;
+            z-index: 10005;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        /* Testi della sequenza della promessa */
+        .story-step {
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.5s ease, visibility 1.5s ease, transform 2s ease, box-shadow 2s ease;
+            text-align: center;
+            color: #ffffff;
+            width: 92%;
+            max-width: 520px;
+            padding: 18px 16px;
+            z-index: 10;
+        }
+
+        .visible {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Classe per l'effetto ottico combinato finale */
+        .grand-finale-effect {
+            transform: scale(1.03);
+            box-shadow: 0 0 35px rgba(230, 197, 132, 0.7), inset 0 0 20px rgba(230, 197, 132, 0.3) !important;
+            border: 1.5px solid #fff !important;
+            background: rgba(58, 70, 56, 0.98) !important;
+        }
+
+        #step-1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 42px;
+            color: #f7e2b3;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+            line-height: 1.3;
+        }
+
+        #step-2 {
+            font-size: 24px;
+            color: #fdfbf7;
+            line-height: 1.6;
+            font-style: italic;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+        }
+
+        #step-3 {
+            background: rgba(52, 63, 50, 0.97);
+            border: 1px solid rgba(230, 197, 132, 0.4);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            z-index: 20;
+            max-height: 94vh;
+            overflow-y: auto;
+        }
+
+        .tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #e6c584;
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 40px;
+            margin: 0 0 2px 0;
+            font-weight: normal;
+            color: #f7e2b3;
+        }
+
+        .names {
+            font-size: 15px;
+            color: #e1dad0;
+            margin-bottom: 6px;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            width: 50px;
+            height: 1px;
+            background-color: #e6c584;
+            margin: 6px auto;
+        }
+
+        /* Sezione Dettagli */
+        .details {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #f2efe9;
+            margin: 4px 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            margin-bottom: 4px;
+        }
+
+        .detail-row strong {
+            color: #e6c584;
+            font-size: 15px;
+        }
+
+        /* Pulsanti d'azione (Mappa & Calendario) */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .btn-action {
+            display: inline-block;
+            background-color: transparent;
+            color: #e6c584;
+            border: 1px solid #e6c584;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-action:hover {
+            background-color: #e6c584;
+            color: #2F3B2E;
+        }
+
+        /* Conto alla rovescia */
+        .countdown-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e6c584;
+            margin-top: 6px;
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin: 4px 0 8px 0;
+        }
+
+        .countdown-box {
+            background: linear-gradient(135deg, #3d4c3a 0%, #293427 100%);
+            border: 1.5px solid #e6c584;
+            border-radius: 6px;
+            padding: 4px 6px;
+            text-align: center;
+            min-width: 48px;
+            box-shadow: 0 0 10px rgba(230, 197, 132, 0.2);
+        }
+
+        .countdown-number {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 6px rgba(247, 226, 179, 0.6);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 8px;
+            text-transform: uppercase;
+            color: #e6c584;
+            letter-spacing: 1px;
+            margin-top: 1px;
+            display: block;
+        }
+
+        /* Video 3 all'interno della card */
+        .video-container {
+            margin-top: 4px;
         }
 
         .video-container video {
             width: 100%;
-            height: 100%;
+            height: 150px;
             object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(230, 197, 132, 0.4);
+            background: #000;
         }
 
-        .intro-skip-btn {
-            position: absolute;
-            bottom: 40px;
-            z-index: 10000;
-            background: rgba(90, 115, 99, 0.85);
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
-        }
-
-        .intro-skip-btn:hover {
-            background: var(--primary-sage);
-            transform: scale(1.05);
-        }
-
-        /* --- CONTENUTO PRINCIPALE DELL'INVITO --- */
-        .main-content {
-            opacity: 0;
-            transition: opacity 1s ease;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        /* Sezione RSVP Pulsanti WhatsApp */
+        .rsvp-section {
+            margin-top: 6px;
             text-align: center;
         }
 
-        .main-content.visible {
-            opacity: 1;
-        }
-
-        h1, h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary-sage);
-        }
-
-        .header-section {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(90, 115, 99, 0.08);
-            margin-bottom: 30px;
-            border: 1px solid rgba(142, 163, 149, 0.2);
-        }
-
-        .header-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .date-badge {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--light-sage);
-            margin: 15px 0;
-            font-weight: 600;
-        }
-
-        .info-box {
-            margin: 25px 0;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .info-box p {
-            margin: 10px 0;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            background-color: var(--primary-sage);
-            color: var(--white);
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 15px rgba(90, 115, 99, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: var(--light-sage);
-            transform: translateY(-2px);
-        }
-
-        .secondary-video-container {
-            margin: 30px 0;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        .secondary-video-container video {
-            width: 100%;
-            display: block;
-        }
-
-        .rsvp-section {
-            background: var(--white);
-            padding: 35px 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(90, 115, 99, 0.08);
-            margin-top: 30px;
-            border: 1px solid rgba(142, 163, 149, 0.2);
-        }
-
-        .rsvp-section h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary-sage);
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+        .rsvp-title {
+            font-size: 12px;
+            color: #e6c584;
+            margin-bottom: 3px;
+            font-style: italic;
         }
 
         .rsvp-buttons {
             display: flex;
-            gap: 15px;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .btn-whatsapp {
-            background-color: #25D366;
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
+        .btn-rsvp {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: transform 0.2s;
         }
 
-        .btn-whatsapp.decline {
-            background-color: #e0e0e0;
-            color: #555;
-            box-shadow: none;
+        .btn-yes {
+            background-color: #25d366;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
 
-        .btn-whatsapp:hover {
-            transform: translateY(-2px);
+        .btn-no {
+            background-color: transparent;
+            color: #e1dad0;
+            border: 1px solid #e1dad0;
         }
 
-        .quote {
-            font-family: 'Playfair Display', serif;
+        .btn-rsvp:hover {
+            transform: scale(1.05);
+        }
+
+        /* Frase Emozionante Finale Pulsante */
+        .final-quote {
+            font-family: 'Great Vibes', cursive;
+            font-size: 21px;
+            color: #f7e2b3;
+            margin-top: 6px;
+            margin-bottom: 2px;
+            text-align: center;
+            transition: transform 0.5s ease, text-shadow 0.5s ease;
+        }
+
+        .pulse-quote {
+            animation: pulseGlow 1.8s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); text-shadow: 0 0 5px rgba(247, 226, 179, 0.4); }
+            100% { transform: scale(1.06); text-shadow: 0 0 18px rgba(247, 226, 179, 0.9), 0 0 25px rgba(230, 197, 132, 0.6); }
+        }
+
+        .footer-note {
+            font-size: 11px;
+            color: #e1dad0;
+            margin-top: 2px;
             font-style: italic;
-            color: var(--light-sage);
-            margin-top: 40px;
-            font-size: 1.1rem;
+        }
+
+        /* Fuochi d'artificio */
+        #fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            display: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 #f7e2b3;
+            animation: explode 1.2s infinite ease-out;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 #f7e2b3, 0 0 0 0 #e6c584; }
+            100% { transform: scale(45); opacity: 0; box-shadow: -45px -45px 0 2px #f7e2b3, 45px -45px 0 2px #e6c584, -45px 45px 0 2px #ffdf79, 45px 45px 0 2px #fff; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ELEMENTO AUDIO -->
-    <audio id="bg-music" preload="auto" loop>
+    <!-- Canzone Principale (Parte alla fine del video in) -->
+    <audio id="bg-music" preload="auto">
         <source src="canzone.mp3.mp3" type="audio/mp3">
     </audio>
 
-    <!-- SCHERMATA INTRODUTTIVA -->
-    <div id="intro-overlay">
-        <div class="video-container">
-            <video id="intro-video" playsinline muted autoplay>
-                <source src="video in.mp4" type="video/mp4">
-            </video>
+    <!-- Schermata Flash Lento -->
+    <div id="flash-overlay"></div>
+
+    <!-- Contenitore Video In a tutto schermo con frasi -->
+    <div id="intro-video-container">
+        <div class="video-stage">
+            <video id="intro-video" src="video in.mp4" playsinline></video>
         </div>
-        <button class="intro-skip-btn" id="start-btn">Tocca per vivere l'emozione ✨</button>
+        <div class="intro-overlay-text">
+            <div id="intro-text-1" class="intro-phrase">Ci sono storie che profumano di futuro...</div>
+            <div id="intro-text-2" class="intro-phrase">Costruire giorno dopo giorno una casa, un rifugio, una vita insieme</div>
+            <div id="intro-text-3" class="intro-phrase">Ogni singolo istante ci ha condotti fin qui</div>
+            <div id="intro-text-4" class="intro-phrase">Due cuori, un solo cammino che sta per svelarsi</div>
+            <div id="intro-text-5" class="intro-phrase">Tutto è pronto per la nostra grande emozione</div>
+        </div>
     </div>
 
-    <!-- CONTENUTO PRINCIPALE -->
-    <div class="main-content" id="main-content">
-        <div class="header-section">
-            <p style="letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem; color: var(--light-sage);">La Nostra Promessa</p>
+    <!-- Fuochi d'artificio -->
+    <div id="fireworks-container">
+        <div class="firework" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
+        <div class="firework" style="top: 30%; left: 80%; animation-delay: 0.4s;"></div>
+        <div class="firework" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
+        <div class="firework" style="top: 60%; left: 75%; animation-delay: 1.2s;"></div>
+        <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
+    </div>
+
+    <!-- Schermata iniziale -->
+    <div id="start-overlay">
+        <div class="start-box">
             <h2>Giovanni & Eliana</h2>
-            <div class="date-badge">— 26 Gennaio 2027 —</div>
+            <p>Tocca per vivere l'emozione della nostra promessa</p>
+            <button class="btn-start" onclick="startExperience()">INIZIA</button>
+        </div>
+    </div>
+
+    <!-- Messaggio 1 -->
+    <div class="story-step" id="step-1">
+        Ci sono momenti che cambiano la vita per sempre...
+    </div>
+
+    <!-- Messaggio 2 -->
+    <div class="story-step" id="step-2">
+        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
+    </div>
+
+    <!-- Messaggio 3: Invito Ufficiale -->
+    <div class="story-step" id="step-3">
+        <div class="tag">La Nostra Promessa</div>
+        <h1>Giovanni & Eliana</h1>
+        <div class="names">&mdash; 26 Gennaio 2027 &mdash;</div>
+        
+        <div class="divider"></div>
+
+        <div class="details">
+            <div class="detail-row">
+                🕒 <strong>Orario:</strong> ore 20:30
+            </div>
+            <div class="detail-row">
+                📍 <strong>Ristorante:</strong> Al Convento<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+            </div>
             
-            <div class="info-box">
-                <p>🕒 <strong>Orario:</strong> ore 20:30</p>
-                <p>📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 0.95rem; color: #666;">Via Cupa Camaldoli 14, 80131 Napoli</span></p>
-            </div>
-
+            <!-- Pulsanti Mappa e Calendario -->
             <div class="action-buttons">
-                <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn">Apri Mappa 🗺️</a>
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Promessa+di+Matrimonio+-+Giovanni+%26+Eliana&dates=20270126T193000Z/20270126T233000Z&details=Vi+aspettiamo+per+la+nostra+promessa+di+matrimonio!&location=Al+Convento,+Via+Cupa+Camaldoli+14,+80131+Napoli" target="_blank" class="btn">Salva in Calendario 📅</a>
+                <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-action">Apri Mappa 🗺️</a>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Promessa+di+Matrimonio+-+Giovanni+%26+Eliana&dates=20270126T193000Z/20270126T233000Z&details=Vi+aspettiamo+per+la+nostra+promessa+di+matrimonio!&location=Al+Convento,+Via+Cupa+Camaldoli+14,+80131+Napoli" target="_blank" class="btn-action">Salva in Calendario 📅</a>
             </div>
         </div>
 
-        <div class="secondary-video-container">
-            <video autoplay loop muted playsinline src="video 3.mp4"></video>
+        <!-- Conto alla rovescia -->
+        <div class="countdown-title">Mancano al grande giorno:</div>
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <span class="countdown-number" id="months">0</span>
+                <span class="countdown-label">Mesi</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="days">0</span>
+                <span class="countdown-label">Giorni</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="hours">0</span>
+                <span class="countdown-label">Ore</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="minutes">0</span>
+                <span class="countdown-label">Min</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="seconds">0</span>
+                <span class="countdown-label">Sec</span>
+            </div>
         </div>
 
+        <div class="divider"></div>
+
+        <!-- Video 3 all'interno della card -->
+        <div class="video-container">
+            <video src="video 3.mp4" autoplay muted loop playsinline></video>
+        </div>
+
+        <!-- Sezione RSVP -->
         <div class="rsvp-section">
-            <h3>Conferma la tua presenza</h3>
+            <div class="rsvp-title">Conferma la tua presenza</div>
             <div class="rsvp-buttons">
-                <a href="https://wa.me/393511481691?text=Ciao!%20Confermo%20con%20gioia%20la%20mia%20presenza%20alla%20vostra%20promessa!%20❤️" target="_blank" class="btn-whatsapp">Sì, ci sarò! ✨</a>
-                <a href="https://wa.me/393511481691?text=Ciao,%20purtroppo%20non%20potrò%20essere%20presente%20alla%20vostra%20promessa,%20vi%20auguro%20il%20meglio!%20🤍" target="_blank" class="btn-whatsapp decline">Purtroppo no</a>
+                <a href="https://wa.me/393511481691?text=Ciao!%20Confermo%20con%20gioia%20la%20mia%20presenza%20alla%20vostra%20promessa!%20❤️" target="_blank" class="btn-rsvp btn-yes">Sì, ci sarò! ✨</a>
+                <a href="https://wa.me/393511481691?text=Ciao,%20purtroppo%20non%20potrò%20essere%20presente%20alla%20vostra%20promessa,%20vi%20auguro%20il%20meglio!%20🤍" target="_blank" class="btn-rsvp btn-no">Purtroppo no</a>
             </div>
         </div>
 
-        <div class="quote">
-            "Il nostro per sempre comincia con voi..."
+        <!-- Frase Emozionante Finale -->
+        <div class="final-quote" id="finalQuoteText">"Il nostro per sempre comincia con voi..."</div>
+
+        <div class="footer-note">
+            La vostra presenza è il regalo più bello.
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const introOverlay = document.getElementById('intro-overlay');
-            const introVideo = document.getElementById('intro-video');
-            const startBtn = document.getElementById('start-btn');
-            const mainContent = document.getElementById('main-content');
-            const bgMusic = document.getElementById('bg-music');
+        var music = document.getElementById('bg-music');
+        var introVideo = document.getElementById('intro-video');
+        var introContainer = document.getElementById('intro-video-container');
+        var flashOverlay = document.getElementById('flash-overlay');
 
-            function triggerExperience() {
-                introOverlay.classList.add('fade-out');
-                mainContent.classList.add('visible');
+        var text1 = document.getElementById('intro-text-1');
+        var text2 = document.getElementById('intro-text-2');
+        var text3 = document.getElementById('intro-text-3');
+        var text4 = document.getElementById('intro-text-4');
+        var text5 = document.getElementById('intro-text-5');
 
-                bgMusic.play().catch(e => {
-                    console.log("Audio riprodotto dopo interazione utente.");
-                });
+        function startExperience() {
+            var overlay = document.getElementById('start-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 1000);
 
-                setTimeout(() => {
-                    introVideo.pause();
-                }, 1000);
+            // Mostra e avvia il video in.mp4 con il suo audio originale
+            introContainer.style.visibility = 'visible';
+            introContainer.style.opacity = '1';
+            
+            introVideo.volume = 1.0; 
+            introVideo.currentTime = 0;
+            introVideo.play().catch(function(error) {
+                console.log("Errore video in:", error);
+                onIntroEnded();
+            });
+
+            // Sequenza frasi sotto il video in.mp4
+            setTimeout(function() { text1.classList.add('show-phrase'); }, 800);
+            setTimeout(function() { text1.classList.remove('show-phrase'); }, 3800);
+
+            setTimeout(function() { text2.classList.add('show-phrase'); }, 4200);
+            setTimeout(function() { text2.classList.remove('show-phrase'); }, 7500);
+
+            setTimeout(function() { text3.classList.add('show-phrase'); }, 7900);
+            setTimeout(function() { text3.classList.remove('show-phrase'); }, 11000);
+
+            setTimeout(function() { text4.classList.add('show-phrase'); }, 11400);
+            setTimeout(function() { text4.classList.remove('show-phrase'); }, 14500);
+
+            setTimeout(function() { text5.classList.add('show-phrase'); }, 14900);
+            setTimeout(function() { text5.classList.remove('show-phrase'); }, 18000);
+
+            // Quando finisce il video in.mp4, passa subito alla promessa
+            introVideo.onended = function() {
+                onIntroEnded();
+            };
+        }
+
+        function onIntroEnded() {
+            // Flash bianco/oro di transizione
+            flashOverlay.style.opacity = '1';
+
+            setTimeout(function() {
+                introContainer.style.display = 'none';
+                flashOverlay.style.opacity = '0';
+
+                // Avvia la musica principale e la sequenza della promessa
+                music.volume = 1.0;
+                music.play().catch(function(error) { console.log(error); });
+
+                runStorySequence();
+
+            }, 1200);
+        }
+
+        function runStorySequence() {
+            document.getElementById('step-1').classList.add('visible');
+
+            setTimeout(function() {
+                document.getElementById('step-1').classList.remove('visible');
+            }, 4000);
+
+            setTimeout(function() {
+                document.getElementById('step-2').classList.add('visible');
+            }, 5500);
+
+            setTimeout(function() {
+                document.getElementById('step-2').classList.remove('visible');
+            }, 9500);
+
+            setTimeout(function() {
+                document.getElementById('step-3').classList.add('visible');
+                document.getElementById('fireworks-container').style.display = 'block';
+            }, 11000);
+
+            music.onended = function() {
+                triggerGrandFinale();
+            };
+        }
+
+        function triggerGrandFinale() {
+            var container = document.getElementById('fireworks-container');
+            container.style.display = 'block';
+
+            var invitationCard = document.getElementById('step-3');
+            invitationCard.classList.add('grand-finale-effect');
+
+            var quote = document.getElementById('finalQuoteText');
+            quote.classList.add('pulse-quote');
+
+            for(let i=0; i<10; i++) {
+                let fw = document.createElement('div');
+                fw.className = 'firework';
+                fw.style.top = Math.random() * 80 + '%';
+                fw.style.left = Math.random() * 80 + '%';
+                fw.style.animationDelay = (i * 0.15) + 's';
+                container.appendChild(fw);
+            }
+        }
+
+        const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("months").innerText = "0";
+                document.getElementById("days").innerText = "0";
+                document.getElementById("hours").innerText = "0";
+                document.getElementById("minutes").innerText = "0";
+                document.getElementById("seconds").innerText = "0";
+                return;
             }
 
-            startBtn.addEventListener('click', triggerExperience);
-            introVideo.addEventListener('ended', triggerExperience);
-        });
+            const daysTotal = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const months = Math.floor(daysTotal / 30);
+            const days = daysTotal % 30;
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("months").innerText = months;
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
+
 </body>
 </html>
