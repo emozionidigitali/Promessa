@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promessa di Matrimonio - Giovanni & Eliana</title>
     
-    <!-- Anteprima Link per WhatsApp e Social -->
+    <!-- Anteprima Link WhatsApp e Social (URL assoluto corretto) -->
     <meta property="og:title" content="Promessa di Matrimonio - Giovanni & Eliana">
     <meta property="og:description" content="26 Gennaio 2027 - Clicca per scoprire i dettagli della nostra promessa!">
-    <meta property="og:image" content="anteprima.jpg">
-    <meta property="og:url" content="https://tuodominio.it/index.html">
+    <meta property="og:image" content="https://emozionidigitali.github.io/Promessa/anteprima.jpg">
+    <meta property="og:url" content="https://emozionidigitali.github.io/Promessa/">
     <meta property="og:type" content="website">
 
     <!-- Font eleganti in stile matrimonio -->
@@ -530,7 +530,7 @@
 </head>
 <body>
 
-    <!-- Canzone Principale in loop (mu.mp3) -->
+    <!-- Canzone Principale in loop (mu.mp3) - Parte subito all'apertura -->
     <audio id="bg-music" preload="auto" loop>
         <source src="mu.mp3" type="audio/mp3">
     </audio>
@@ -684,21 +684,33 @@
             });
         }
 
-        // Avvio iniziale del video di copertina
+        // Avvio automatico all'apertura della pagina (video intro + tentate riproduzione audio)
         window.addEventListener('DOMContentLoaded', (event) => {
             introVideo.play().catch(function(error) {
                 console.log("Video intro in attesa:", error);
             });
+
+            // Tenta di far partire subito la musica all'apertura
+            music.volume = 1.0;
+            music.play().catch(function(error) {
+                console.log("Audio in attesa del primo tocco sulla pagina per le policy del browser.");
+            });
         });
+
+        // Se il browser blocca l'audio all'apertura, parte appena l'utente tocca/clicca ovunque sullo schermo
+        window.addEventListener('click', function unlockAudioOnce() {
+            if (music.paused) {
+                music.volume = 1.0;
+                music.play().catch(e => console.log(e));
+            }
+        }, { once: true });
 
         // Funzione eseguita al click sul pulsante APRI
         function startPromiseExperience() {
-            // Avvia la musica forzatamente al click dell'utente (supera i blocchi dei browser)
+            // Assicura che la musica sia attiva
             music.volume = 1.0;
-            music.play().then(() => {
-                console.log("Audio avviato con successo");
-            }).catch(function(error) {
-                console.log("Errore riproduzione audio:", error);
+            music.play().catch(function(error) {
+                console.log("Ripresa audio:", error);
             });
 
             // Ferma il primo video e nascondi il contenitore iniziale
