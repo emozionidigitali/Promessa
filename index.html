@@ -125,7 +125,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* Scritte sovrapposte al video */
+        /* Scritte sovrapposte al video (accompagnamento) */
         .story-step {
             position: fixed;
             top: 50%;
@@ -150,18 +150,26 @@
 
         #step-1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 42px;
+            font-size: 38px;
             color: #f7e2b3;
             text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
             line-height: 1.3;
         }
 
         #step-2 {
-            font-size: 24px;
+            font-size: 22px;
             color: #fdfbf7;
             line-height: 1.6;
             font-style: italic;
             text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        #step-4 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 40px;
+            color: #f7e2b3;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
+            line-height: 1.3;
         }
 
         #step-3 {
@@ -387,6 +395,32 @@
             font-style: italic;
         }
 
+        /* Effetto Scintille Luminose continuo */
+        #sparkles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 15;
+            display: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, #fff 0%, #f7e2b3 60%, transparent 100%);
+            border-radius: 50%;
+            animation: sparkleAnim linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.9; box-shadow: 0 0 12px #f7e2b3, 0 0 20px #fff; }
+            100% { transform: scale(0.3); opacity: 0; }
+        }
+
         #fireworks-container {
             position: fixed;
             top: 0;
@@ -394,7 +428,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 5;
+            z-index: 12;
             display: none;
         }
 
@@ -438,6 +472,9 @@
         <video id="tram-video" src="intro 2.mp4" muted playsinline></video>
     </div>
 
+    <!-- Effetto Scintille Luminose -->
+    <div id="sparkles-container"></div>
+
     <!-- Fuochi d'artificio -->
     <div id="fireworks-container">
         <div class="firework" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
@@ -447,14 +484,15 @@
         <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
     </div>
 
-    <!-- Messaggio 1 sovrapposto (all'inizio del video intro 2) -->
+    <!-- Frasi di accompagnamento durante il video -->
     <div class="story-step" id="step-1">
         Ci sono momenti che cambiano la vita per sempre...
     </div>
-
-    <!-- Messaggio 2 sovrapposto (a metà video intro 2) -->
     <div class="story-step" id="step-2">
-        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
+        Ogni istante passato insieme è una promessa d'amore eterno.
+    </div>
+    <div class="story-step" id="step-4">
+        Non mancate alla nostra promessa! ✨
     </div>
 
     <!-- Messaggio 3: Invito Ufficiale sovrapposto (compare a 7 secondi dalla fine) -->
@@ -561,7 +599,6 @@
         });
 
         function startPromiseExperience() {
-            // Mantiene la musica attiva durante la transizione
             music.play().catch(function(error) {
                 console.log("Ripresa audio:", error);
             });
@@ -581,31 +618,52 @@
                     console.log("Errore riproduzione intro 2:", error);
                 });
 
-                // Avvia la sequenza delle frasi e del monitoraggio per l'invito finale
+                // Attiva le scintille e la sequenza delle frasi
+                document.getElementById('sparkles-container').style.display = 'block';
+                startSparklesGenerator();
                 runStorySequence();
 
             }, 1000);
         }
 
-        // Funzione che gestisce le frasi e mostra l'invito a 7 secondi dalla fine
+        // Generatore continuo di scintille luminose casuali sullo schermo
+        function startSparklesGenerator() {
+            const container = document.getElementById('sparkles-container');
+            setInterval(() => {
+                if (container.style.display === 'block') {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    
+                    const size = Math.random() * 8 + 4; // Dimensione tra 4px e 12px
+                    sparkle.style.width = size + 'px';
+                    sparkle.style.height = size + 'px';
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = Math.random() * 100 + 'vh';
+                    
+                    const duration = Math.random() * 1.5 + 0.8; // Durata animazione
+                    sparkle.style.animationDuration = duration + 's';
+                    
+                    container.appendChild(sparkle);
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, duration * 1000);
+                }
+            }, 150);
+        }
+
+        // Gestione sequenza frasi e comparsa dell'invito finale a 7 secondi dalla fine
         function runStorySequence() {
-            // Frase 1 (all'inizio del video)
-            setTimeout(function() {
-                document.getElementById('step-1').classList.add('visible');
-            }, 1000);
+            // Frase 1 (da 1s a 5s)
+            setTimeout(() => { document.getElementById('step-1').classList.add('visible'); }, 1000);
+            setTimeout(() => { document.getElementById('step-1').classList.remove('visible'); }, 5000);
 
-            setTimeout(function() {
-                document.getElementById('step-1').classList.remove('visible');
-            }, 5000);
+            // Frase 2 (da 7s a 13s)
+            setTimeout(() => { document.getElementById('step-2').classList.add('visible'); }, 7000);
+            setTimeout(() => { document.getElementById('step-2').classList.remove('visible'); }, 13000);
 
-            // Frase 2 (a circa metà video)
-            setTimeout(function() {
-                document.getElementById('step-2').classList.add('visible');
-            }, 6500);
-
-            setTimeout(function() {
-                document.getElementById('step-2').classList.remove('visible');
-            }, 11000);
+            // Frase 3: "Non mancate alla nostra promessa" (da 15s a 21s)
+            setTimeout(() => { document.getElementById('step-4').classList.add('visible'); }, 15000);
+            setTimeout(() => { document.getElementById('step-4').classList.remove('visible'); }, 21000);
 
             // Controllo per mostrare l'invito ufficiale (step-3) a 7 secondi dalla fine del video
             let cardShown = false;
