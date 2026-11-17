@@ -125,7 +125,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* Scritte sovrapposte al video (accompagnamento) */
+        /* Scritte sovrapposte al video */
         .story-step {
             position: fixed;
             top: 50%;
@@ -151,22 +151,6 @@
         #step-1 {
             font-family: 'Great Vibes', cursive;
             font-size: 38px;
-            color: #f7e2b3;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
-            line-height: 1.3;
-        }
-
-        #step-2 {
-            font-size: 22px;
-            color: #fdfbf7;
-            line-height: 1.6;
-            font-style: italic;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
-        }
-
-        #step-4 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 40px;
             color: #f7e2b3;
             text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
             line-height: 1.3;
@@ -256,6 +240,7 @@
             font-weight: 600;
             border-radius: 20px;
             text-decoration: none;
+            cursor: pointer;
             transition: background 0.3s, color 0.3s;
         }
 
@@ -395,6 +380,92 @@
             font-style: italic;
         }
 
+        /* Finestra Modale IBAN */
+        #iban-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 30000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        #iban-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .iban-card {
+            background: #232b22;
+            border: 2px solid #e6c584;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            color: #f2efe9;
+            position: relative;
+        }
+
+        .iban-card h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 34px;
+            color: #f7e2b3;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .iban-box {
+            background: #192018;
+            border: 1px dashed #e6c584;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 15px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .btn-copy {
+            background: #e6c584;
+            color: #232b22;
+            border: none;
+            padding: 8px 20px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            margin-top: 5px;
+            transition: transform 0.2s;
+        }
+
+        .btn-copy:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #e6c584;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
         /* Effetto Scintille Luminose continuo */
         #sparkles-container {
             position: fixed;
@@ -484,15 +555,26 @@
         <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
     </div>
 
-    <!-- Frasi di accompagnamento durante il video -->
+    <!-- Frase di accompagnamento durante il video -->
     <div class="story-step" id="step-1">
-        Ci sono momenti che cambiano la vita per sempre...
-    </div>
-    <div class="story-step" id="step-2">
-        Ogni istante passato insieme è una promessa d'amore eterno.
-    </div>
-    <div class="story-step" id="step-4">
         Non mancate alla nostra promessa! ✨
+    </div>
+
+    <!-- Modale IBAN Viaggio di Nozze -->
+    <div id="iban-modal">
+        <div class="iban-card">
+            <button class="modal-close" onclick="closeIbanModal()">&times;</button>
+            <h2>Viaggio di Nozze ✈️</h2>
+            <p style="font-size: 14px; margin-bottom: 10px;">Il vostro contributo per realizzare il nostro sogno è il regalo più gradito.</p>
+            <div style="font-size: 13px; text-align: left; margin-top: 10px;">
+                <strong>Intestatario:</strong> Giovanni & Eliana<br>
+                <strong>Banca:</strong> [Nome Banca]<br>
+                <strong>Causale:</strong> Viaggio di Nozze Promessa Giovanni & Eliana
+            </div>
+            <div class="iban-box" id="ibanText">IT00 X000 0000 0000 0000 0000 000</div>
+            <button class="btn-copy" onclick="copyIban()">Copia IBAN 📋</button>
+            <p style="font-size: 11px; color: #e1dad0; margin-top: 12px; font-style: italic;">Potete effettuare il bonifico con la vostra carta o home banking preferito.</p>
+        </div>
     </div>
 
     <!-- Messaggio 3: Invito Ufficiale sovrapposto (compare a 7 secondi dalla fine) -->
@@ -515,7 +597,7 @@
             <!-- PULSANTI AZIONE -->
             <div class="action-buttons">
                 <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-action">Apri Mappa 🗺️</a>
-                <a href="https://paypal.me/TUONOMETODO" target="_blank" class="btn-action btn-iban-pay">Viaggio di Nozze ✈️</a>
+                <button class="btn-action btn-iban-pay" onclick="openIbanModal()">Viaggio di Nozze ✈️</button>
             </div>
         </div>
 
@@ -572,6 +654,22 @@
         var introContainer = document.getElementById('intro-video-container');
         var tramVideo = document.getElementById('tram-video');
         var tramContainer = document.getElementById('tram-video-container');
+
+        // Funzioni per la modale IBAN
+        function openIbanModal() {
+            document.getElementById('iban-modal').classList.add('active');
+        }
+
+        function closeIbanModal() {
+            document.getElementById('iban-modal').classList.remove('active');
+        }
+
+        function copyIban() {
+            const ibanText = document.getElementById('ibanText').innerText;
+            navigator.clipboard.writeText(ibanText).then(() => {
+                alert("IBAN copiato negli appunti!");
+            });
+        }
 
         // Sblocca e avvia la musica e il video in loop al primo tocco ovunque sullo schermo
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -634,13 +732,13 @@
                     const sparkle = document.createElement('div');
                     sparkle.classList.add('sparkle');
                     
-                    const size = Math.random() * 8 + 4; // Dimensione tra 4px e 12px
+                    const size = Math.random() * 8 + 4;
                     sparkle.style.width = size + 'px';
                     sparkle.style.height = size + 'px';
                     sparkle.style.left = Math.random() * 100 + 'vw';
                     sparkle.style.top = Math.random() * 100 + 'vh';
                     
-                    const duration = Math.random() * 1.5 + 0.8; // Durata animazione
+                    const duration = Math.random() * 1.5 + 0.8;
                     sparkle.style.animationDuration = duration + 's';
                     
                     container.appendChild(sparkle);
@@ -651,19 +749,11 @@
             }, 150);
         }
 
-        // Gestione sequenza frasi e comparsa dell'invito finale a 7 secondi dalla fine
+        // Gestione sequenza frase e comparsa dell'invito finale a 7 secondi dalla fine
         function runStorySequence() {
-            // Frase 1 (da 1s a 5s)
-            setTimeout(() => { document.getElementById('step-1').classList.add('visible'); }, 1000);
-            setTimeout(() => { document.getElementById('step-1').classList.remove('visible'); }, 5000);
-
-            // Frase 2 (da 7s a 13s)
-            setTimeout(() => { document.getElementById('step-2').classList.add('visible'); }, 7000);
-            setTimeout(() => { document.getElementById('step-2').classList.remove('visible'); }, 13000);
-
-            // Frase 3: "Non mancate alla nostra promessa" (da 15s a 21s)
-            setTimeout(() => { document.getElementById('step-4').classList.add('visible'); }, 15000);
-            setTimeout(() => { document.getElementById('step-4').classList.remove('visible'); }, 21000);
+            // Frase di accompagnamento iniziale
+            setTimeout(() => { document.getElementById('step-1').classList.add('visible'); }, 1500);
+            setTimeout(() => { document.getElementById('step-1').classList.remove('visible'); }, 7000);
 
             // Controllo per mostrare l'invito ufficiale (step-3) a 7 secondi dalla fine del video
             let cardShown = false;
