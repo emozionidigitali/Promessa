@@ -339,4 +339,144 @@
         }
 
         .rsvp-buttons {
-            display
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-rsvp {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .btn-yes {
+            background-color: #25d366;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-no {
+            background-color: transparent;
+            color: #e1dad0;
+            border: 1px solid #e1dad0;
+        }
+
+        .btn-rsvp:hover {
+            transform: scale(1.05);
+        }
+
+        .final-quote {
+            font-family: 'Great Vibes', cursive;
+            font-size: 19px;
+            color: #f7e2b3;
+            margin-top: 6px;
+            margin-bottom: 2px;
+            text-align: center;
+        }
+
+        .footer-note {
+            font-size: 11px;
+            color: #e1dad0;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        /* Finestra Modale IBAN */
+        #iban-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 30000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        #iban-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .iban-card {
+            background: #232b22;
+            border: 2px solid #e6c584;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            color: #f2efe9;
+            position: relative;
+        }
+
+        .iban-card h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 34px;
+            color: #f7e2b3;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .iban-box {
+            background: #192018;
+            border: 1px dashed #e6c584;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 14px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .btn-copy {
+            background: #e6c584;
+            color: #232b22;
+            border: none;
+            padding: 8px 20px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            margin-top: 5px;
+            transition: transform 0.2s;
+        }
+
+        .btn-copy:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #e6c584;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Effetto Scintille Luminose continuo */
+        #sparkles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw
