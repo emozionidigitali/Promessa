@@ -24,7 +24,7 @@
             align-items: center;
         }
 
-        /* Video Intro a tutto schermo come lo avevi impostato all'inizio */
+        /* Video Intro a tutto schermo */
         #intro-video-container {
             position: fixed;
             top: 0;
@@ -89,7 +89,7 @@
             color: #fff;
         }
 
-        /* Contenitore Video Tram (tram.mp4) adattato perfettamente a schermo intero */
+        /* Contenitore Video Tram (tram.mp4) a schermo intero adattato */
         #tram-video-container {
             position: fixed;
             top: 0;
@@ -109,7 +109,7 @@
         #tram-video {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Si adatta perfettamente senza tagliarsi */
+            object-fit: contain;
         }
 
         #flash-overlay {
@@ -579,9 +579,11 @@
         });
 
         function startPromiseExperience() {
-            // Ferma la musica e il video intro
-            music.pause();
-            music.currentTime = 0;
+            // Assicura che la musica continui a suonare senza interruzioni durante il passaggio al tram
+            music.play().catch(function(error) {
+                console.log("Ripresa audio:", error);
+            });
+
             introVideo.pause();
 
             // Transizione a schermo intero sul video tram.mp4
