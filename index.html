@@ -125,7 +125,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* Scritte sovrapposte al secondo video */
+        /* Scritte sovrapposte al video */
         .story-step {
             position: fixed;
             top: 50%;
@@ -146,22 +146,6 @@
         .visible {
             opacity: 1 !important;
             visibility: visible !important;
-        }
-
-        #step-1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 42px;
-            color: #f7e2b3;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
-            line-height: 1.3;
-        }
-
-        #step-2 {
-            font-size: 24px;
-            color: #fdfbf7;
-            line-height: 1.6;
-            font-style: italic;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
         }
 
         #step-3 {
@@ -447,17 +431,7 @@
         <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
     </div>
 
-    <!-- Messaggio 1 sovrapposto -->
-    <div class="story-step" id="step-1">
-        Ci sono momenti che cambiano la vita per sempre...
-    </div>
-
-    <!-- Messaggio 2 sovrapposto -->
-    <div class="story-step" id="step-2">
-        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
-    </div>
-
-    <!-- Messaggio 3: Invito Ufficiale sovrapposto (compare negli ultimi 10 secondi del video) -->
+    <!-- Messaggio 3: Invito Ufficiale sovrapposto (compare a 7 secondi dalla fine) -->
     <div class="story-step" id="step-3">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
@@ -581,13 +555,13 @@
                     console.log("Errore riproduzione intro 2:", error);
                 });
 
-                // Avvia il controllo dinamico basato sulla durata del video intro 2.mp4
+                // Monitora il video per mostrare la card a 7 secondi dalla fine
                 monitorVideoAndShowCard();
 
             }, 1000);
         }
 
-        // Funzione per monitorare il video e mostrare l'invito negli ultimi 10 secondi lasciando riprodurre tutto il video
+        // Funzione per monitorare il video e mostrare l'invito a 7 secondi dalla fine
         function monitorVideoAndShowCard() {
             let cardShown = false;
 
@@ -595,14 +569,14 @@
                 if (tramVideo.duration && !isNaN(tramVideo.duration)) {
                     const timeLeft = tramVideo.duration - tramVideo.currentTime;
                     
-                    // Quando mancano esattamente 10 secondi alla fine del video (e non è già stata mostrata)
-                    if (timeLeft <= 10 && !cardShown) {
+                    // Quando mancano esattamente 7 secondi alla fine del video
+                    if (timeLeft <= 7 && !cardShown) {
                         cardShown = true;
                         document.getElementById('step-3').classList.add('visible');
                         document.getElementById('fireworks-container').style.display = 'block';
                     }
 
-                    // Se il video è arrivato alla fine
+                    // Se il video è terminato
                     if (tramVideo.ended) {
                         clearInterval(checkInterval);
                     }
