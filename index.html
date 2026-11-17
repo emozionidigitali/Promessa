@@ -148,7 +148,7 @@
             visibility: visible !important;
         }
 
-        #step-1 {
+        .story-text {
             font-family: 'Great Vibes', cursive;
             font-size: 38px;
             color: #f7e2b3;
@@ -555,10 +555,12 @@
         <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
     </div>
 
-    <!-- Frase di accompagnamento durante il video -->
-    <div class="story-step" id="step-1">
-        Non mancate alla nostra promessa! ✨
-    </div>
+    <!-- Frasi di accompagnamento durante il video -->
+    <div class="story-step story-text" id="step-1">Ci sono momenti che cambiano la vita per sempre...</div>
+    <div class="story-step story-text" id="step-2">Ogni istante passato insieme è un dono prezioso.</div>
+    <div class="story-step story-text" id="step-4">Il nostro cammino è appena iniziato...</div>
+    <div class="story-step story-text" id="step-5">Con il cuore colmo di gioia vi aspettiamo.</div>
+    <div class="story-step story-text" id="step-6">Non mancate alla nostra promessa! ✨</div>
 
     <!-- Modale IBAN Viaggio di Nozze -->
     <div id="iban-modal">
@@ -749,11 +751,27 @@
             }, 150);
         }
 
-        // Gestione sequenza frase e comparsa dell'invito finale a 7 secondi dalla fine
+        // Gestione sequenza frasi in successione e comparsa dell'invito finale a 7 secondi dalla fine
         function runStorySequence() {
-            // Frase di accompagnamento iniziale
-            setTimeout(() => { document.getElementById('step-1').classList.add('visible'); }, 1500);
-            setTimeout(() => { document.getElementById('step-1').classList.remove('visible'); }, 7000);
+            // Frase 1 (da 1s a 5s)
+            setTimeout(() => { document.getElementById('step-1').classList.add('visible'); }, 1000);
+            setTimeout(() => { document.getElementById('step-1').classList.remove('visible'); }, 5000);
+
+            // Frase 2 (da 6s a 10s)
+            setTimeout(() => { document.getElementById('step-2').classList.add('visible'); }, 6000);
+            setTimeout(() => { document.getElementById('step-2').classList.remove('visible'); }, 10000);
+
+            // Frase 3 (da 11s a 15s)
+            setTimeout(() => { document.getElementById('step-4').classList.add('visible'); }, 11000);
+            setTimeout(() => { document.getElementById('step-4').classList.remove('visible'); }, 15000);
+
+            // Frase 4 (da 16s a 20s)
+            setTimeout(() => { document.getElementById('step-5').classList.add('visible'); }, 16000);
+            setTimeout(() => { document.getElementById('step-5').classList.remove('visible'); }, 20000);
+
+            // Frase 5: "Non mancate alla nostra promessa!" (da 21s a 26s)
+            setTimeout(() => { document.getElementById('step-6').classList.add('visible'); }, 21000);
+            setTimeout(() => { document.getElementById('step-6').classList.remove('visible'); }, 26000);
 
             // Controllo per mostrare l'invito ufficiale (step-3) a 7 secondi dalla fine del video
             let cardShown = false;
