@@ -89,14 +89,14 @@
             color: #fff;
         }
 
-        /* Contenitore Video Intro 2 (intro 2.mp4) a schermo intero */
+        /* Contenitore Video Intro 2 (intro 2.mp4) a schermo intero con sfondo verde salvia */
         #tram-video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #000;
+            background: #232b22;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -146,6 +146,22 @@
         .visible {
             opacity: 1 !important;
             visibility: visible !important;
+        }
+
+        #step-1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 42px;
+            color: #f7e2b3;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
+            line-height: 1.3;
+        }
+
+        #step-2 {
+            font-size: 24px;
+            color: #fdfbf7;
+            line-height: 1.6;
+            font-style: italic;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
         }
 
         #step-3 {
@@ -417,7 +433,7 @@
         </div>
     </div>
 
-    <!-- Contenitore Video Intro 2 (intro 2.mp4) a schermo intero -->
+    <!-- Contenitore Video Intro 2 (intro 2.mp4) a schermo intero con sfondo verde salvia -->
     <div id="tram-video-container">
         <video id="tram-video" src="intro 2.mp4" muted playsinline></video>
     </div>
@@ -429,6 +445,16 @@
         <div class="firework" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
         <div class="firework" style="top: 60%; left: 75%; animation-delay: 1.2s;"></div>
         <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
+    </div>
+
+    <!-- Messaggio 1 sovrapposto (all'inizio del video intro 2) -->
+    <div class="story-step" id="step-1">
+        Ci sono momenti che cambiano la vita per sempre...
+    </div>
+
+    <!-- Messaggio 2 sovrapposto (a metà video intro 2) -->
+    <div class="story-step" id="step-2">
+        Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
     </div>
 
     <!-- Messaggio 3: Invito Ufficiale sovrapposto (compare a 7 secondi dalla fine) -->
@@ -555,28 +581,44 @@
                     console.log("Errore riproduzione intro 2:", error);
                 });
 
-                // Monitora il video per mostrare la card a 7 secondi dalla fine
-                monitorVideoAndShowCard();
+                // Avvia la sequenza delle frasi e del monitoraggio per l'invito finale
+                runStorySequence();
 
             }, 1000);
         }
 
-        // Funzione per monitorare il video e mostrare l'invito a 7 secondi dalla fine
-        function monitorVideoAndShowCard() {
-            let cardShown = false;
+        // Funzione che gestisce le frasi e mostra l'invito a 7 secondi dalla fine
+        function runStorySequence() {
+            // Frase 1 (all'inizio del video)
+            setTimeout(function() {
+                document.getElementById('step-1').classList.add('visible');
+            }, 1000);
 
+            setTimeout(function() {
+                document.getElementById('step-1').classList.remove('visible');
+            }, 5000);
+
+            // Frase 2 (a circa metà video)
+            setTimeout(function() {
+                document.getElementById('step-2').classList.add('visible');
+            }, 6500);
+
+            setTimeout(function() {
+                document.getElementById('step-2').classList.remove('visible');
+            }, 11000);
+
+            // Controllo per mostrare l'invito ufficiale (step-3) a 7 secondi dalla fine del video
+            let cardShown = false;
             const checkInterval = setInterval(function() {
                 if (tramVideo.duration && !isNaN(tramVideo.duration)) {
                     const timeLeft = tramVideo.duration - tramVideo.currentTime;
                     
-                    // Quando mancano esattamente 7 secondi alla fine del video
                     if (timeLeft <= 7 && !cardShown) {
                         cardShown = true;
                         document.getElementById('step-3').classList.add('visible');
                         document.getElementById('fireworks-container').style.display = 'block';
                     }
 
-                    // Se il video è terminato
                     if (tramVideo.ended) {
                         clearInterval(checkInterval);
                     }
