@@ -89,7 +89,7 @@
             color: #fff;
         }
 
-        /* Contenitore Video Intro 2 (intro 2.mp4) a schermo intero adattato */
+        /* Contenitore Video Intro 2 (intro 2.mp4) a schermo intero */
         #tram-video-container {
             position: fixed;
             top: 0;
@@ -433,9 +433,9 @@
         </div>
     </div>
 
-    <!-- Contenitore Video Intro 2 (intro 2.mp4) a schermo intero adattato -->
+    <!-- Contenitore Video Intro 2 (intro 2.mp4) a schermo intero -->
     <div id="tram-video-container">
-        <video id="tram-video" src="intro 2.mp4" autoplay muted loop playsinline></video>
+        <video id="tram-video" src="intro 2.mp4" muted playsinline></video>
     </div>
 
     <!-- Fuochi d'artificio -->
@@ -457,7 +457,7 @@
         Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
     </div>
 
-    <!-- Messaggio 3: Invito Ufficiale sovrapposto -->
+    <!-- Messaggio 3: Invito Ufficiale sovrapposto (compare negli ultimi 10 secondi del video) -->
     <div class="story-step" id="step-3">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
@@ -581,31 +581,33 @@
                     console.log("Errore riproduzione intro 2:", error);
                 });
 
-                // Avvia la sequenza delle scritte sovrapposte
-                runStorySequence();
+                // Avvia il controllo dinamico basato sulla durata del video intro 2.mp4
+                monitorVideoAndShowCard();
 
             }, 1000);
         }
 
-        function runStorySequence() {
-            document.getElementById('step-1').classList.add('visible');
+        // Funzione per monitorare il video e mostrare l'invito negli ultimi 10 secondi lasciando riprodurre tutto il video
+        function monitorVideoAndShowCard() {
+            let cardShown = false;
 
-            setTimeout(function() {
-                document.getElementById('step-1').classList.remove('visible');
-            }, 4000);
+            const checkInterval = setInterval(function() {
+                if (tramVideo.duration && !isNaN(tramVideo.duration)) {
+                    const timeLeft = tramVideo.duration - tramVideo.currentTime;
+                    
+                    // Quando mancano esattamente 10 secondi alla fine del video (e non è già stata mostrata)
+                    if (timeLeft <= 10 && !cardShown) {
+                        cardShown = true;
+                        document.getElementById('step-3').classList.add('visible');
+                        document.getElementById('fireworks-container').style.display = 'block';
+                    }
 
-            setTimeout(function() {
-                document.getElementById('step-2').classList.add('visible');
-            }, 5500);
-
-            setTimeout(function() {
-                document.getElementById('step-2').classList.remove('visible');
-            }, 9500);
-
-            setTimeout(function() {
-                document.getElementById('step-3').classList.add('visible');
-                document.getElementById('fireworks-container').style.display = 'block';
-            }, 11000);
+                    // Se il video è arrivato alla fine
+                    if (tramVideo.ended) {
+                        clearInterval(checkInterval);
+                    }
+                }
+            }, 200);
         }
 
         const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
