@@ -89,7 +89,7 @@
             color: #fff;
         }
 
-        /* Contenitore Video Tram (tram.mp4) a schermo intero adattato */
+        /* Contenitore Video Intro 2 (intro 2.mp4) a schermo intero adattato */
         #tram-video-container {
             position: fixed;
             top: 0;
@@ -125,7 +125,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* Scritte sovrapposte al video tram */
+        /* Scritte sovrapposte al secondo video */
         .story-step {
             position: fixed;
             top: 50%;
@@ -146,13 +146,6 @@
         .visible {
             opacity: 1 !important;
             visibility: visible !important;
-        }
-
-        .grand-finale-effect {
-            transform: translate(-50%, -50%) scale(1.02);
-            box-shadow: 0 0 35px rgba(230, 197, 132, 0.7), inset 0 0 20px rgba(230, 197, 132, 0.3) !important;
-            border: 1.5px solid #fff !important;
-            background: rgba(35, 43, 34, 0.92) !important;
         }
 
         #step-1 {
@@ -385,16 +378,6 @@
             margin-top: 6px;
             margin-bottom: 2px;
             text-align: center;
-            transition: transform 0.5s ease, text-shadow 0.5s ease;
-        }
-
-        .pulse-quote {
-            animation: pulseGlow 1.8s infinite alternate ease-in-out;
-        }
-
-        @keyframes pulseGlow {
-            0% { transform: scale(1); text-shadow: 0 0 5px rgba(247, 226, 179, 0.4); }
-            100% { transform: scale(1.06); text-shadow: 0 0 18px rgba(247, 226, 179, 0.9), 0 0 25px rgba(230, 197, 132, 0.6); }
         }
 
         .footer-note {
@@ -450,9 +433,9 @@
         </div>
     </div>
 
-    <!-- Contenitore Video Tram (tram.mp4) a schermo intero adattato -->
+    <!-- Contenitore Video Intro 2 (intro 2.mp4) a schermo intero adattato -->
     <div id="tram-video-container">
-        <video id="tram-video" src="tram.mp4" autoplay muted loop playsinline></video>
+        <video id="tram-video" src="intro 2.mp4" autoplay muted loop playsinline></video>
     </div>
 
     <!-- Fuochi d'artificio -->
@@ -488,7 +471,7 @@
             </div>
             <div class="detail-row">
                 📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_1](start_span)[span_1](end_span)
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_0](start_span)[span_0](end_span)
             </div>
             
             <!-- PULSANTI AZIONE -->
@@ -585,7 +568,7 @@
 
             introVideo.pause();
 
-            // Transizione a schermo intero sul video tram.mp4
+            // Transizione a schermo intero sul video intro 2.mp4
             introContainer.style.opacity = '0';
             setTimeout(function() {
                 introContainer.style.display = 'none';
@@ -595,7 +578,7 @@
                 
                 tramVideo.currentTime = 0;
                 tramVideo.play().catch(function(error) {
-                    console.log("Errore riproduzione tram:", error);
+                    console.log("Errore riproduzione intro 2:", error);
                 });
 
                 // Avvia la sequenza delle scritte sovrapposte
