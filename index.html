@@ -24,7 +24,7 @@
             align-items: center;
         }
 
-        /* Contenitore Video In in Loop con Pulsante sotto il video */
+        /* Video Intro a tutto schermo come lo avevi impostato all'inizio */
         #intro-video-container {
             position: fixed;
             top: 0;
@@ -38,31 +38,26 @@
             align-items: center;
             z-index: 9999;
             padding: 20px;
-            gap: 15px;
+            gap: 20px;
             transition: opacity 1s ease;
         }
 
         .video-stage {
             position: relative;
             width: 100%;
-            max-width: 450px;
-            height: 68vh;
+            height: 75vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(230, 197, 132, 0.3);
         }
 
         #intro-video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
-        /* Pulsante APRI posizionato subito sotto il video */
+        /* Pulsante APRI sotto il video intro */
         .loop-action-wrapper {
             display: flex;
             justify-content: center;
@@ -78,7 +73,7 @@
             font-weight: 600;
             letter-spacing: 6px;
             text-transform: uppercase;
-            padding: 10px 40px;
+            padding: 12px 45px;
             border: 2px solid #D4AF37;
             border-radius: 50px;
             cursor: pointer;
@@ -94,7 +89,7 @@
             color: #fff;
         }
 
-        /* Contenitore Sottofondo Video Tram (tram.mp4) attivo dopo APRI */
+        /* Contenitore Video Tram (tram.mp4) adattato perfettamente a schermo intero */
         #tram-video-container {
             position: fixed;
             top: 0;
@@ -114,7 +109,7 @@
         #tram-video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Si adatta perfettamente senza tagliarsi */
         }
 
         #flash-overlay {
@@ -177,7 +172,7 @@
         }
 
         #step-3 {
-            position: absolute; /* Ritorna a scorrere/scrollabile all'interno della pagina se lungo */
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -445,7 +440,7 @@
     <!-- Schermata Flash Lento -->
     <div id="flash-overlay"></div>
 
-    <!-- Contenitore Video In in Loop con Pulsante APRI -->
+    <!-- Contenitore Video Intro a Schermo Intero -->
     <div id="intro-video-container">
         <div class="video-stage">
             <video id="intro-video" src="intro.mp4" autoplay loop muted playsinline></video>
@@ -455,7 +450,7 @@
         </div>
     </div>
 
-    <!-- Sottofondo Video Tram (tram.mp4) che rimane attivo mentre compaiono le scritte sovrapposte -->
+    <!-- Contenitore Video Tram (tram.mp4) a schermo intero adattato -->
     <div id="tram-video-container">
         <video id="tram-video" src="tram.mp4" autoplay muted loop playsinline></video>
     </div>
@@ -469,17 +464,17 @@
         <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
     </div>
 
-    <!-- Messaggio 1 sovrapposto al video tram -->
+    <!-- Messaggio 1 sovrapposto -->
     <div class="story-step" id="step-1">
         Ci sono momenti che cambiano la vita per sempre...
     </div>
 
-    <!-- Messaggio 2 sovrapposto al video tram -->
+    <!-- Messaggio 2 sovrapposto -->
     <div class="story-step" id="step-2">
         Con il cuore colmo di gioia, vi aspettiamo alla nostra promessa.<br><strong>Non mancate!</strong>
     </div>
 
-    <!-- Messaggio 3: Invito Ufficiale sovrapposto al video tram -->
+    <!-- Messaggio 3: Invito Ufficiale sovrapposto -->
     <div class="story-step" id="step-3">
         <div class="tag">La Nostra Promessa</div>
         <h1>Giovanni & Eliana</h1>
@@ -558,9 +553,8 @@
         var tramVideo = document.getElementById('tram-video');
         var tramContainer = document.getElementById('tram-video-container');
 
-        // Avvia il video in loop e sblocca l'audio al primo tocco
+        // Sblocca e avvia la musica e il video in loop al primo tocco ovunque sullo schermo
         window.addEventListener('DOMContentLoaded', (event) => {
-            introVideo.muted = true;
             introVideo.play().catch(function(error) {
                 console.log("Video autoplay in attesa:", error);
             });
@@ -580,17 +574,17 @@
 
             music.volume = 1.0;
             music.play().catch(function(error) {
-                console.log("Audio in attesa del primo tocco.");
+                console.log("Audio in attesa del primo tocco dell'utente.");
             });
         });
 
         function startPromiseExperience() {
-            // Ferma la musica e il video dell'intro
+            // Ferma la musica e il video intro
             music.pause();
             music.currentTime = 0;
             introVideo.pause();
 
-            // Transizione fluida: nasconde l'intro e fa partire in sottofondo il video tram.mp4
+            // Transizione a schermo intero sul video tram.mp4
             introContainer.style.opacity = '0';
             setTimeout(function() {
                 introContainer.style.display = 'none';
@@ -603,7 +597,7 @@
                     console.log("Errore riproduzione tram:", error);
                 });
 
-                // Avvia subito la sequenza delle scritte sovrapposte sopra il video tram
+                // Avvia la sequenza delle scritte sovrapposte
                 runStorySequence();
 
             }, 1000);
