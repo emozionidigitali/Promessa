@@ -88,6 +88,8 @@
             outline: none;
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(212, 175, 55, 0.25);
             transition: all 0.4s ease;
+            position: relative;
+            z-index: 10020;
         }
 
         .magic-btn-loop:hover {
@@ -602,7 +604,7 @@
             </div>
             <div class="detail-row">
                 📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_0](start_span)[span_0](end_span)
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
             </div>
             
             <!-- PULSANTI AZIONE -->
@@ -682,143 +684,7 @@
             });
         }
 
-        // Avvio dei video all'apertura della pagina
+        // Avvio iniziale del video di copertina
         window.addEventListener('DOMContentLoaded', (event) => {
             introVideo.play().catch(function(error) {
-                console.log("Video intro in attesa:", error);
-            });
-        });
-
-        // Funzione scatenata dal clic sul pulsante APRI
-        function startPromiseExperience() {
-            // Avvia la musica col volume al massimo
-            music.volume = 1.0;
-            music.play().catch(function(error) {
-                console.log("Errore riproduzione audio:", error);
-            });
-
-            // Ferma il primo video e nascondi la schermata iniziale
-            introVideo.pause();
-            introContainer.style.opacity = '0';
-
-            setTimeout(function() {
-                introContainer.style.display = 'none';
-                
-                // Mostra e fai partire il secondo video (intro 2.mp4)
-                tramContainer.style.visibility = 'visible';
-                tramContainer.style.opacity = '1';
-                
-                tramVideo.currentTime = 0;
-                tramVideo.play().catch(function(error) {
-                    console.log("Errore riproduzione intro 2:", error);
-                });
-
-                // Attiva le scintille e la sequenza delle frasi
-                document.getElementById('sparkles-container').style.display = 'block';
-                startSparklesGenerator();
-                runStorySequence();
-
-            }, 1000);
-        }
-
-        // Generatore continuo di scintille luminose casuali sullo schermo
-        function startSparklesGenerator() {
-            const container = document.getElementById('sparkles-container');
-            setInterval(() => {
-                if (container.style.display === 'block') {
-                    const sparkle = document.createElement('div');
-                    sparkle.classList.add('sparkle');
-                    
-                    const size = Math.random() * 8 + 4;
-                    sparkle.style.width = size + 'px';
-                    sparkle.style.height = size + 'px';
-                    sparkle.style.left = Math.random() * 100 + 'vw';
-                    sparkle.style.top = Math.random() * 100 + 'vh';
-                    
-                    const duration = Math.random() * 1.5 + 0.8;
-                    sparkle.style.animationDuration = duration + 's';
-                    
-                    container.appendChild(sparkle);
-                    setTimeout(() => {
-                        sparkle.remove();
-                    }, duration * 1000);
-                }
-            }, 150);
-        }
-
-        // Gestione sequenza frasi in successione e comparsa dell'invito finale a 7 secondi dalla fine
-        function runStorySequence() {
-            // Frase 1 (da 1s a 5s)
-            setTimeout(() => { document.getElementById('step-1').classList.add('visible'); }, 1000);
-            setTimeout(() => { document.getElementById('step-1').classList.remove('visible'); }, 5000);
-
-            // Frase 2 (da 6s a 10s)
-            setTimeout(() => { document.getElementById('step-2').classList.add('visible'); }, 6000);
-            setTimeout(() => { document.getElementById('step-2').classList.remove('visible'); }, 10000);
-
-            // Frase 3 (da 11s a 15s)
-            setTimeout(() => { document.getElementById('step-4').classList.add('visible'); }, 11000);
-            setTimeout(() => { document.getElementById('step-4').classList.remove('visible'); }, 15000);
-
-            // Frase 4 (da 16s a 20s)
-            setTimeout(() => { document.getElementById('step-5').classList.add('visible'); }, 16000);
-            setTimeout(() => { document.getElementById('step-5').classList.remove('visible'); }, 20000);
-
-            // Frase 5: "Non mancate alla nostra promessa!" (da 21s a 26s)
-            setTimeout(() => { document.getElementById('step-6').classList.add('visible'); }, 21000);
-            setTimeout(() => { document.getElementById('step-6').classList.remove('visible'); }, 26000);
-
-            // Controllo per mostrare l'invito ufficiale (step-3) a 7 secondi dalla fine del video
-            let cardShown = false;
-            const checkInterval = setInterval(function() {
-                if (tramVideo.duration && !isNaN(tramVideo.duration)) {
-                    const timeLeft = tramVideo.duration - tramVideo.currentTime;
-                    
-                    if (timeLeft <= 7 && !cardShown) {
-                        cardShown = true;
-                        document.getElementById('step-3').classList.add('visible');
-                        document.getElementById('fireworks-container').style.display = 'block';
-                    }
-
-                    if (tramVideo.ended) {
-                        clearInterval(checkInterval);
-                    }
-                }
-            }, 200);
-        }
-
-        const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                document.getElementById("months").innerText = "0";
-                document.getElementById("days").innerText = "0";
-                document.getElementById("hours").innerText = "0";
-                document.getElementById("minutes").innerText = "0";
-                document.getElementById("seconds").innerText = "0";
-                return;
-            }
-
-            const daysTotal = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const months = Math.floor(daysTotal / 30);
-            const days = daysTotal % 30;
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("months").innerText = months;
-            document.getElementById("days").innerText = days;
-            document.getElementById("hours").innerText = hours;
-            document.getElementById("minutes").innerText = minutes;
-            document.getElementById("seconds").innerText = seconds;
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
-
-</body>
-</html>
+                console
