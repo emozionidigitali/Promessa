@@ -602,7 +602,7 @@
             </div>
             <div class="detail-row">
                 📍 <strong>Ristorante:</strong> Al Convento<br>
-                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_0](start_span)[span_0](end_span)
             </div>
             
             <!-- PULSANTI AZIONE -->
@@ -682,43 +682,29 @@
             });
         }
 
-        // Sblocca e avvia la musica e il video in loop al primo tocco ovunque sullo schermo
+        // Avvio dei video all'apertura della pagina
         window.addEventListener('DOMContentLoaded', (event) => {
             introVideo.play().catch(function(error) {
-                console.log("Video autoplay in attesa:", error);
-            });
-
-            function unlockAndPlayAudio() {
-                music.volume = 1.0;
-                music.play().then(() => {
-                    window.removeEventListener('click', unlockAndPlayAudio);
-                    window.removeEventListener('touchstart', unlockAndPlayAudio);
-                }).catch(function(error) {
-                    console.log("In attesa di interazione per l'audio");
-                });
-            }
-
-            window.addEventListener('click', unlockAndPlayAudio);
-            window.addEventListener('touchstart', unlockAndPlayAudio);
-
-            music.volume = 1.0;
-            music.play().catch(function(error) {
-                console.log("Audio in attesa del primo tocco dell'utente.");
+                console.log("Video intro in attesa:", error);
             });
         });
 
+        // Funzione scatenata dal clic sul pulsante APRI
         function startPromiseExperience() {
+            // Avvia la musica col volume al massimo
+            music.volume = 1.0;
             music.play().catch(function(error) {
-                console.log("Ripresa audio:", error);
+                console.log("Errore riproduzione audio:", error);
             });
 
+            // Ferma il primo video e nascondi la schermata iniziale
             introVideo.pause();
-
-            // Transizione a schermo intero sul video intro 2.mp4
             introContainer.style.opacity = '0';
+
             setTimeout(function() {
                 introContainer.style.display = 'none';
                 
+                // Mostra e fai partire il secondo video (intro 2.mp4)
                 tramContainer.style.visibility = 'visible';
                 tramContainer.style.opacity = '1';
                 
@@ -753,4 +739,86 @@
                     sparkle.style.animationDuration = duration + 's';
                     
                     container.appendChild(sparkle);
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, duration * 1000);
+                }
+            }, 150);
+        }
+
+        // Gestione sequenza frasi in successione e comparsa dell'invito finale a 7 secondi dalla fine
+        function runStorySequence() {
+            // Frase 1 (da 1s a 5s)
+            setTimeout(() => { document.getElementById('step-1').classList.add('visible'); }, 1000);
+            setTimeout(() => { document.getElementById('step-1').classList.remove('visible'); }, 5000);
+
+            // Frase 2 (da 6s a 10s)
+            setTimeout(() => { document.getElementById('step-2').classList.add('visible'); }, 6000);
+            setTimeout(() => { document.getElementById('step-2').classList.remove('visible'); }, 10000);
+
+            // Frase 3 (da 11s a 15s)
+            setTimeout(() => { document.getElementById('step-4').classList.add('visible'); }, 11000);
+            setTimeout(() => { document.getElementById('step-4').classList.remove('visible'); }, 15000);
+
+            // Frase 4 (da 16s a 20s)
+            setTimeout(() => { document.getElementById('step-5').classList.add('visible'); }, 16000);
+            setTimeout(() => { document.getElementById('step-5').classList.remove('visible'); }, 20000);
+
+            // Frase 5: "Non mancate alla nostra promessa!" (da 21s a 26s)
+            setTimeout(() => { document.getElementById('step-6').classList.add('visible'); }, 21000);
+            setTimeout(() => { document.getElementById('step-6').classList.remove('visible'); }, 26000);
+
+            // Controllo per mostrare l'invito ufficiale (step-3) a 7 secondi dalla fine del video
+            let cardShown = false;
+            const checkInterval = setInterval(function() {
+                if (tramVideo.duration && !isNaN(tramVideo.duration)) {
+                    const timeLeft = tramVideo.duration - tramVideo.currentTime;
                     
+                    if (timeLeft <= 7 && !cardShown) {
+                        cardShown = true;
+                        document.getElementById('step-3').classList.add('visible');
+                        document.getElementById('fireworks-container').style.display = 'block';
+                    }
+
+                    if (tramVideo.ended) {
+                        clearInterval(checkInterval);
+                    }
+                }
+            }, 200);
+        }
+
+        const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("months").innerText = "0";
+                document.getElementById("days").innerText = "0";
+                document.getElementById("hours").innerText = "0";
+                document.getElementById("minutes").innerText = "0";
+                document.getElementById("seconds").innerText = "0";
+                return;
+            }
+
+            const daysTotal = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const months = Math.floor(daysTotal / 30);
+            const days = daysTotal % 30;
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("months").innerText = months;
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+</body>
+</html>
