@@ -529,3 +529,300 @@
     </style>
 </head>
 <body>
+
+    <!-- Canzone Principale in loop (mu.mp3) -->
+    <audio id="bg-music" preload="auto" loop>
+        <source src="mu.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Schermata Flash Lento -->
+    <div id="flash-overlay"></div>
+
+    <!-- Contenitore Video Intro a Schermo Intero -->
+    <div id="intro-video-container">
+        <div class="video-stage">
+            <video id="intro-video" src="intro.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="loop-action-wrapper">
+            <button class="magic-btn-loop" onclick="startPromiseExperience()">APRI</button>
+        </div>
+    </div>
+
+    <!-- Contenitore Video Intro 2 (intro 2.mp4) a schermo intero con sfondo verde salvia -->
+    <div id="tram-video-container">
+        <video id="tram-video" src="intro 2.mp4" muted playsinline></video>
+    </div>
+
+    <!-- Effetto Scintille Luminose -->
+    <div id="sparkles-container"></div>
+
+    <!-- Fuochi d'artificio -->
+    <div id="fireworks-container">
+        <div class="firework" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
+        <div class="firework" style="top: 30%; left: 80%; animation-delay: 0.4s;"></div>
+        <div class="firework" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
+        <div class="firework" style="top: 60%; left: 75%; animation-delay: 1.2s;"></div>
+        <div class="firework" style="top: 15%; left: 50%; animation-delay: 0.6s;"></div>
+    </div>
+
+    <!-- Frasi di accompagnamento durante il video -->
+    <div class="story-step story-text" id="step-1">Ci sono momenti che cambiano la vita per sempre...</div>
+    <div class="story-step story-text" id="step-2">Ogni istante passato insieme è un dono prezioso.</div>
+    <div class="story-step story-text" id="step-4">Il nostro cammino è appena iniziato...</div>
+    <div class="story-step story-text" id="step-5">Con il cuore colmo di gioia vi aspettiamo.</div>
+    <div class="story-step story-text" id="step-6">Non mancate alla nostra promessa! ✨</div>
+
+    <!-- Modale IBAN Viaggio di Nozze (Postepay - Eliana Lanzi) -->
+    <div id="iban-modal">
+        <div class="iban-card">
+            <button class="modal-close" onclick="closeIbanModal()">&times;</button>
+            <h2>Viaggio di Nozze ✈️</h2>
+            <p style="font-size: 14px; margin-bottom: 10px;">Il vostro contributo per realizzare il nostro sogno è il regalo più gradito.</p>
+            <div style="font-size: 13px; text-align: left; margin-top: 10px;">
+                <strong>Intestatario:</strong> Eliana Lanzi<br>
+                <strong>Banca:</strong> Postepay<br>
+                <strong>BIC/SWIFT:</strong> PPAYITR1XXX<br>
+                <strong>Causale:</strong> Viaggio di Nozze Promessa Giovanni & Eliana
+            </div>
+            <div class="iban-box" id="ibanText">IT55S3608105138275689475698</div>
+            <button class="btn-copy" onclick="copyIban()">Copia IBAN 📋</button>
+            <p style="font-size: 11px; color: #e1dad0; margin-top: 12px; font-style: italic;">Potete effettuare il bonifico con la vostra carta o home banking preferito.</p>
+        </div>
+    </div>
+
+    <!-- Messaggio 3: Invito Ufficiale sovrapposto (compare a 7 secondi dalla fine) -->
+    <div class="story-step" id="step-3">
+        <div class="tag">La Nostra Promessa</div>
+        <h1>Giovanni & Eliana</h1>
+        <div class="names">&mdash; 26 Gennaio 2027 &mdash;</div>
+        
+        <div class="divider"></div>
+
+        <div class="details">
+            <div class="detail-row">
+                🕒 <strong>Orario:</strong> ore 20:30
+            </div>
+            <div class="detail-row">
+                📍 <strong>Ristorante:</strong> Al Convento<br>
+                <span style="font-size: 11px; color: #e1dad0; padding-left: 18px; display: inline-block;">Via Cupa Camaldoli 14, 80131 Napoli</span>[span_0](start_span)[span_0](end_span)
+            </div>
+            
+            <!-- PULSANTI AZIONE -->
+            <div class="action-buttons">
+                <a href="https://maps.google.com/?q=Via+Cupa+Camaldoli+14+Napoli" target="_blank" class="btn-action">Apri Mappa 🗺️</a>
+                <button class="btn-action btn-iban-pay" onclick="openIbanModal()">Viaggio di Nozze ✈️</button>
+            </div>
+        </div>
+
+        <div class="countdown-title">Mancano al grande giorno:</div>
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <span class="countdown-number" id="months">0</span>
+                <span class="countdown-label">Mesi</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="days">0</span>
+                <span class="countdown-label">Giorni</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="hours">0</span>
+                <span class="countdown-label">Ore</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="minutes">0</span>
+                <span class="countdown-label">Min</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="seconds">0</span>
+                <span class="countdown-label">Sec</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Video gia.mp4 all'interno della card -->
+        <div class="video-container">
+            <video src="gia.mp4" autoplay muted loop playsinline></video>
+        </div>
+
+        <!-- Sezione RSVP -->
+        <div class="rsvp-section">
+            <div class="rsvp-title">Conferma la tua presenza</div>
+            <div class="rsvp-buttons">
+                <a href="https://wa.me/393511481691?text=Ciao!%20Confermo%20con%20gioia%20la%20mia%20presenza%20alla%20vostra%20promessa!%20❤️" target="_blank" class="btn-rsvp btn-yes">Sì, ci sarò! ✨</a>
+                <a href="https://wa.me/393511481691?text=Ciao,%20purtroppo%20non%20potrò%20essere%20presente%20alla%20vostra%20promessa,%20vi%20auguro%20il%20meglio!%20🤍" target="_blank" class="btn-rsvp btn-no">Purtroppo no</a>
+            </div>
+        </div>
+
+        <div class="final-quote" id="finalQuoteText">"Il nostro per sempre comincia con voi..."</div>
+
+        <div class="footer-note">
+            La vostra presenza è il regalo più bello.
+        </div>
+    </div>
+
+    <script>
+        var music = document.getElementById('bg-music');
+        var introVideo = document.getElementById('intro-video');
+        var introContainer = document.getElementById('intro-video-container');
+        var tramVideo = document.getElementById('tram-video');
+        var tramContainer = document.getElementById('tram-video-container');
+
+        // Funzioni per la modale IBAN
+        function openIbanModal() {
+            document.getElementById('iban-modal').classList.add('active');
+        }
+
+        function closeIbanModal() {
+            document.getElementById('iban-modal').classList.remove('active');
+        }
+
+        function copyIban() {
+            const ibanText = document.getElementById('ibanText').innerText;
+            navigator.clipboard.writeText(ibanText).then(() => {
+                alert("IBAN copiato negli appunti!");
+            });
+        }
+
+        // Avvio iniziale del video di copertina
+        window.addEventListener('DOMContentLoaded', (event) => {
+            introVideo.play().catch(function(error) {
+                console.log("Video intro in attesa:", error);
+            });
+        });
+
+        // Funzione eseguita al click sul pulsante APRI
+        function startPromiseExperience() {
+            // Avvia la musica forzatamente al click dell'utente (supera i blocchi dei browser)
+            music.volume = 1.0;
+            music.play().then(() => {
+                console.log("Audio avviato con successo");
+            }).catch(function(error) {
+                console.log("Errore riproduzione audio:", error);
+            });
+
+            // Ferma il primo video e nascondi il contenitore iniziale
+            introVideo.pause();
+            introContainer.style.opacity = '0';
+
+            setTimeout(function() {
+                introContainer.style.display = 'none';
+                
+                // Mostra e avvia il secondo video (intro 2.mp4)
+                tramContainer.style.visibility = 'visible';
+                tramContainer.style.opacity = '1';
+                
+                tramVideo.currentTime = 0;
+                tramVideo.play().catch(function(error) {
+                    console.log("Errore riproduzione intro 2:", error);
+                });
+
+                // Avvia le scintille e la sequenza delle frasi
+                document.getElementById('sparkles-container').style.display = 'block';
+                startSparklesGenerator();
+                runStorySequence();
+
+            }, 1000);
+        }
+
+        // Generatore continuo di scintille luminose casuali sullo schermo
+        function startSparklesGenerator() {
+            const container = document.getElementById('sparkles-container');
+            setInterval(() => {
+                if (container.style.display === 'block') {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    
+                    const size = Math.random() * 8 + 4;
+                    sparkle.style.width = size + 'px';
+                    sparkle.style.height = size + 'px';
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = Math.random() * 100 + 'vh';
+                    
+                    const duration = Math.random() * 1.5 + 0.8;
+                    sparkle.style.animationDuration = duration + 's';
+                    
+                    container.appendChild(sparkle);
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, duration * 1000);
+                }
+            }, 150);
+        }
+
+        // Gestione sequenza frasi in successione e comparsa dell'invito finale a 7 secondi dalla fine
+        function runStorySequence() {
+            // Frase 1 (da 1s a 5s)
+            setTimeout(() => { document.getElementById('step-1').classList.add('visible'); }, 1000);
+            setTimeout(() => { document.getElementById('step-1').classList.remove('visible'); }, 5000);
+
+            // Frase 2 (da 6s a 10s)
+            setTimeout(() => { document.getElementById('step-2').classList.add('visible'); }, 6000);
+            setTimeout(() => { document.getElementById('step-2').classList.remove('visible'); }, 10000);
+
+            // Frase 3 (da 11s a 15s)
+            setTimeout(() => { document.getElementById('step-4').classList.add('visible'); }, 11000);
+            setTimeout(() => { document.getElementById('step-4').classList.remove('visible'); }, 15000);
+
+            // Frase 4 (da 16s a 20s)
+            setTimeout(() => { document.getElementById('step-5').classList.add('visible'); }, 16000);
+            setTimeout(() => { document.getElementById('step-5').classList.remove('visible'); }, 20000);
+
+            // Frase 5: "Non mancate alla nostra promessa!" (da 21s a 26s)
+            setTimeout(() => { document.getElementById('step-6').classList.add('visible'); }, 21000);
+            setTimeout(() => { document.getElementById('step-6').classList.remove('visible'); }, 26000);
+
+            // Controllo per mostrare l'invito ufficiale (step-3) a 7 secondi dalla fine del video
+            let cardShown = false;
+            const checkInterval = setInterval(function() {
+                if (tramVideo.duration && !isNaN(tramVideo.duration)) {
+                    const timeLeft = tramVideo.duration - tramVideo.currentTime;
+                    
+                    if (timeLeft <= 7 && !cardShown) {
+                        cardShown = true;
+                        document.getElementById('step-3').classList.add('visible');
+                        document.getElementById('fireworks-container').style.display = 'block';
+                    }
+
+                    if (tramVideo.ended) {
+                        clearInterval(checkInterval);
+                    }
+                }
+            }, 200);
+        }
+
+        const targetDate = new Date("Jan 26, 2027 20:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("months").innerText = "0";
+                document.getElementById("days").innerText = "0";
+                document.getElementById("hours").innerText = "0";
+                document.getElementById("minutes").innerText = "0";
+                document.getElementById("seconds").innerText = "0";
+                return;
+            }
+
+            const daysTotal = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const months = Math.floor(daysTotal / 30);
+            const days = daysTotal % 30;
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("months").innerText = months;
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+</body>
+</html>
